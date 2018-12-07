@@ -1,0 +1,20 @@
+{
+  "name": "Active Storage Example App",
+  "description": "A barebones Rails app that uses Active Storage",
+  "image": "heroku/ruby",
+  "repository": "https://github.com/heroku/active_storage_with_previews_example",
+  "keywords": ["ruby", "rails" ],
+  "addons": [
+    "heroku-postgresql",
+    "bucketeer:hobbyist"
+  ],
+  "buildpacks": [
+    {
+      "url": "https://github.com/heroku/heroku-buildpack-activestorage-preview"
+    },
+    {
+      "url": "heroku/ruby"
+    }
+  ]
+
+}
