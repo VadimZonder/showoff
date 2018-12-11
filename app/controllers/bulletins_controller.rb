@@ -6,6 +6,11 @@ class BulletinsController < ApplicationController
   def index
     @bulletins = Bulletin.all
     @bulletin = Bulletin.last
+
+    
+    #FileUtils.rm_f('./storage/2p')
+    File.delete('delete.txt')
+   # FileUtils.rm_rf('./storage/2p/remove')
   end
 
   # GET /bulletins/1
