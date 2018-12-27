@@ -24,7 +24,8 @@ class IsFTpsController < ApplicationController
   # POST /is_f_tps
   # POST /is_f_tps.json
   def create
-    @is_f_tp = IsFTp.new(is_f_tp_params)
+   # @is_f_tp = IsFTp.new(is_f_tp_params)
+  @is_f_tp = IsFTp.last
 
     respond_to do |format|
       if @is_f_tp.save
