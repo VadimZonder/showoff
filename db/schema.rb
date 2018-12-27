@@ -41,12 +41,6 @@ ActiveRecord::Schema.define(version: 2018_12_27_154725) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "is_f_tps", force: :cascade do |t|
-    t.string "isFTP"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "widgets", force: :cascade do |t|
     t.string "name"
     t.text "description"
