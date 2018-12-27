@@ -1,12 +1,49 @@
+   <script>
+   //OPEN ALL LABEL URLS
+    ///console.log(labelsArray);
+    //opens all the label URLs
+    function printLabels(){
+        var i = 0;
+        while (i < labelsArray.length) {
+          window.open(labelsArray[i], '_blank'); 
+          i++;
+          }
+
+        }
+</script>
+
 <div class="jumbotron text-center">
   <div class="container">
     <a href="/" class="lang-logo">
       <img src="<%= asset_path('Dpdlog') %>">
     </a>
-    <h1>DPD Lael Generator App</h1>
+    <h1>DPD Label Generator App</h1>
     <p>From APIs to a Label
   </div>
 </div>
+
+
+<div class="container">
+  <div class="row">
+              <label class=" float-right">
+            <h3>Print All Labels</h3>
+            <button class ="btn btn-print btn-lg " onclick="printLabels()">Print Labels</button>
+        </label>
+        
+        
+       <h3 id="ftpText"></h3>
+     <br>
+        <label class="switch">
+            <br>
+          <input type="checkbox" id="slider" onchange="isFTP()" >
+          <span class="slider round"></span>
+        </label>
+
+
+  </div>
+</div>
+<hr />
+
 <div class="container">
   <div class="row">
     <div class="purple-box u-padding-Al">
@@ -18,17 +55,202 @@
     </div>
     <hr />
   </div>
+  
+ 
   <div class="row">
 
     <div class="col-md-12">
+        
+
+<%#=@isFtp = IsFTp.last%>
+  
+  <script>
+//empty an array at the beginning
+var labelsArray = [];
+
+var isFtp = '<%=@isFtp%>';
+
+ </script>
+
+</head>
+<body>
+<%
+@isFTP2 = @isFTP2.isFTP
+%>
+<script>
+ var isFTP2 = '<%=@isFTP2%>';
+</script>
+
+
+<%#first check the value of what checkbox should be%>
+<script>
+
+     console.log('this is first isFTP2 var ' + isFTP2);
+    if (isFTP2 == 'false'){
+        document.getElementById("slider").checked = false;
+        ftpText.innerText = "Local Import is ON";
+     
+    }
+    else if (isFTP2 == 'true'){
+        document.getElementById("slider").checked = true;
+         ftpText.innerText = "FTP Import is ON";
+    }
+  
+
+    </script>
+<%# elsif @isFTP2 == true %>
+
+<%#end%>
+
+<script>
+
+ 
+ 
+ 
+ /*
+ var slider=document.getElementById("slider").checked;
+        if (slider==false){
+            document.getElementById("slider").checked=false;
+              console.log(slider);
+            
+      document.cookie = "cl=" + slider +  ";";
+        }
+        else if (slider==true){
+            document.getElementById("slider").checked=true;
+            document.cookie = "cl=" + slider +  ";";
+        }
+
+
+*/
+    
+  
+</script>
+
+<script>
+    //document.getElementById("slider").checked = false;  
+</script>
+
+
+
+ <%if @isFtp2 == false    %>
+
+<script>
+   // document.getElementById("slider").checked = false;
+</script>
+<%elsif  @isFtp2 == true  %>
+
+<script>
+   // document.getElementById("slider").checked = true;
+</script>
+<%end%>
+
+
+
+
+
+
+    <script>
+  
+    console.log(slider);
+    
+    function isFTP (){  
+        var slider=document.getElementById("slider").checked;
+        if (slider==false){
+              console.log(slider);
+            
+      document.cookie = "cl=" + slider +  ";";
+        location.reload();
+        }
+        else if (slider==true){
+            document.cookie = "cl=" + slider +  ";";
+              location.reload();
+        }
+        //document.getElementById("slider").value = false;
+      
+    
+        }
+    
+</script>
+
+
+
+<script>
+ //need both - here is the first definition of isFTP js function  
+   // console.log(slider);
+
+
+/*    
+    function isFTP (){  
+        var slider=document.getElementById("slider").checked;
+        console.log(slider);
+        
+        if (slider == true){
+            
+      document.cookie = "cl=" + slider +  ";";
+      //location.reload();
+            
+        }
+        else if (slider == false){
+            document.cookie = "cl=" + slider +  ";";
+           // location.reload();
+        }
+
+      
+ 
+    }
+   */     
+ 
+</script>
+
+
+
+ 
+
+
+<br>
+<br>
+<br>
+<br>
+
+
+
+            <!--
+      
+
+  
+     <%
+         
+        
+        isFtp = IsFTp.last
+        
+        
+require 'net/ftp'
+
+ftp = Net::FTP::new("ftp.dpd.ie")
+ftp.login("3L4", "3l4123")
+ftp.chdir("/users/3L4/WebAppImport")
+
+  files = ftp.list
+
+  ftp.passive = true
+   ftp.getbinaryfile("OurFormatEmailVadimTest.csv", "FromFTP")
+
+
+#tgz = ftp.list("ruby-*.tar.gz").sort.last
+#print "the latest version is ", tgz, "\n"
+#ftp.getbinaryfile(tgz, tgz)
+ftp.close
+%>
+            <%#= files%>
       
       <%#= Dir.chdir("/storage")%>
       <%#= Go to this directory%>
+ <%if isFtp.isFTP == false %>      
       <p>Go to thos directory-------------</p>
-       <%= @storage = Dir["/home/ubuntu/workspace/storage/*"]%>
+       <% @storage = Dir["/home/ubuntu/workspace/storage/*"]%>
        <p>gets an array of folders-------------</p>
        <%#= gets and array of folders%>
-        <%= @storage.select do |directory|
+        <% @storage.select do |directory|
         @foldersArray = directory
         end%>
          <p>Splits the array by the comma delimiter-------------</p>
@@ -48,8 +270,20 @@
              # Dir.entries("/home/ubuntu/workspace/storage/AE/bt/AEbtNbAYiVDqXyDMzN8oj9YE")
           'no'
           end%>
+          
+          
                  <p>Read the .csv file</p>
-      <%=  customers = CSV.read(@csvFileLocation.chomp("/*")) %>
+      <%  customers = CSV.read(@csvFileLocation.chomp("/*")) %>
+          
+          
+          <%else%>
+           <%  @csvFileLocation =  '/home/ubuntu/workspace/FromFTP' %>
+          <%  customers = CSV.read(@csvFileLocation.chomp("/*")) %>
+          
+     <%end%>  
+          
+          
+     
       
 <%#= take each row in csv and get rid of the quotes%>      
      <%CSV.foreach(@csvFileLocation.chomp("/*")) do |row1|
@@ -74,7 +308,11 @@
 @csvColumn30 =  row1[29].inspect.gsub!('"', '')  
 @csvColumn31 =  row1[30].inspect.gsub!('"', '')  
 @csvColumn32 =  row1[31].inspect.gsub!('"', '')  
-end%>
+
+
+#end
+%>
+
 
 
 <%
@@ -132,13 +370,11 @@ end%>
   
  %>
  <br>
-<%=
+<%
   @mapping_array[d]
  %>
  
- 
- 
- 
+  
  
  <%
 
@@ -162,7 +398,7 @@ authorizeResponce = RestClient.post "https://papi.dpd.ie/common/api/authorize", 
 {content_type: :xml, accept: :xml, authorization: "Bearer R3JlZW5JVDpHcmVlbklUUGFzc3cwcmQyMDE4"}
 
 %>
-<%=
+<%
 #parce the xml to get the access token
 xmlAuthorizeDoc  = Nokogiri::XML(authorizeResponce)
 #get the access token
@@ -270,7 +506,7 @@ xmlPayloadAuthorised =
 labelResponce = RestClient.post "https://papi.dpd.ie/common/api/preadvice", xmlPayloadAuthorised, 
 {content_type: :xml, accept: :xml, authorization: "Bearer " + accessToken}
 %>
-<%=
+<%
 #parce the xml to get the access token
 xmlLabelDoc  = Nokogiri::XML(labelResponce)
 #get the access token
@@ -283,22 +519,45 @@ xmlLabelDoc  = Nokogiri::XML(labelResponce)
 #doc = Nokogiri::HTML(open(labelURI))
 %>
 
-<!-- uncomment ALL to auto download the labels-->
+<!--___________________________________________________________________________ uncomment ALL to auto download the labels-->
+
 <script>
-var labelUri = <% @labelURI %>;
-if (labelUri.length < 50) {
- indow.open('<%= @labelURI %>', '_blank');
- }
+//save a array now to attach one by one and then at the end run script to print an array ech element - make an array of urls and then call all the array until lenght
+
+var labelUri = '<%@labelURI %>';
+//get the array of labels URLs and push to an array
+labelsArray.push('<%=@labelURI %>');
+//if (labelUri.length < 50) {
+//    var my_window = window.open('<%= @labelURI %>', '_blank');
+// }
  </script>
+<!--___________________________________________________________________________ uncomment ALL to auto download the labels--> 
+ 
 
- <%= link_to "LABEL",@labelURI,  :class => "a", :target => "_blank"%></td>
+
+<%#= creates a label link/button for each label%>
+<%#= link_to "LABEL",@labelURI,  :class => "a", :target => "_blank"%>
                                           
-
+ <!--
 <%
 @labelURI
 # link_to labelURI, target: :_blank 
 
 %>
+
+
+
+
+
+
+
+
+<%#for esch row print a label end %>
+ <%end%>
+ 
+ 
+
+
      <p>END-------------
        <%#= Dir[".."]%>
        <p>-------------</p>
@@ -356,6 +615,9 @@ if (labelUri.length < 50) {
    
       %>
       
+      -->
+
+
        <%= link_to({:controller => 'mappings', :action => 'new'}) do%>
            <div class="container">
   <div class="row">
@@ -368,6 +630,8 @@ if (labelUri.length < 50) {
     <hr />
   </div>
 <% end %>  
+
+
            
       <center>
         <ul class="no-bullet">

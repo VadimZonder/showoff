@@ -1,13 +1,41 @@
 class WelcomeController < ApplicationController
   before_action :set_mapping, only: [:show, :edit, :update, :destroy]
    before_action :set_bulletin, only: [:show, :edit, :update, :destroy]
+   before_action :set_is_f_tp, only: [:show, :edit, :update, :destroy]
   # GET /welcome
   def index
     @bulletin      = Bulletin.new
     @bulletin_list = Bulletin.order(created_at: :desc).all
     
    @bulletin_last = Bulletin.last.created_at
-    
+
+
+#def switch 
+  @isFTP2 = IsFTp.last
+
+  #@isFTP2.save
+  
+  
+   isFTP = cookies[:cl]
+unless isFTP.nil?
+
+  
+if isFTP == 'true'
+@isFTP2.isFTP = true
+@isFTP2.save
+
+else
+@isFTP2.isFTP  = false
+@isFTP2.save
+
+end
+  
+ # @isFTP2 = isFTP
+  # @is_f_tp = IsFTp.last
+
+
+end
+#end    
     
         #now get a file from storage if file is in folder.
 
@@ -55,5 +83,17 @@ class WelcomeController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def bulletin_params
       params.fetch(:bulletin, {})
+    end
+    
+    
+      private
+    # Use callbacks to share common setup or constraints between actions.
+    def set_is_f_tp
+      @is_f_tp = IsFTp.find(params[:id])
+    end
+
+    # Never trust parameters from the scary internet, only allow the white list through.
+    def is_f_tp_params
+      params.require(:is_f_tp).permit(:isFTP)
     end
 end

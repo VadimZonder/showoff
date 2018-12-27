@@ -1,5 +1,6 @@
 $brand-primary: #532F8C;
 $brand-language: #B01302;
+$brand-print: #DC0032;
 
 .jumbotron {
   background: $brand-primary;
@@ -14,6 +15,15 @@ $brand-language: #B01302;
       background: lighten($brand-primary, 15%);
     }
   }
+  
+    .btn-print {
+    background: lighten($brand-print, 20%);
+    border-color: lighten($brand-print, 20%);
+    &:hover {
+      background: lighten($brand-print, 95%);
+    }
+  }
+ 
 
   p {
     color: lighten($brand-primary, 50%);
