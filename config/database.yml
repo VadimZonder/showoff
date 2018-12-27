@@ -76,11 +76,12 @@ test:
 #
 # You can use this database configuration with:
 #
-  production:
-     url: <%= ENV['DATABASE_URL'] %>
+#   production:
+#     url: <%= ENV['DATABASE_URL'] %>
 #
 #production:
-#  <<: *default
-#  database: active_storage_with_previews_example_production
-#  username: active_storage_with_previews_example
-#  password: <%= ENV['ACTIVE_STORAGE_WITH_PREVIEWS_EXAMPLE_DATABASE_PASSWORD'] %>
+  <<: *default
+  database: active_storage_with_previews_example_production
+  #username: active_storage_with_previews_example
+  #password: <%= ENV['ACTIVE_STORAGE_WITH_PREVIEWS_EXAMPLE_DATABASE_PASSWORD'] 
+  %>
