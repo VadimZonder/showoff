@@ -1,5 +1,5 @@
    <script>
-   //OPEN ALL LABEL URLS
+   //OPENS ALL LABEL URLS
     ///console.log(labelsArray);
     function printLabels(){
         var i = 0;
@@ -24,19 +24,19 @@
 
 <div class="container">
   <div class="row">
-              <label class=" float-right">
-            <h3>Print All Labels</h3>
-            <button class ="btn btn-print btn-lg " onclick="printLabels()">Print Labels</button>
-        </label>
+    <label class=" float-right">
+      <h3>Print All Labels</h3>
+      <button class ="btn btn-print btn-lg " onclick="printLabels()">Print Labels</button>
+    </label>
         
         
-       <h3 id="ftpText"></h3>
-     <br>
-        <label class="switch">
-            <br>
-          <input type="checkbox" id="slider" onchange="isFTP()" >
-          <span class="slider round"></span>
-        </label>
+    <h3 id="ftpText"></h3>
+    <br>
+    <label class="switch">
+      <br>
+      <input type="checkbox" id="slider" onchange="isFTP()" >
+      <span class="slider round"></span>
+    </label>
   </div>
 </div>
 <hr />
@@ -179,7 +179,7 @@ var isFtp = '<%=@isFtp%>';
 
 
 
-            <!-
+            <!--
       
 
   
@@ -526,7 +526,7 @@ labelsArray.push('<%=@labelURI %>');
 <%#= creates a label link/button for each label%>
 <%#= link_to "LABEL",@labelURI,  :class => "a", :target => "_blank"%>
                                           
-                                     <!-
+                                     <!--
 <%
 @labelURI
 # link_to labelURI, target: :_blank 
