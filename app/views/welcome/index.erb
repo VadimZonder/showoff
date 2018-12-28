@@ -53,7 +53,22 @@
     <hr />
   </div>
   
- 
+
+
+    <%= link_to({:controller => 'is_f_tps', :action => 'index'}) do%>
+           <div class="container">
+  <div class="row">
+    <div class="purple-box u-padding-Al">
+      <left>
+        <h3>Map Your Import File</h3>
+        <%#= render "upload", bulletin: @bulletin %>
+      </left>
+    </div>
+    <hr />
+  </div>
+<% end %>  
+
+
   <div class="row">
     <div class="col-md-12">
 <%=link_to "Label", :controller => :is_f_tps, :action => :index%>
