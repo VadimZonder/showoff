@@ -7,14 +7,13 @@ class WelcomeController < ApplicationController
     @bulletin      = Bulletin.new
     @bulletin_list = Bulletin.order(created_at: :desc).all
     
-   @bulletin_last = Bulletin.last.created_at
-
-
+  ####################################  @bulletin_last = Bulletin.last.created_at
+ ####################################
+=begin
 #def switch 
   @isFTP2 = IsFTp.last
 
   #@isFTP2.save
-  
   
    isFTP = cookies[:cl]
 unless isFTP.nil?
@@ -60,9 +59,12 @@ end
     @ad30= Mapping.last.ad30
     @ae31= Mapping.last.ae31
     @af32= Mapping.last.af32
+    
+=end 
   end
   
-  
+
+
    private
     # Use callbacks to share common setup or constraints between actions.
     def set_mapping

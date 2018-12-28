@@ -53,6 +53,12 @@
     <hr />
   </div>
   
+  <%
+  #delete this later
+   @isFTP = true
+  @isFTP2 = true
+
+%>
  
   <div class="row">
     <div class="col-md-12">
@@ -63,14 +69,13 @@
 //empty an array at the beginning
 var labelsArray = [];
 
-var isFtp = '<%=@isFtp%>';
+var isFtp = '<%==@isFtp%>';
 
  </script>
 
 </head>
 <body>
-<%
-@isFTP2 = @isFTP2.isFTP
+<%######################################################@isFTP2 = @isFTP2.isFTP
 %>
 <script>
  var isFTP2 = '<%=@isFTP2%>';
@@ -99,7 +104,7 @@ var isFtp = '<%=@isFtp%>';
 <script>
    // document.getElementById("slider").checked = false;
 </script>
-<%elsif  @isFtp2 == true  %>
+<% elsif  @isFtp2 == true  %>
 
 <script>
    // document.getElementById("slider").checked = true;
@@ -183,7 +188,7 @@ var isFtp = '<%=@isFtp%>';
      <%
          
         
-        isFtp = IsFTp.last
+        isFtp = true  ####################################IsFTp.last
         
         
 require 'net/ftp'
@@ -207,7 +212,7 @@ ftp.close
       
       <%#= Dir.chdir("/storage")%>
       <%#= Go to this directory%>
- <%if isFtp.isFTP == false %>      
+ <%if isFtp == false ####################################if isFtp.isFTP == false %>      
       <p>Go to thos directory-------------</p>
        <% @storage = Dir["/home/ubuntu/workspace/storage/*"]%>
        <p>gets an array of folders-------------</p>

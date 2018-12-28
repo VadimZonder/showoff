@@ -5,7 +5,7 @@ class BulletinsController < ApplicationController
   # GET /bulletins.json
   def index
     @bulletins = Bulletin.all
-    @bulletin = Bulletin.last
+   #################################### @bulletin = Bulletin.last
 
     
     #FileUtils.rm_f('./storage/2p')
@@ -30,8 +30,8 @@ class BulletinsController < ApplicationController
   # POST /bulletins
   # POST /bulletins.json
   def create
-    #@bulletin = Bulletin.new()
-    @bulletin = Bulletin.last
+    @bulletin = Bulletin.new()
+    #################################### @bulletin = Bulletin.last
     @bulletin.attachment.attach(params[:bulletin][:attachment])
     @bulletin.save!
 
