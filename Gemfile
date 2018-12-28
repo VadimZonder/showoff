@@ -32,6 +32,7 @@ gem 'mini_magick', '~> 4.8'
 
 gem 'rest-client'
 
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
