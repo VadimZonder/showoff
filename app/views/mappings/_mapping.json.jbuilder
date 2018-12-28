@@ -1,2 +1,0 @@
-json.extract! mapping, :id, :a1, :b2, :c3, :d4, :e5, :f6, :g7, :h8, :i9, :j10, :k11, :l12, :m13, :n14, :o15, :p16, :q17, :r18, :s19, :t20, :u21, :v22, :w23, :x24, :y25, :z26, :aa27, :ab28, :ac29, :ad30, :ae31, :af32, :ag33, :ah34, :ai35, :aj36, :ak37, :al38, :am39, :an40, :ao41, :ap42, :aq43, :ar44, :as45, :at46, :au47, :av48, :aw49, :ax50, :created_at, :updated_at
-json.url mapping_url(mapping, format: :json)

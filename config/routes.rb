@@ -1,6 +1,4 @@
 Rails.application.routes.draw do
-  resources :mappings
-  resources :is_f_tps
   resources :bulletins
   resources :widgets
 

@@ -1,12 +1,10 @@
 $brand-primary: #532F8C;
 $brand-language: #B01302;
-$brand-print: #DC0032;
 
 .jumbotron {
   background: $brand-primary;
   color: white;
   padding-bottom: 80px;
-  background-color: #DC0032;
 
   .btn-primary {
     background: lighten($brand-primary, 20%);
@@ -15,15 +13,6 @@ $brand-print: #DC0032;
       background: lighten($brand-primary, 15%);
     }
   }
-  
-    .btn-print {
-    background: lighten($brand-print, 20%);
-    border-color: lighten($brand-print, 20%);
-    &:hover {
-      background: lighten($brand-print, 95%);
-    }
-  }
- 
 
   p {
     color: lighten($brand-primary, 50%);
@@ -38,16 +27,14 @@ $brand-print: #DC0032;
   .lang-logo {
     display: block;
     background: $brand-language;
-    background-color: white;
     border-radius: 50%;
     overflow: hidden;
-    width: 150px;
-    height: 150px;
+    width: 100px;
+    height: 100px;
     margin: auto;
     border: 2px solid white;
     img {
-      max-width: 90%;
-       margin-top: 45px;
+      max-width: 100%;
     }
   }
 

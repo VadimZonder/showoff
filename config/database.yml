@@ -17,7 +17,6 @@
 default: &default
   adapter: postgresql
   encoding: SQL_ASCII
-  #encoding: unicode
   # For details on connection pooling, see Rails configuration guide
   # http://guides.rubyonrails.org/configuring.html#database-pooling
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
@@ -79,9 +78,8 @@ test:
 #   production:
 #     url: <%= ENV['DATABASE_URL'] %>
 #
-#production:
+production:
   <<: *default
   database: active_storage_with_previews_example_production
-  #username: active_storage_with_previews_example
-  #password: <%= ENV['ACTIVE_STORAGE_WITH_PREVIEWS_EXAMPLE_DATABASE_PASSWORD'] 
-  %>
+  username: active_storage_with_previews_example
+  password: <%= ENV['ACTIVE_STORAGE_WITH_PREVIEWS_EXAMPLE_DATABASE_PASSWORD'] %>

@@ -5,12 +5,6 @@ class BulletinsController < ApplicationController
   # GET /bulletins.json
   def index
     @bulletins = Bulletin.all
-   #################################### @bulletin = Bulletin.last
-
-    
-    #FileUtils.rm_f('./storage/2p')
-    File.delete('delete.txt')
-   # FileUtils.rm_rf('./storage/2p/remove')
   end
 
   # GET /bulletins/1
@@ -31,7 +25,6 @@ class BulletinsController < ApplicationController
   # POST /bulletins.json
   def create
     @bulletin = Bulletin.new()
-    #################################### @bulletin = Bulletin.last
     @bulletin.attachment.attach(params[:bulletin][:attachment])
     @bulletin.save!
 
