@@ -248,8 +248,6 @@ ftp.close
           
      <%end%>  
           
-          
-      
 <%#= take each row in csv and get rid of the quotes%>      
      <%CSV.foreach(@csvFileLocation.chomp("/*")) do |row1|
 @csvColumn1 =  row1[0].inspect.gsub!('"', '') #+  @csvRow1.inspect 
