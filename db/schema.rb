@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_04_17_154551) do
+ActiveRecord::Schema.define(version: 2018_12_28_162346) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -37,6 +37,12 @@ ActiveRecord::Schema.define(version: 2018_04_17_154551) do
   end
 
   create_table "bulletins", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "is_f_tps", force: :cascade do |t|
+    t.boolean "isFTP"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

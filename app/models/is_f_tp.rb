@@ -1,0 +1,2 @@
+class IsFTp < ApplicationRecord
+end
