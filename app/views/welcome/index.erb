@@ -286,27 +286,52 @@ ftp.close
                   @csvColumn27,  @csvColumn30, @csvColumn31 , @csvColumn32   ]
                    
   #user_input_mapping = change all to integers
-  a = @a1.to_i
-  b = @b2.to_i
-  c = @c3.to_i
-  d = @d4.to_i
-  e = @e5.to_i
-  f = @f6.to_i
-  g = @g7.to_i
-  h = @h8.to_i
-  i = @i9.to_i
-  j = @j10.to_i
-  k = @k11.to_i
-  l = @l12.to_i
-  m = @m13.to_i
-  n = @n14.to_i
-  x = @x24.to_i
-  y = @y25.to_i
-  z = @z26.to_i
-  aa = @aa27.to_i
-  ad = @ad30.to_i
-  ae = @ae31.to_i
-  af = @af32.to_i
+  ##########################ORIGINAL
+  #a = @a1.to_i
+  #b = @b2.to_i
+  #c = @c3.to_i
+  #d = @d4.to_i
+  #e = @e5.to_i
+  #f = @f6.to_i
+  #g = @g7.to_i
+  #h = @h8.to_i
+  #i = @i9.to_i
+  #j = @j10.to_i
+  #k = @k11.to_i
+  #l = @l12.to_i
+  #m = @m13.to_i
+  #n = @n14.to_i
+  #x = @x24.to_i
+  #y = @y25.to_i
+  #z = @z26.to_i
+  #aa = @aa27.to_i
+  #ad = @ad30.to_i
+  #ae = @ae31.to_i
+  #af = @af32.to_i
+  
+  
+  ##############before mapping db
+   a = 1
+  b = 2
+  c = 3
+  d = 4
+  e = 5
+  f = 6
+  g = 7
+  h = 8
+  i =9
+  j = 10
+  k = 11
+  l = 12
+  m = 13
+  n = 14
+  x = 24
+  y = 25
+  z = 26
+  aa =27
+  ad = 30
+  ae =31
+  af = 32
   
   @xml_input_a  = a.to_s
   @xml_input_b  = b.to_s
@@ -370,7 +395,7 @@ accessToken = xmlAuthorizeDoc.xpath("//AccessToken").text
 %>
 <br>
 
-<p>works here</p>
+<p>works here1</p>
 <%=@csvColumn4%> ,
 <%=@xml_input_d %>, 
 <%=@mapping_array[@xml_input_d.to_i]%>,
