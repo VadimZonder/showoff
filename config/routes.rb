@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  resources :is_f_tps
   resources :bulletins
   resources :widgets
 
