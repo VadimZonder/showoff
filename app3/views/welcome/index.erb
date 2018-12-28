@@ -1,0 +1,42 @@
+<div class="jumbotron text-center">
+  <div class="container">
+    <a href="/" class="lang-logo">
+      <img src="<%= asset_path('lang-logo.png') %>">
+    </a>
+    <h1>Active Storage Example App</h1>
+    <p>This application demonstrates Active Storage on Heroku. To get started upload a file with the below form.
+  </div>
+</div>
+<div class="container">
+  <div class="row">
+    <div class="purple-box u-padding-Al">
+      <center>
+        <h3>Browse, then upload a PDF, Video or Image to the Bulletin</h3>
+        <%= render "upload", bulletin: @bulletin %>
+      </center>
+    </div>
+    <hr />
+  </div>
+  <div class="row">
+
+    <div class="col-md-12">
+      <center>
+        <ul class="no-bullet">
+          <% @bulletin_list.each do |bulletin| %>
+            <li>
+              <% if bulletin.attachment.previewable? %>
+                <%= link_to(image_tag(bulletin.attachment.preview(resize: "200x200>")),  rails_blob_path(bulletin.attachment, disposition: "attachment"))
+                %>
+              <% elsif bulletin.attachment.variable? %>
+                <%= link_to(image_tag(bulletin.attachment.variant(resize: "200x200")), rails_blob_path(bulletin.attachment, disposition: "attachment"))%>
+              <% else %>
+                <%= link_to "Download file", rails_blob_path(bulletin.attachment, disposition: "attachment") %>
+              <% end %>
+            </li>
+          <% end %>
+        </ul>
+      </center>
+    </div>
+  </div> <!-- row -->
+</div>
+
