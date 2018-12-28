@@ -242,7 +242,8 @@ ftp.close
       
           
           <%else%>
-           <%  @csvFileLocation =  '/home/ubuntu/workspace/FromFTP' %>
+           <%  #######################LOCAL            @csvFileLocation =  '/home/ubuntu/workspace/FromFTP' %>
+            <%  @csvFileLocation =  '/FromFTP' %>
           <%  customers = CSV.read(@csvFileLocation.chomp("/*")) %>
           
      <%end%>  
