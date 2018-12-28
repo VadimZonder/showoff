@@ -211,7 +211,7 @@ ftp.close
       
       <%#= Dir.chdir("/storage")%>
       <%#= Go to this directory%>
- <%if    isFtp.isFTP                       ############ORIGINAL LINE  isFtp.isFTP == false %>      
+ <%if    isFtp.isFTP== false                    ############ORIGINAL LINE  isFtp.isFTP == false %>      
       <p>Go to thos directory-------------</p>
        <% @storage = Dir["/home/ubuntu/workspace/storage/*"]%>
        <p>gets an array of folders-------------</p>
