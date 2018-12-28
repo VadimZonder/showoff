@@ -58,8 +58,8 @@
     <div class="col-md-12">
 
 <%#DELETE%>        
-<%@isFtp = true%>
-<%@isFtp2 = true%>  
+<%###@isFtp = true%>
+<%###@isFtp2 = true%>  
 <%#DELETE%>  
 
   <script>
@@ -73,7 +73,7 @@ var isFtp = '<%=@isFtp%>';
 </head>
 <body>
 <%
-@isFTP2 = true ############ORIGINAL LINE  @isFTP2 = @isFTP2.isFTP
+ @isFTP2 = @isFTP2.isFTP ############ORIGINAL LINE  @isFTP2 = @isFTP2.isFTP
 %>
 <script>
  var isFTP2 = '<%=@isFTP2%>';
@@ -186,7 +186,7 @@ var isFtp = '<%=@isFtp%>';
      <%
          
         
-        isFtp = true  ############ORIGINAL LINE    isFtp = IsFTp.last
+       isFtp = IsFTp.last ############ORIGINAL LINE    isFtp = IsFTp.last
         
         
 require 'net/ftp'
@@ -210,7 +210,7 @@ ftp.close
       
       <%#= Dir.chdir("/storage")%>
       <%#= Go to this directory%>
- <%if        isFtp == false                        ############ORIGINAL LINE  isFtp.isFTP == false %>      
+ <%if    isFtp.isFTP                       ############ORIGINAL LINE  isFtp.isFTP == false %>      
       <p>Go to thos directory-------------</p>
        <% @storage = Dir["/home/ubuntu/workspace/storage/*"]%>
        <p>gets an array of folders-------------</p>
