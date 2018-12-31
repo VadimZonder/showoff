@@ -37,6 +37,7 @@ class IsFTpsController < ApplicationController
     end
   end
 
+
   # PATCH/PUT /is_f_tps/1
   # PATCH/PUT /is_f_tps/1.json
   def update
