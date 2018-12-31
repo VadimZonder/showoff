@@ -16,7 +16,6 @@ class WelcomeController < ApplicationController
   
    isFTP = cookies[:cl]
 unless isFTP.nil?
-
   
 if isFTP == 'true'
 @isFTP2.isFTP = true
