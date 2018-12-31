@@ -27,8 +27,8 @@ class MappingsController < ApplicationController
   # POST /mappings.json
   def create
     #problem for the first create. if no recods(Mapping.last = nill) then run first and if records then last
-  ## @mapping = Mapping.new(mapping_params)
-   @mapping = Mapping.last
+   @mapping = Mapping.new(mapping_params)
+  ### @mapping = Mapping.last
 
     respond_to do |format|
       if @mapping.save
