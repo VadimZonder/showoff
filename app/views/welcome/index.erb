@@ -1,5 +1,5 @@
    <script>
-   //OPEN ALL LABEL URLS
+   //OPENS ALL LABEL URLS
     ///console.log(labelsArray);
     function printLabels(){
         var i = 0;
@@ -24,19 +24,19 @@
 
 <div class="container">
   <div class="row">
-              <label class=" float-right">
-            <h3>Print All Labels</h3>
-            <button class ="btn btn-print btn-lg " onclick="printLabels()">Print Labels</button>
-        </label>
+    <label class=" float-right">
+      <h3>Print All Labels</h3>
+      <button class ="btn btn-print btn-lg " onclick="printLabels()">Print Labels</button>
+    </label>
         
         
-       <h3 id="ftpText"></h3>
-     <br>
-        <label class="switch">
-            <br>
-          <input type="checkbox" id="slider" onchange="isFTP()" >
-          <span class="slider round"></span>
-        </label>
+    <h3 id="ftpText"></h3>
+    <br>
+    <label class="switch">
+      <br>
+      <input type="checkbox" id="slider" onchange="isFTP()" >
+      <span class="slider round"></span>
+    </label>
   </div>
 </div>
 <hr />
@@ -47,30 +47,49 @@
       <center>
         <h3>Browse, then upload a PDF, Video or Image to the Bulletin</h3>
         <% require 'csv' %>
-        <%################= render "upload", bulletin: @bulletin %>
+        <%= render "upload", bulletin: @bulletin %>
       </center>
     </div>
     <hr />
   </div>
   
- 
+
+
+    <%= link_to({:controller => 'bulletins', :action => 'index'}) do%>
+           <div class="container">
+  <div class="row">
+    <div class="purple-box u-padding-Al">
+      <left>
+        <h3>Map Your Import File</h3>
+        <%#= render "upload", bulletin: @bulletin %>
+      </left>
+    </div>
+    <hr />
+  </div>
+<% end %>  
+
+
   <div class="row">
     <div class="col-md-12">
-        
-<%#=@isFtp = IsFTp.last%>
-  
+<%=link_to "Label", :controller => :is_f_tps, :action => :index%>
+<%#DELETE%>        
+<%###@isFtp = true%>
+<%###@isFtp2 = true%>  
+<%#DELETE%>  
+
   <script>
 //empty an array at the beginning
 var labelsArray = [];
 
 var isFtp = '<%=@isFtp%>';
+console.log("isFTP = " + isFtp);
 
  </script>
 
 </head>
 <body>
 <%
-@isFTP2 = @isFTP2.isFTP
+ @isFTP2 = @isFTP2.isFTP ############ORIGINAL LINE  @isFTP2 = @isFTP2.isFTP
 %>
 <script>
  var isFTP2 = '<%=@isFTP2%>';
@@ -183,7 +202,7 @@ var isFtp = '<%=@isFtp%>';
      <%
          
         
-        isFtp = IsFTp.last
+       isFtp = IsFTp.last ############ORIGINAL LINE    isFtp = IsFTp.last
         
         
 require 'net/ftp'
@@ -207,7 +226,7 @@ ftp.close
       
       <%#= Dir.chdir("/storage")%>
       <%#= Go to this directory%>
- <%if isFtp.isFTP == false %>      
+ <%if    isFtp.isFTP== false                    ############ORIGINAL LINE  isFtp.isFTP == false %>      
       <p>Go to thos directory-------------</p>
        <% @storage = Dir["/home/ubuntu/workspace/storage/*"]%>
        <p>gets an array of folders-------------</p>
@@ -236,17 +255,15 @@ ftp.close
           
                  <p>Read the .csv file</p>
       <%  customers = CSV.read(@csvFileLocation.chomp("/*")) %>
-          
+      
           
           <%else%>
-           <%  @csvFileLocation =  '/home/ubuntu/workspace/FromFTP' %>
+           <%  #######################LOCAL            @csvFileLocation =  '/home/ubuntu/workspace/FromFTP' %>
+            <%  @csvFileLocation =  './FromFTP' %>
           <%  customers = CSV.read(@csvFileLocation.chomp("/*")) %>
           
      <%end%>  
           
-          
-     
-      
 <%#= take each row in csv and get rid of the quotes%>      
      <%CSV.foreach(@csvFileLocation.chomp("/*")) do |row1|
 @csvColumn1 =  row1[0].inspect.gsub!('"', '') #+  @csvRow1.inspect 
@@ -285,27 +302,52 @@ ftp.close
                   @csvColumn27,  @csvColumn30, @csvColumn31 , @csvColumn32   ]
                    
   #user_input_mapping = change all to integers
-  a = @a1.to_i
-  b = @b2.to_i
-  c = @c3.to_i
-  d = @d4.to_i
-  e = @e5.to_i
-  f = @f6.to_i
-  g = @g7.to_i
-  h = @h8.to_i
-  i = @i9.to_i
-  j = @j10.to_i
-  k = @k11.to_i
-  l = @l12.to_i
-  m = @m13.to_i
-  n = @n14.to_i
-  x = @x24.to_i
-  y = @y25.to_i
-  z = @z26.to_i
-  aa = @aa27.to_i
-  ad = @ad30.to_i
-  ae = @ae31.to_i
-  af = @af32.to_i
+  ##########################ORIGINAL
+  #a = @a1.to_i
+  #b = @b2.to_i
+  #c = @c3.to_i
+  #d = @d4.to_i
+  #e = @e5.to_i
+  #f = @f6.to_i
+  #g = @g7.to_i
+  #h = @h8.to_i
+  #i = @i9.to_i
+  #j = @j10.to_i
+  #k = @k11.to_i
+  #l = @l12.to_i
+  #m = @m13.to_i
+  #n = @n14.to_i
+  #x = @x24.to_i
+  #y = @y25.to_i
+  #z = @z26.to_i
+  #aa = @aa27.to_i
+  #ad = @ad30.to_i
+  #ae = @ae31.to_i
+  #af = @af32.to_i
+  
+  
+  ##############before mapping db
+   a = 1
+  b = 2
+  c = 3
+  d = 4
+  e = 5
+  f = 6
+  g = 7
+  h = 8
+  i =9
+  j = 10
+  k = 11
+  l = 12
+  m = 13
+  n = 14
+  x = 24
+  y = 25
+  z = 26
+  aa =27
+  ad = 30
+  ae =31
+  af = 32
   
   @xml_input_a  = a.to_s
   @xml_input_b  = b.to_s
@@ -369,7 +411,7 @@ accessToken = xmlAuthorizeDoc.xpath("//AccessToken").text
 %>
 <br>
 
-<p>works here</p>
+<p>works here1</p>
 <%=@csvColumn4%> ,
 <%=@xml_input_d %>, 
 <%=@mapping_array[@xml_input_d.to_i]%>,
@@ -500,7 +542,7 @@ labelsArray.push('<%=@labelURI %>');
 <%#= creates a label link/button for each label%>
 <%#= link_to "LABEL",@labelURI,  :class => "a", :target => "_blank"%>
                                           
- <!--
+                                     <!--
 <%
 @labelURI
 # link_to labelURI, target: :_blank 
@@ -580,7 +622,7 @@ labelsArray.push('<%=@labelURI %>');
       -->
 
 
-       <%= link_to({:controller => 'mappings', :action => 'new'}) do%>
+       <%########################= link_to({:controller => 'mappings', :action => 'new'}) do%>
            <div class="container">
   <div class="row">
     <div class="purple-box u-padding-Al">
@@ -591,24 +633,24 @@ labelsArray.push('<%=@labelURI %>');
     </div>
     <hr />
   </div>
-<% end %>  
+<% ###################################end %>  
 
 
            
       <center>
         <ul class="no-bullet">
-          <%################ @bulletin_list.each do |bulletin| %>
+          <% @bulletin_list.each do |bulletin| %>
             <li>
-              <%################ if bulletin.attachment.previewable? %>
-                <%################= link_to(image_tag(bulletin.attachment.preview(resize: "200x200>")),  rails_blob_path(bulletin.attachment, disposition: "attachment"))
+              <% if bulletin.attachment.previewable? %>
+                <%= link_to(image_tag(bulletin.attachment.preview(resize: "200x200>")),  rails_blob_path(bulletin.attachment, disposition: "attachment"))
                 %>
-              <%################ elsif bulletin.attachment.variable? %>
-                <%################= link_to(image_tag(bulletin.attachment.variant(resize: "200x200")), rails_blob_path(bulletin.attachment, disposition: "attachment"))%>
-              <%################ else %>
-                <%################= link_to "Download file", rails_blob_path(bulletin.attachment, disposition: "attachment") %>
-              <%################ end %>
+              <% elsif bulletin.attachment.variable? %>
+                <%= link_to(image_tag(bulletin.attachment.variant(resize: "200x200")), rails_blob_path(bulletin.attachment, disposition: "attachment"))%>
+              <% else %>
+                <%= link_to "Download file", rails_blob_path(bulletin.attachment, disposition: "attachment") %>
+              <% end %>
             </li>
-          <%################ end %>
+          <% end %>
         </ul>
       </center>
     </div>
