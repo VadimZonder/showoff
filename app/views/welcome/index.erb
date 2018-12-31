@@ -197,7 +197,7 @@ console.log("isFTP = " + isFtp);
 
             <!--
       
-<%=@foldersArray = ['delete', 'deleteME']%>
+
   
      <%
          
@@ -254,7 +254,7 @@ ftp.close
           
           
                  <p>Read the .csv file</p>
-      <%################  customers = CSV.read(@csvFileLocation.chomp("/*")) %>
+      <%  customers = CSV.read(@csvFileLocation.chomp("/*")) %>
       
           
           <%else%>
@@ -263,7 +263,6 @@ ftp.close
           <%  customers = CSV.read(@csvFileLocation.chomp("/*")) %>
           
      <%end%>  
-    
           
 <%#= take each row in csv and get rid of the quotes%>      
      <%CSV.foreach(@csvFileLocation.chomp("/*")) do |row1|
