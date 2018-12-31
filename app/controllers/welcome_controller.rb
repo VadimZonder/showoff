@@ -1,6 +1,6 @@
 class WelcomeController < ApplicationController
   before_action :set_mapping, only: [:show, :edit, :update, :destroy]
-   before_action :set_bulletin, only: [:show, :edit, :update, :destroy]
+  ##### before_action :set_bulletin, only: [:show, :edit, :update, :destroy]
    before_action :set_is_f_tp, only: [:show, :edit, :update, :destroy]
   # GET /welcome
   def index
@@ -77,12 +77,12 @@ end
      private
     # Use callbacks to share common setup or constraints between actions.
     def set_bulletin
-      @bulletin = Bulletin.find(params[:id])
+     ###### @bulletin = Bulletin.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def bulletin_params
-      params.fetch(:bulletin, {})
+   #########   params.fetch(:bulletin, {})
     end
     
     
