@@ -7,7 +7,7 @@ class WelcomeController < ApplicationController
   ################  @bulletin      = Bulletin.new
   ################  @bulletin_list = Bulletin.order(created_at: :desc).all
     
-  ###################### @bulletin_last = Bulletin.last.created_at
+  ######################## @bulletin_last = Bulletin.last.created_at
 
 
 #def switch 
