@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class BulletinControllerTest < ActionDispatch::IntegrationTest
+class MappingTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end

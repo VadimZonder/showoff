@@ -1,0 +1,101 @@
+<%= form_for(@mapping) do |f| %>
+  <% if @mapping.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@mapping.errors.count, "error") %> prohibited this mapping from being saved:</h2>
+
+      <ul>
+      <% @mapping.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :a1, "Order/Shipping Ref"  %><br>
+    <%= f.text_field :a1 %>
+  </div>
+  <div class="field">
+    <%= f.label :b2, "Client Code" %><br>
+    <%= f.text_field :b2 %>
+  </div>
+  <div class="field">
+    <%= f.label :c3, "Delivery Name" %><br>
+    <%= f.text_field :c3 %>
+  </div>
+  <div class="field">
+    <%= f.label :d4, "Address Line 1" %><br>
+    <%= f.text_field :d4 %>
+  </div>
+  <div class="field">
+    <%= f.label :e5, "Address Line 2" %><br>
+    <%= f.text_field :e5 %>
+  </div>
+  <div class="field">
+    <%= f.label :f6, "City/Town" %><br>
+    <%= f.text_field :f6 %>
+  </div>
+  <div class="field">
+    <%= f.label :g7, "County" %><br>
+    <%= f.text_field :g7 %>
+  </div>
+  <div class="field">
+    <%= f.label :h8 %><br>
+    <%= f.text_field :h8 %>
+  </div>
+  <div class="field">
+    <%= f.label :i9 %><br>
+    <%= f.text_field :i9 %>
+  </div>
+  <div class="field">
+    <%= f.label :j10 %><br>
+    <%= f.text_field :j10 %>
+  </div>
+  <div class="field">
+    <%= f.label :k11 %><br>
+    <%= f.text_field :k11 %>
+  </div>
+  <div class="field">
+    <%= f.label :l12 %><br>
+    <%= f.text_field :l12 %>
+  </div>
+  <div class="field">
+    <%= f.label :m13 %><br>
+    <%= f.text_field :m13 %>
+  </div>
+  <div class="field">
+    <%= f.label :n14 %><br>
+    <%= f.text_field :n14 %>
+  </div>
+  <div class="field">
+    <%= f.label :x24 %><br>
+    <%= f.text_field :x24 %>
+  </div>
+  <div class="field">
+    <%= f.label :y25 %><br>
+    <%= f.text_field :y25 %>
+  </div>
+  <div class="field">
+    <%= f.label :z26 %><br>
+    <%= f.text_field :z26 %>
+  </div>
+  <div class="field">
+    <%= f.label :aa27 %><br>
+    <%= f.text_field :aa27 %>
+  </div>
+  <div class="field">
+    <%= f.label :ad30 %><br>
+    <%= f.text_field :ad30 %>
+  </div>
+  <div class="field">
+    <%= f.label :ae31 %><br>
+    <%= f.text_field :ae31 %>
+  </div>
+  <div class="field">
+    <%= f.label :af32 %><br>
+    <%= f.text_field :af32 %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
