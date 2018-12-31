@@ -47,7 +47,7 @@
       <center>
         <h3>Browse, then upload a PDF, Video or Image to the Bulletin</h3>
         <% require 'csv' %>
-        <%= render "upload", bulletin: @bulletin %>
+        <%################= render "upload", bulletin: @bulletin %>
       </center>
     </div>
     <hr />
@@ -597,18 +597,18 @@ labelsArray.push('<%=@labelURI %>');
            
       <center>
         <ul class="no-bullet">
-          <% @bulletin_list.each do |bulletin| %>
+          <%################ @bulletin_list.each do |bulletin| %>
             <li>
-              <% if bulletin.attachment.previewable? %>
-                <%= link_to(image_tag(bulletin.attachment.preview(resize: "200x200>")),  rails_blob_path(bulletin.attachment, disposition: "attachment"))
+              <%################ if bulletin.attachment.previewable? %>
+                <%################= link_to(image_tag(bulletin.attachment.preview(resize: "200x200>")),  rails_blob_path(bulletin.attachment, disposition: "attachment"))
                 %>
-              <% elsif bulletin.attachment.variable? %>
-                <%= link_to(image_tag(bulletin.attachment.variant(resize: "200x200")), rails_blob_path(bulletin.attachment, disposition: "attachment"))%>
-              <% else %>
-                <%= link_to "Download file", rails_blob_path(bulletin.attachment, disposition: "attachment") %>
-              <% end %>
+              <%################ elsif bulletin.attachment.variable? %>
+                <%################= link_to(image_tag(bulletin.attachment.variant(resize: "200x200")), rails_blob_path(bulletin.attachment, disposition: "attachment"))%>
+              <%################ else %>
+                <%################= link_to "Download file", rails_blob_path(bulletin.attachment, disposition: "attachment") %>
+              <%################ end %>
             </li>
-          <% end %>
+          <%################ end %>
         </ul>
       </center>
     </div>

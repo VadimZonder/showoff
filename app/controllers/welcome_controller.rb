@@ -4,8 +4,8 @@ class WelcomeController < ApplicationController
    before_action :set_is_f_tp, only: [:show, :edit, :update, :destroy]
   # GET /welcome
   def index
-    @bulletin      = Bulletin.new
-    @bulletin_list = Bulletin.order(created_at: :desc).all
+  ################  @bulletin      = Bulletin.new
+  ################  @bulletin_list = Bulletin.order(created_at: :desc).all
     
   ###################### @bulletin_last = Bulletin.last.created_at
 
