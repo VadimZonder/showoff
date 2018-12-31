@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_28_162346) do
+ActiveRecord::Schema.define(version: 2018_12_31_113858) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -37,6 +37,12 @@ ActiveRecord::Schema.define(version: 2018_12_28_162346) do
   end
 
   create_table "bulletins", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "deletes", force: :cascade do |t|
+    t.boolean "delete"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
