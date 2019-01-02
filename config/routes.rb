@@ -10,6 +10,7 @@ Rails.application.routes.draw do
 
   root 'welcome#index'
 
+ # get '/button', to: 'welcome#button', as: 'button'
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

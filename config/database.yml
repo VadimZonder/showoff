@@ -80,6 +80,7 @@ test:
 #
 production:
   <<: *default
-  database: active_storage_with_previews_example_production
+  #database: active_storage_with_previews_example_production
+  database: active_storage_with_previews_example_development
   ##username: active_storage_with_previews_example
   ##password: <%= ENV['ACTIVE_STORAGE_WITH_PREVIEWS_EXAMPLE_DATABASE_PASSWORD'] %>

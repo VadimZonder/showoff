@@ -1,6 +1,5 @@
 class WelcomeController < ApplicationController
 
-
   # GET /welcome
   def index
      @bulletin      = Bulletin.new
