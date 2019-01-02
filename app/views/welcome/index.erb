@@ -261,11 +261,11 @@ tempfile = Tempfile.new(['test', '.csv'], options)
 
 
 #@open_uri = open(rails_blob_path(Bulletin.last.attachment))
-####@csvFileLocation3 = open('https://api-to-labels-base-vadimmalakhovski.c9users.io'+rails_blob_path(Bulletin.last.attachment))
-@csvFileLocation3 = open('https://label-gen-is-ftp.herokuapp.com'+rails_blob_path(Bulletin.last.attachment))
+@csvFileLocation3 = open('https://api-to-labels-base-vadimmalakhovski.c9users.io'+rails_blob_path(Bulletin.last.attachment))
+######@csvFileLocation3 = open('https://label-gen-is-ftp.herokuapp.com'+rails_blob_path(Bulletin.last.attachment))
 open('OurFormatTest.csv', 'wb') do |file|
-  ####file << open('https://api-to-labels-base-vadimmalakhovski.c9users.io'+rails_blob_path(Bulletin.last.attachment)).read
-  file << open('https://label-gen-is-ftp.herokuapp.com'+rails_blob_path(Bulletin.last.attachment)).read
+  file << open('https://api-to-labels-base-vadimmalakhovski.c9users.io'+rails_blob_path(Bulletin.last.attachment)).read
+ ##### file << open('https://label-gen-is-ftp.herokuapp.com'+rails_blob_path(Bulletin.last.attachment)).read
   @file = file
 end
 
