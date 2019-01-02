@@ -1,5 +1,6 @@
 class WelcomeController < ApplicationController
 
+
   # GET /welcome
   def index
      @bulletin      = Bulletin.new
@@ -7,8 +8,6 @@ class WelcomeController < ApplicationController
     
   ############# @bulletin_last = Bulletin.last.created_at
 
-
-#def switch 
   @isFTP2 = IsFTp.last
 
   #@isFTP2.save
