@@ -225,6 +225,7 @@ ftp.chdir("/users/3L4/WebAppImport")
 #ftp.getbinaryfile(tgz, tgz)
 ftp.close
 
+=begin 
 
 #Upload to FTP
 ftp = Net::FTP::new("ftp.dpd.ie")
@@ -241,7 +242,8 @@ ftp.chdir("/users/3L4/WebAppImport")
  # my_data = Bulletin.last
  # tempfile.puts my_data
  # ftp.putbinaryfile(tempfile)
- 
+
+
 # name_start = 'my_special_file'
 #name_end = '.txt'
 #location = '/path/to/some/dir'
@@ -304,6 +306,7 @@ ftp.putbinaryfile(tempfile)
 ftp.close
 tempfile.close
 
+=end
 %>
 
 <%=@file %>
