@@ -4,7 +4,7 @@ class BulletinsController < ApplicationController
   # GET /bulletins
   # GET /bulletins.json
   def index
-    @bulletins = Bulletin.all
+    #@bulletins = Bulletin.all
   end
 
   # GET /bulletins/1
