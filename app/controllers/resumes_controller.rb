@@ -1,5 +1,7 @@
-class WelcomeController < ApplicationController
-
+class ResumesController < ApplicationController
+  def index
+      @resumes = Resume.all
+  end
    
    def new
       @resume = Resume.new
@@ -26,42 +28,5 @@ class WelcomeController < ApplicationController
       def resume_params
         params.require(:resume).permit(:name, :attachment)
       end
-
-  # GET /welcome
-  def index
-      def button
-           @hi = 'hi'
-      end
-
-     @bulletin      = Bulletin.new
-    @bulletin_list = Bulletin.order(created_at: :desc).all
-    
-  ############# @bulletin_last = Bulletin.last.created_at
-  
-  @resumes = Resume.all
-
-  @isFTP2 = IsFTp.last
-
-  #@isFTP2.save
-  
-  
-   isFTP = cookies[:cl]
-unless isFTP.nil?
-  
-if isFTP == 'true'
-@isFTP2.isFTP = true
-@isFTP2.save
-
-else
-@isFTP2.isFTP  = false
-@isFTP2.save
-
-end
-  
- # @isFTP2 = isFTP
-  # @is_f_tp = IsFTp.last
-
-
-end
-  end
+   
 end

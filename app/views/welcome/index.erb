@@ -11,6 +11,9 @@
         }
 </script>
 
+
+
+<%= render "button" %>
 <div class="jumbotron text-center">
   <div class="container">
     <a href="/" class="lang-logo">
@@ -89,7 +92,7 @@ console.log("isFTP = " + isFtp);
 </head>
 <body>
 <%
- @isFTP2 = @isFTP2.isFTP ############ORIGINAL LINE  @isFTP2 = @isFTP2.isFTP
+ @isFTP2 = true ############ORIGINAL LINE  @isFTP2 = @isFTP2.isFTP
 %>
 <script>
  var isFTP2 = '<%=@isFTP2%>';
@@ -734,18 +737,18 @@ labelsArray.push('<%=@labelURI %>');
            
       <center>
         <ul class="no-bullet">
-          <% @bulletin_list.each do |bulletin| %>
+          <%# @bulletin_list.each do |bulletin| %>
             <li>
-              <% if bulletin.attachment.previewable? %>
-                <%= link_to(image_tag(bulletin.attachment.preview(resize: "200x200>")),  rails_blob_path(bulletin.attachment, disposition: "attachment"))
-                %>
-              <% elsif bulletin.attachment.variable? %>
-                <%= link_to(image_tag(bulletin.attachment.variant(resize: "200x200")), rails_blob_path(bulletin.attachment, disposition: "attachment"))%>
-              <% else %>
-                <%= link_to "Download file", rails_blob_path(bulletin.attachment, disposition: "attachment") %>
-              <% end %>
+              <%# if bulletin.attachment.previewable? %>
+                <%#= link_to(image_tag(bulletin.attachment.preview(resize: "200x200>")),  rails_blob_path(bulletin.attachment, disposition: "attachment"))
+                #%>
+              <%# elsif bulletin.attachment.variable? %>
+                <%#= link_to(image_tag(bulletin.attachment.variant(resize: "200x200")), rails_blob_path(bulletin.attachment, disposition: "attachment"))%>
+              <%# else %>
+                <%#= link_to "Download file", rails_blob_path(bulletin.attachment, disposition: "attachment") %>
+              <%# end %>
             </li>
-          <% end %>
+          <%# end %>
         </ul>
       </center>
     </div>

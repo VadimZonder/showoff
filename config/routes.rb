@@ -1,7 +1,18 @@
 Rails.application.routes.draw do
+  get 'resumes/index'
+  get 'resumes/new'
+  get 'resumes/create'
+  get 'resumes/destroy'
+  get 'attachments/show'
+  get 'attachments/create'
+  get 'attachments/new'
   resources :is_f_tps
   resources :bulletins
   resources :widgets
+  resources :attachments
+  
+  resources :resumes, only: [:index, :new, :create, :destroy]
+   ##root "resumes#index"
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
@@ -10,7 +21,7 @@ Rails.application.routes.draw do
 
   root 'welcome#index'
 
- # get '/button', to: 'welcome#button', as: 'button'
+  get '/button', to: 'welcome#button', as: 'button'
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

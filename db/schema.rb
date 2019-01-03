@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_28_162346) do
+ActiveRecord::Schema.define(version: 2019_01_03_121813) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,6 +36,12 @@ ActiveRecord::Schema.define(version: 2018_12_28_162346) do
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
+  create_table "attachments", force: :cascade do |t|
+    t.string "filename"
+    t.string "content_type"
+    t.binary "data"
+  end
+
   create_table "bulletins", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -43,6 +49,13 @@ ActiveRecord::Schema.define(version: 2018_12_28_162346) do
 
   create_table "is_f_tps", force: :cascade do |t|
     t.boolean "isFTP"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "resumes", force: :cascade do |t|
+    t.string "name"
+    t.string "attachment"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
