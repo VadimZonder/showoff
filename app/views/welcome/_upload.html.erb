@@ -12,10 +12,33 @@
 
 <div class = "well">
    <%= form_for @resume, html: { multipart: true } do |f| %>
+    <%#eventually remove the name if needed %>
       <%= f.label :name %>
-      <%= f.text_field :name %>
+      <%= f.text_field :name ,  value: 'Import File' %>
       <%= f.label :attachment %>
       <%= f.file_field :attachment %>
-      <%= f.submit "Save", class: "btn btn-primary" %>
+      <%= f.submit "Import", class: "btn btn-primary" %>
    <% end %>
 </div>
+
+<!--delete
+<%#= form_with(model: bulletin, local: true) do |form| %>
+  <%# if bulletin.errors.any? %>
+    <div id="error_explanation">
+      <h2><%#= pluralize(comment.errors.count, "error") %> prohibited this comment from being saved:</h2>
+
+      <ul>
+      <%# bulletin.errors.full_messages.each do |message| %>
+        <li><%#= message %></li>
+      <%# end %>
+      </ul>
+    </div>
+  <%# end %>
+  <div class="form-group">
+    <#%= form.file_field :attachment %><br>
+  </div>
+  <div class="actions">
+    <%#= form.submit("Upload File", class: "btn btn-primary btn-lg") %>
+  </div>
+<%# end %>
+-->
