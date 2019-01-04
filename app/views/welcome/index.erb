@@ -329,9 +329,9 @@ tempfile.close
                  end
                  @csvRead = CSV.read(@file5)
           else
-              @csvFileLocationOpen = open('https://label-gen-is-ftp.herokuapp.com'+ Resume.last.attachment.to_s)
+              @csvFileLocationOpen = open('https://label-gen-is-ftp.herokuapp.com/uploads/resume/attachment/24/OurFormatTest.csv')
                   open('OurFormatTest.csv', 'wb') do |file|
-                   file << open('https://label-gen-is-ftp.herokuapp.com'+ Resume.last.attachment.to_s).read
+                   file << open('https://label-gen-is-ftp.herokuapp.com/uploads/resume/attachment/24/OurFormatTest.csv').read
                    @file5 = file
                  end
                  @csvRead = CSV.read(@file5)
