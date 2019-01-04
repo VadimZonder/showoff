@@ -11,7 +11,17 @@
         }
 </script>
 
+<%require 'open-uri'%>
 
+<%  @url =  request.original_url  %>
+<%
+##Development or Deployment
+if @url.include? 'c9users.io' 
+    @deployment = false
+else
+    @deployment = true
+end
+%>
 
 <%#= render "button" %>
 <div class="jumbotron text-center">
@@ -309,13 +319,49 @@ tempfile.close
       <%####  customers = CSV.read(@csvFileLocation.chomp("/*")) %>
       <%#######################= @csvFileLocation =  './public' + Resume.last.attachment.to_s%>
         <%#################  customers = CSV.read(@csvFileLocation.chomp("/*")) %>
-       
-              <%  @csvFileLocation =  './FromFTP' %>
+           
+          <%  
+          if @deployment == false
+              @csvFileLocationOpen = open('https://api-to-labels-base-vadimmalakhovski.c9users.io'+ Resume.last.attachment.to_s)
+                  open('OurFormatTest.csv', 'wb') do |file|
+                   file << open('https://api-to-labels-base-vadimmalakhovski.c9users.io'+ Resume.last.attachment.to_s).read
+                   @file5 = file
+                 end
+                 @csvRead = CSV.read(@file5)
+          else
+              @csvFileLocationOpen = open('https://label-gen-is-ftp.herokuapp.com'+ Resume.last.attachment.to_s)
+                  open('OurFormatTest.csv', 'wb') do |file|
+                   file << open('https://label-gen-is-ftp.herokuapp.com'+ Resume.last.attachment.to_s).read
+                   @file5 = file
+                 end
+                 @csvRead = CSV.read(@file5)
+              
+          end
+          
+          
+ ########               @csvFileLocation3 = open('https://api-to-labels-base-vadimmalakhovski.c9users.io'+ Resume.last.attachment.to_s)
+########open('OurFormatTest.csv', 'wb') do |file|
+#######  file << open('https://api-to-labels-base-vadimmalakhovski.c9users.io'+ Resume.last.attachment.to_s).read
+ ##### file << open('https://label-gen-is-ftp.herokuapp.com'+rails_blob_path(Bulletin.last.attachment)).read
+  ########@file5 = file
+########end
+    %>
+    <%=@file5%>
+          <%  ########@csvFileLocation =  'https://api-to-labels-base-vadimmalakhovski.c9users.io/uploads/resume/attachment/24/OurFormatTest.csv' %>
+          <% ###### customers = CSV.read(@file5) %>
+          
+             <%  @csvFileLocation =  './FromFTP' %>
           <%  customers = CSV.read(@csvFileLocation.chomp("/*")) %>
            -->
            <script>
              var csv = '<%=@csvFileLocation%>'; 
+             var csvActual = '<%=@file5%>';
+              var url = '<%=@url%>';
+                 var csvRead = '<%=@csvRead%>';
              console.log(csv);
+             console.log('actual  file =' + csvActual);
+              console.log(url);
+               console.log(csvRead);
            </script>
       <!--
           
