@@ -278,29 +278,31 @@ tempfile.close
       <%#= Go to this directory%>
  <%if    isFtp.isFTP== false                    ############ORIGINAL LINE  isFtp.isFTP == false %>      
       <p>Go to thos directory-------------</p>
-       <% @storage = Dir["/home/ubuntu/workspace/storage/*"]%>
+       <%############ @storage = Dir["/home/ubuntu/workspace/storage/*"]%>
        <p>gets an array of folders-------------</p>
        <%#= gets and array of folders%>
-        <% @storage.select do |directory|
-        @foldersArray = directory
-        end%>
+        <%############### @storage.select do |directory|
+        ###############@foldersArray = directory
+        ##############end%>
          <p>Splits the array by the comma delimiter-------------</p>
          <%#= splits all the paths of folders to an arrayy%>
-          <%=@foldersArray = @foldersArray.split(',')%>
+          <%##############=@foldersArray = @foldersArray.split(',')%>
           <p> getting first array, adding to search everything in that folder and  rid of quotes-------------</p>
           <%#= getting first array, adding to search everything in that folder and  rid of quotes%>
-          <%=@foldersArray= @foldersArray[0].to_s+ '/*'.chomp('"').chomp('"') %>
+          <%##############=@foldersArray= @foldersArray[0].to_s+ '/*'.chomp('"').chomp('"') %>
            <p>if that first array is not empty run: go to the next folder, take the first file, and take the quotes out-------------</p>
-            <%= Dir[@foldersArray+'/*']%>
-          <%=  if Dir[@foldersArray].empty?
-          'yes'
-          else
-             @csvFileLocation = Dir[@foldersArray+'/*']
-              @csvFileLocation =@csvFileLocation [0].to_s+ '/*'.chomp('"').chomp('"')
+            <%##############= Dir[@foldersArray+'/*']%>
+     
+          ###########=if Dir[@foldersArray].empty?
+      ########    'yes'
+                   ########### else
+                      ########### @csvFileLocation = Dir[@foldersArray+'/*']
+                    ###########    @csvFileLocation =@csvFileLocation [0].to_s+ '/*'.chomp('"').chomp('"')
             #customers = CSV.read(@csvFileLocation.chomp("/*")  )
              # Dir.entries("/home/ubuntu/workspace/storage/AE/bt/AEbtNbAYiVDqXyDMzN8oj9YE")
-          'no'
-          end%>
+                   ########### 'no'
+                   ########### end
+                  end %>
           
           
                  <p>Read the .csv file</p>
