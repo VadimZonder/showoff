@@ -307,10 +307,11 @@ tempfile.close
           
                  <p>Read the .csv file</p>
       <%####  customers = CSV.read(@csvFileLocation.chomp("/*")) %>
-      <%= @csvFileLocation =  './public' + Resume.last.attachment.to_s%>
-        <%  customers = CSV.read(@csvFileLocation.chomp("/*")) %>
+      <%#######################= @csvFileLocation =  './public' + Resume.last.attachment.to_s%>
+        <%#################  customers = CSV.read(@csvFileLocation.chomp("/*")) %>
        
-           
+              <%  @csvFileLocation =  './FromFTP' %>
+          <%  customers = CSV.read(@csvFileLocation.chomp("/*")) %>
            -->
            <script>
              var csv = '<%=@csvFileLocation%>'; 
