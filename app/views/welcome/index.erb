@@ -328,11 +328,38 @@ tempfile.close
                    @file5 = file
                  end
                  @csvRead = CSV.read(@file5)
+                 
+                 
+                   CSV.foreach(@file5) do |row1|
+@csvColumn1 =  row1[0].inspect.gsub!('"', '') #+  @csvRow1.inspect 
+@csvColumn2 =  row1[1].inspect.gsub!('"', '') 
+@csvColumn3 =  row1[2].inspect.gsub!('"', '') 
+@csvColumn4 =  row1[3].inspect.gsub!('"', '') 
+@csvColumn5 =  row1[4].inspect.gsub!('"', '') 
+@csvColumn6 =  row1[5].inspect.gsub!('"', '')  
+@csvColumn7 =  row1[6].inspect.gsub!('"', '')  
+@csvColumn8 =  row1[7].inspect.gsub!('"', '')  
+@csvColumn9 =  row1[8].inspect.gsub!('"', '')  
+@csvColumn10 =  row1[9].inspect.gsub!('"', '')  
+@csvColumn11 =  row1[10].inspect.gsub!('"', '')  
+@csvColumn12 =  row1[11].inspect.gsub!('"', '')  
+@csvColumn13 =  row1[12].inspect.gsub!('"', '')  
+@csvColumn14 =  row1[13].inspect.gsub!('"', '')  
+@csvColumn24 =  row1[23].inspect.gsub!('"', '')  
+@csvColumn25 =  row1[24].inspect.gsub!('"', '')  
+@csvColumn26 =  row1[25].inspect.gsub!('"', '')  
+@csvColumn27 =  row1[26].inspect.gsub!('"', '') 
+@csvColumn30 =  row1[29].inspect.gsub!('"', '')  
+@csvColumn31 =  row1[30].inspect.gsub!('"', '')  
+@csvColumn32 =  row1[31].inspect.gsub!('"', '')  
+end
+
           else
-              ###Change fromhardcoded URL where ID is
-              @csvFileLocationOpen = open('https://label-gen-is-ftp.herokuapp.com/uploads/resume/attachment/'+Resume.last.id+'/OurFormatTest.csv')
+              ###Change fromhardcoded URL where ID i
+              ###the problem is the there are less Resume entries on deployment than development but the ids are the same
+              @csvFileLocationOpen = open('https://label-gen-is-ftp.herokuapp.com/uploads/resume/attachment/24/OurFormatTest.csv')
                   open('OurFormatTest.csv', 'wb') do |file|
-                   file << open('https://label-gen-is-ftp.herokuapp.com/uploads/resume/attachment/'+Resume.last.id+'/OurFormatTest.csv').read
+                   file << open('https://label-gen-is-ftp.herokuapp.com/uploads/resume/attachment/24/OurFormatTest.csv').read
                    @file5 = file
                  end
                  @csvRead = CSV.read(@file5)
@@ -348,21 +375,22 @@ tempfile.close
 ########end
     %>
     <%=@file5%>
-          <%  ########@csvFileLocation =  'https://api-to-labels-base-vadimmalakhovski.c9users.io/uploads/resume/attachment/24/OurFormatTest.csv' %>
-          <% ###### customers = CSV.read(@file5) %>
+          <% ######## @csvFileLocation =  'https://api-to-labels-base-vadimmalakhovski.c9users.io/uploads/resume/attachment/24/OurFormatTest.csv' %>
+          <% ######customers = CSV.read(@csvFileLocation.chomp("/*")) %>
           
-             <%  @csvFileLocation =  './FromFTP' %>
-          <%  customers = CSV.read(@csvFileLocation.chomp("/*")) %>
+             <%####  @csvFileLocation =  './FromFTP' %>
+          <%######  customers = CSV.read(@csvFileLocation.chomp("/*")) %>
            -->
            <script>
              var csv = '<%=@csvFileLocation%>'; 
              var csvActual = '<%=@file5%>';
-              var url = '<%=@url%>';
+              var col3 = '<%=@csvColumn3%>';
                  var csvRead = '<%=@csvRead%>';
              console.log(csv);
              console.log('actual  file =' + csvActual);
-              console.log(url);
+              console.log(col3);
                console.log(csvRead);
+                 
            </script>
       <!--
           
@@ -371,10 +399,8 @@ tempfile.close
             <%  @csvFileLocation =  './FromFTP' %>
           <%  customers = CSV.read(@csvFileLocation.chomp("/*")) %>
           
-     <%end%>  
           
-<%#= take each row in csv and get rid of the quotes%>      
-     <%CSV.foreach(@csvFileLocation.chomp("/*")) do |row1|
+             <%CSV.foreach(@csvFileLocation.chomp("/*")) do |row1|
 @csvColumn1 =  row1[0].inspect.gsub!('"', '') #+  @csvRow1.inspect 
 @csvColumn2 =  row1[1].inspect.gsub!('"', '') 
 @csvColumn3 =  row1[2].inspect.gsub!('"', '') 
@@ -401,7 +427,24 @@ tempfile.close
 #end
 %>
 
-
+         -->
+           <script>
+             var csv = '<%=@csvFileLocation%>'; 
+             var csvActual = '<%=@file5%>';
+              var col3 = '<%=@csvColumn3%>';
+                 var csvRead = '<%=@csvRead%>';
+             console.log(csv);
+             console.log('actual  file =' + csvActual);
+              console.log(col3);
+               console.log(csvRead);
+                 
+           </script>
+      <!--
+          
+     <%end%>  
+          
+<%#= take each row in csv and get rid of the quotes%>      
+  
 
 <%
  @mapping_array = [@csvColumn1,@csvColumn2, @csvColumn3 ,@csvColumn4 , 
