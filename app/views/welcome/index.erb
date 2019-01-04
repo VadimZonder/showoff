@@ -320,16 +320,20 @@ tempfile.close
       <%#######################= @csvFileLocation =  './public' + Resume.last.attachment.to_s%>
         <%#################  customers = CSV.read(@csvFileLocation.chomp("/*")) %>
            
-          <%  
+          <%
+          #if on DEVELOPMENT
           if @deployment == false
+              #get the last CSV from location and open it
               @csvFileLocationOpen = open('https://api-to-labels-base-vadimmalakhovski.c9users.io'+ Resume.last.attachment.to_s)
+              #open each line and save it to a variable
                   open('OurFormatTest.csv', 'wb') do |file|
                    file << open('https://api-to-labels-base-vadimmalakhovski.c9users.io'+ Resume.last.attachment.to_s).read
                    @file5 = file
                  end
+                 #read that variable
                  @csvRead = CSV.read(@file5)
                  
-                 
+                 #read ech column and save it to a variable
                    CSV.foreach(@file5) do |row1|
 @csvColumn1 =  row1[0].inspect.gsub!('"', '') #+  @csvRow1.inspect 
 @csvColumn2 =  row1[1].inspect.gsub!('"', '') 
@@ -366,13 +370,6 @@ end
               
           end
           
-          
- ########               @csvFileLocation3 = open('https://api-to-labels-base-vadimmalakhovski.c9users.io'+ Resume.last.attachment.to_s)
-########open('OurFormatTest.csv', 'wb') do |file|
-#######  file << open('https://api-to-labels-base-vadimmalakhovski.c9users.io'+ Resume.last.attachment.to_s).read
- ##### file << open('https://label-gen-is-ftp.herokuapp.com'+rails_blob_path(Bulletin.last.attachment)).read
-  ########@file5 = file
-########end
     %>
     <%=@file5%>
           <% ######## @csvFileLocation =  'https://api-to-labels-base-vadimmalakhovski.c9users.io/uploads/resume/attachment/24/OurFormatTest.csv' %>
