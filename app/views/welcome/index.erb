@@ -323,11 +323,12 @@ tempfile.close
           <%
           #if on DEVELOPMENT
           if @deployment == false
-              #get the last CSV from location and open it
-              @csvFileLocationOpen = open('https://api-to-labels-base-vadimmalakhovski.c9users.io'+ Resume.last.attachment.to_s)
+              #get the 1st and the only file location where the file is stored
+              @csvFileLocationOpen = open('https://api-to-labels-base-vadimmalakhovski.c9users.io/uploads/resume/attachment/1/OurFormatTest.csv')
               #open each line and save it to a variable
                   open('OurFormatTest.csv', 'wb') do |file|
-                   file << open('https://api-to-labels-base-vadimmalakhovski.c9users.io'+ Resume.last.attachment.to_s).read
+                   file << open('https://api-to-labels-base-vadimmalakhovski.c9users.io/uploads/resume/attachment/1/OurFormatTest.csv').read
+                   #Resume.last.attachment.to_s
                    @file5 = file
                  end
                  #read that variable
@@ -360,10 +361,10 @@ end
 
           else
               ###Change fromhardcoded URL where ID i
-              ###the problem is the there are less Resume entries on deployment than development but the ids are the same
-              @csvFileLocationOpen = open('https://label-gen-is-ftp.herokuapp.com/uploads/resume/attachment/24/OurFormatTest.csv')
+              ###not a problem -  there are less Resume entries on deployment than development but the ids are the same
+              @csvFileLocationOpen = open('https://label-gen-is-ftp.herokuapp.com/uploads/resume/attachment/1/OurFormatTest.csv')
                   open('OurFormatTest.csv', 'wb') do |file|
-                   file << open('https://label-gen-is-ftp.herokuapp.com/uploads/resume/attachment/24/OurFormatTest.csv').read
+                   file << open('https://label-gen-is-ftp.herokuapp.com/uploads/resume/attachment/1/OurFormatTest.csv').read
                    @file5 = file
                  end
                  @csvRead = CSV.read(@file5)
