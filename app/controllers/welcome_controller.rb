@@ -1,9 +1,7 @@
 class WelcomeController < ApplicationController
 # GET /welcome
   def index
-      def button
-           @hi = 'hi'
-      end
+
 
      @bulletin      = Bulletin.new
     @bulletin_list = Bulletin.order(created_at: :desc).all
@@ -13,13 +11,16 @@ class WelcomeController < ApplicationController
   @resumes = Resume.all
   @resume = Resume.new
 
+  @isFtp= IsFTp.last.isFTP
   @isFTP2 = IsFTp.last
 
   #@isFTP2.save
   
   
    isFTP = cookies[:cl]
+   @isFTPC = IsFTp.last
 unless isFTP.nil?
+
   
 if isFTP == 'true'
 @isFTP2.isFTP = true

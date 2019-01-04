@@ -13,14 +13,14 @@
 
 
 
-<%= render "button" %>
+<%#= render "button" %>
 <div class="jumbotron text-center">
   <div class="container">
     <a href="/" class="lang-logo">
       <img src="<%= asset_path('Dpdlog') %>">
     </a>
     <h1>DPD Label Generator App</h1>
-    <p>From APIs to a Label
+    <p>From APIs to a Label</p>
   </div>
 </div>
 
@@ -48,9 +48,9 @@
   <div class="row">
     <div class="purple-box u-padding-Al">
       <center>
-        <h3>Browse, then upload a PDF, Video or Image to the Bulletin</h3>
+         <h3>File Upload</h3>
+         <%= render "upload" %>
         <% require 'csv' %>
-        <%= render "upload", bulletin: @bulletin %>
       </center>
     </div>
     <hr />
@@ -78,21 +78,24 @@
 <%#DELETE%>        
 <%###@isFtp = true%>
 <%###@isFtp2 = true%>  
+<%###@isFtp = true%>  
 <%#DELETE%>  
 
-  <script>
+   <script>
+  
+    var statusFTP = '<%=@isFTP2.isFTP%>'; 
+  console.log("isFTP STATUS= " + statusFTP);
 //empty an array at the beginning
 var labelsArray = [];
 
 var isFtp = '<%=@isFtp%>';
-console.log("isFTP = " + isFtp);
 
  </script>
 
 </head>
 <body>
 <%
- @isFTP2 = true ############ORIGINAL LINE  @isFTP2 = @isFTP2.isFTP
+@isFTP2 = @isFTP2.isFTP
 %>
 <script>
  var isFTP2 = '<%=@isFTP2%>';
@@ -115,22 +118,6 @@ console.log("isFTP = " + isFtp);
   
 
     </script>
-
- <%if @isFtp2 == false    %>
-
-<script>
-   // document.getElementById("slider").checked = false;
-</script>
-<%elsif  @isFtp2 == true  %>
-
-<script>
-   // document.getElementById("slider").checked = true;
-</script>
-<%end%>
-
-
-
-
 
 
     <script>
@@ -155,41 +142,6 @@ console.log("isFTP = " + isFtp);
         }
     
 </script>
-
-
-
-<script>
- //need both - here is the first definition of isFTP js function  
-   // console.log(slider);
-
-
-/*    
-    function isFTP (){  
-        var slider=document.getElementById("slider").checked;
-        console.log(slider);
-        
-        if (slider == true){
-            
-      document.cookie = "cl=" + slider +  ";";
-      //location.reload();
-            
-        }
-        else if (slider == false){
-            document.cookie = "cl=" + slider +  ";";
-           // location.reload();
-        }
-
-      
- 
-    }
-   */     
- 
-</script>
-
-
-
- 
-
 
 <br>
 <br>
@@ -727,6 +679,7 @@ labelsArray.push('<%=@labelURI %>');
       <left>
         <h3>Map Your Import File</h3>
         <%#= render "upload", bulletin: @bulletin %>
+        <%###= link_to "Map Your Import File", rails_mapping_path %>
       </left>
     </div>
     <hr />

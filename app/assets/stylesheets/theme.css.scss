@@ -26,7 +26,8 @@ $brand-print: #DC0032;
  
 
   p {
-    color: lighten($brand-primary, 50%);
+    //color: lighten($brand-primary, 50%);
+    color: black;
     max-width: 75%;
     margin: 1em auto 2em;
   }

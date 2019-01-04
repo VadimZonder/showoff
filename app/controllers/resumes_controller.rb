@@ -20,7 +20,7 @@ class ResumesController < ApplicationController
       end
       
       if @resume.save
-         redirect_to resumes_path, notice: "The resume #{@resume.name} has been uploaded."
+         redirect_to root_path, notice: "The resume #{@resume.name} has been uploaded."
       else
          render "new"
       end
@@ -30,7 +30,7 @@ class ResumesController < ApplicationController
    def destroy
       @resume = Resume.find(params[:id])
       @resume.destroy
-      redirect_to resumes_path, notice:  "The resume #{@resume.name} has been deleted."
+      redirect_to root_path, notice:  "The resume #{@resume.name} has been deleted."
    end
    
    private
