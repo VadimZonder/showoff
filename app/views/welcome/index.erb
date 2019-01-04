@@ -284,9 +284,9 @@ tempfile.close
 </script>
 <!--
       
-      <%#= Dir.chdir("/storage")%>
-      <%#= Go to this directory%>
- <%if    isFtp.isFTP== false                    ############ORIGINAL LINE  isFtp.isFTP == false %>      
+  
+<%#= If on LOCAL%>
+<%if    isFtp.isFTP== false                    ############ORIGINAL LINE  isFtp.isFTP == false %>      
       <p>Go to thos directory-------------</p>
        <%############ @storage = Dir["/home/ubuntu/workspace/storage/*"]%>
        <p>gets an array of folders-------------</p>
