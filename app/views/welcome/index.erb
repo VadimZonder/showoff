@@ -1,7 +1,17 @@
+<% 
+require 'csv' 
+require 'net/ftp'
+require 'tempfile'
+require "open-uri"
+%>
+
+  
    <script>
    //OPENS ALL LABEL URLS
     ///console.log(labelsArray);
     function printLabels(){
+        //reload before print so that lates file is loaded
+         location.reload();
         var i = 0;
         while (i < labelsArray.length) {
           window.open(labelsArray[i], '_blank'); 
@@ -11,11 +21,10 @@
         }
 </script>
 
-<%require 'open-uri'%>
 
-<%  @url =  request.original_url  %>
 <%
 ##Development or Deployment
+@url =  request.original_url
 if @url.include? 'c9users.io' 
     @deployment = false
 else
@@ -60,7 +69,6 @@ end
       <center>
          <h3>File Upload</h3>
          <%= render "upload" %>
-        <% require 'csv' %>
       </center>
     </div>
     <hr />
@@ -168,10 +176,6 @@ var isFtp = '<%=@isFtp%>';
         
        isFtp = IsFTp.last ############ORIGINAL LINE    isFtp = IsFTp.last
         
-        
-require 'net/ftp'
-require 'tempfile'
-require "open-uri"
 
 #Read from FTP
 ftp = Net::FTP::new("ftp.dpd.ie")
@@ -285,7 +289,7 @@ tempfile.close
 <!--
       
   
-<%#= If on LOCAL%>
+<%# If on LOCAL_____________________________________________________________________________________________________%>
 <%if    isFtp.isFTP== false                    ############ORIGINAL LINE  isFtp.isFTP == false %>      
       <p>Go to thos directory-------------</p>
        <%############ @storage = Dir["/home/ubuntu/workspace/storage/*"]%>
@@ -321,7 +325,7 @@ tempfile.close
         <%#################  customers = CSV.read(@csvFileLocation.chomp("/*")) %>
            
           <%
-          #if on DEVELOPMENT
+ #if on DEVELOPMENT LOCAL-----------------------------------------------
           if @deployment == false
               #get the 1st and the only file location where the file is stored
               @csvFileLocationOpen = open('https://api-to-labels-base-vadimmalakhovski.c9users.io/uploads/resume/attachment/1/OurFormatTest.csv')
@@ -331,6 +335,26 @@ tempfile.close
                    #Resume.last.attachment.to_s
                    @file5 = file
                  end
+
+%>
+
+
+
+<%
+#IF ON DEPLOYMENT LOCAL----------------------------------------------------
+          else
+              ###not a problem -  there are less Resume entries on deployment than development but the ids are the same
+              @csvFileLocationOpen = open('https://label-gen-is-ftp.herokuapp.com/uploads/resume/attachment/1/OurFormatTest.csv')
+                  open('OurFormatTest.csv', 'wb') do |file|
+                   file << open('https://label-gen-is-ftp.herokuapp.com/uploads/resume/attachment/1/OurFormatTest.csv').read
+                   @file5 = file
+                 end
+
+              
+          end
+
+
+
                  #read that variable
                  @csvRead = CSV.read(@file5)
                  
@@ -357,28 +381,10 @@ tempfile.close
 @csvColumn30 =  row1[29].inspect.gsub!('"', '')  
 @csvColumn31 =  row1[30].inspect.gsub!('"', '')  
 @csvColumn32 =  row1[31].inspect.gsub!('"', '')  
-end
-
-          else
-              ###Change fromhardcoded URL where ID i
-              ###not a problem -  there are less Resume entries on deployment than development but the ids are the same
-              @csvFileLocationOpen = open('https://label-gen-is-ftp.herokuapp.com/uploads/resume/attachment/1/OurFormatTest.csv')
-                  open('OurFormatTest.csv', 'wb') do |file|
-                   file << open('https://label-gen-is-ftp.herokuapp.com/uploads/resume/attachment/1/OurFormatTest.csv').read
-                   @file5 = file
-                 end
-                 @csvRead = CSV.read(@file5)
-              
-          end
-          
+end          
     %>
-    <%=@file5%>
-          <% ######## @csvFileLocation =  'https://api-to-labels-base-vadimmalakhovski.c9users.io/uploads/resume/attachment/24/OurFormatTest.csv' %>
-          <% ######customers = CSV.read(@csvFileLocation.chomp("/*")) %>
-          
-             <%####  @csvFileLocation =  './FromFTP' %>
-          <%######  customers = CSV.read(@csvFileLocation.chomp("/*")) %>
-           -->
+    
+     -->
            <script>
              var csv = '<%=@csvFileLocation%>'; 
              var csvActual = '<%=@file5%>';
@@ -391,7 +397,16 @@ end
                  
            </script>
       <!--
+      
+      
+    <%=@file5%>
+          <% ######## @csvFileLocation =  'https://api-to-labels-base-vadimmalakhovski.c9users.io/uploads/resume/attachment/24/OurFormatTest.csv' %>
+          <% ######customers = CSV.read(@csvFileLocation.chomp("/*")) %>
           
+             <%####  @csvFileLocation =  './FromFTP' %>
+          <%######  customers = CSV.read(@csvFileLocation.chomp("/*")) %>
+
+ IF on FTP DEV + DEPL all is ONE------------------------------------------------------------------------------------------------------        
           <%else%>
            <%  #######################LOCAL            @csvFileLocation =  '/home/ubuntu/workspace/FromFTP' %>
             <%  @csvFileLocation =  './FromFTP' %>
@@ -422,29 +437,19 @@ end
 @csvColumn32 =  row1[31].inspect.gsub!('"', '')  
 
 
-#end
+end
 %>
 
-         -->
-           <script>
-             var csv = '<%=@csvFileLocation%>'; 
-             var csvActual = '<%=@file5%>';
-              var col3 = '<%=@csvColumn3%>';
-                 var csvRead = '<%=@csvRead%>';
-             console.log(csv);
-             console.log('actual  file =' + csvActual);
-              console.log(col3);
-               console.log(csvRead);
-                 
-           </script>
-      <!--
+
           
      <%end%>  
           
+      
 <%#= take each row in csv and get rid of the quotes%>      
   
 
 <%
+
  @mapping_array = [@csvColumn1,@csvColumn2, @csvColumn3 ,@csvColumn4 , 
                    @csvColumn5, @csvColumn6 , @csvColumn7 ,@csvColumn8 ,
                    @csvColumn9 , @csvColumn10 , @csvColumn11 ,@csvColumn12 , 
@@ -524,9 +529,14 @@ end
   
  %>
  <br>
+ 
+ 
+ 
 <%
   @mapping_array[d]
  %>
+
+      
  
   
  
@@ -594,6 +604,7 @@ accessToken = xmlAuthorizeDoc.xpath("//AccessToken").text
 <%=@G = @mapping_array[@xml_input_g.to_i]%>
 <%=@G= @G.to_s%>
 <p>works here</p>
+
 <%
 
                    
@@ -707,7 +718,7 @@ labelsArray.push('<%=@labelURI %>');
 
 
 <%#for esch row print a label end %>
- <%end%>
+
  
  
 
@@ -723,7 +734,19 @@ labelsArray.push('<%=@labelURI %>');
      }
   
     %>
-     
+         -->
+           <script>
+             var csv = '<%=@csvFileLocation%>'; 
+             var csvActual = '<%=@file5%>';
+              var col3 = '<%=@csvColumn3%>';
+                 var csvRead = '<%=@csvRead%>';
+             console.log(csv);
+             console.log('actual  file =' + csvActual);
+              console.log(col3);
+               console.log(csvRead);
+                 
+           </script>
+      <!--     
        
         <%= 
        # delete directory
@@ -786,7 +809,19 @@ labelsArray.push('<%=@labelURI %>');
   </div>
 <% ###################################end %>  
 
+ 
+   -->
+           <script>
+    
+              var col3 = '<%=@mapping_array[d]%>';
+     
+    
+             console.log('from mapping array 3 =' + col3);
 
+                 
+           </script>
+      <!--
+     
            
       <center>
         <ul class="no-bullet">
