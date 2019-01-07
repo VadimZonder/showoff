@@ -1,7 +1,8 @@
 class WelcomeController < ApplicationController
+    before_action :authenticate_user!
 # GET /welcome
   def index
-
+ @user = current_user.email
 
      @bulletin      = Bulletin.new
     @bulletin_list = Bulletin.order(created_at: :desc).all

@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
+  devise_for :users
+  
+  resources :users do
+    resources :resumes
+  end
+  
   get 'resumes/index'
   get 'resumes/new'
   get 'resumes/create'
@@ -21,7 +27,7 @@ Rails.application.routes.draw do
 
   root 'welcome#index'
 
-  get '/button', to: 'welcome#button', as: 'button'
+  #get '/button', to: 'welcome#button', as: 'button'
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

@@ -36,7 +36,7 @@ gem 'rest-client'
 
 gem 'carrierwave' , '~> 0.9'
 
-
+gem 'devise'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
