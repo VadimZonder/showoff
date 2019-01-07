@@ -451,12 +451,20 @@ end
   
 
 <%
-
- @mapping_array = [@csvColumn1,@csvColumn2, @csvColumn3 ,@csvColumn4 , 
-                   @csvColumn5, @csvColumn6 , @csvColumn7 ,@csvColumn8 ,
-                   @csvColumn9 , @csvColumn10 , @csvColumn11 ,@csvColumn12 , 
-                   @csvColumn13, @csvColumn14, @csvColumn25, @csvColumn25, @csvColumn26, 
-                  @csvColumn27,  @csvColumn30, @csvColumn31 , @csvColumn32   ]
+ #save all entrie from .csv into an array
+ @mapping_array = [@csvColumn1,  @csvColumn2,  @csvColumn3,  @csvColumn4, 
+                   @csvColumn5,  @csvColumn6,  @csvColumn7,  @csvColumn8,
+                   @csvColumn9,  @csvColumn10, @csvColumn11, @csvColumn12, 
+                   @csvColumn13, @csvColumn14, @csvColumn15, @csvColumn16,
+                   @csvColumn17, @csvColumn18, @csvColumn19, @csvColumn20,
+                   @csvColumn21, @csvColumn22, @csvColumn23, @csvColumn24, 
+                   @csvColumn25, @csvColumn26, @csvColumn27, @csvColumn28,  
+                   @csvColumn29, @csvColumn30, @csvColumn31, @csvColumn32, 
+                   @csvColumn33, @csvColumn34, @csvColumn35, @csvColumn36,
+                   @csvColumn37, @csvColumn38, @csvColumn39, @csvColumn40,
+                   @csvColumn41, @csvColumn42, @csvColumn43, @csvColumn44,
+                   @csvColumn45, @csvColumn46, @csvColumn47, @csvColumn48, 
+                   @csvColumn49, @csvColumn50]
                    
   #user_input_mapping = change all to integers
   ##########################ORIGINAL
@@ -484,7 +492,7 @@ end
   
   
   ##############before mapping db
-   a = 1
+  a = 1
   b = 2
   c = 3
   d = 4
@@ -505,42 +513,8 @@ end
   ad = 30
   ae =31
   af = 32
-  
-  @xml_input_a  = a.to_s
-  @xml_input_b  = b.to_s
-  @xml_input_c  = c.to_s
-  @xml_input_d  = d.to_s
-  @xml_input_e  = e.to_s
-  @xml_input_f  = f.to_s
-  @xml_input_g  = g.to_s
-  @xml_input_h  = h.to_s
-  @xml_input_i  = i.to_s
-  @xml_input_j  = j.to_s
-  @xml_input_k  = k.to_s
-  @xml_input_l  = l.to_s
-  @xml_input_m  = m.to_s
-  @xml_input_n  = n.to_s
-  @xml_input_x  = x.to_s
-  @xml_input_y  = y.to_s
-  @xml_input_z  = z.to_s
-  @xml_input_aa  = aa.to_s
-   @xml_input_ad = ad.to_s
-    @xml_input_ae  = ae.to_s
-     @xml_input_af  = af.to_s
-     
-  
  %>
- <br>
  
- 
- 
-<%
-  @mapping_array[d]
- %>
-
-      
- 
-  
  
  <%
 
@@ -574,36 +548,36 @@ accessToken = xmlAuthorizeDoc.xpath("//AccessToken").text
 <br>
 
 <p>works here1</p>
-<%=@csvColumn4%> ,
-<%=@xml_input_d %>, 
-<%=@mapping_array[@xml_input_d.to_i]%>,
 
-<%@A = @mapping_array[@xml_input_a.to_i]%>,
+<%######___________________________________MAPPING AN ARRAY_________________________________%> 
+<%=@mapping_array[@xml_input_d.to_i-1]%>,
+
+<%@A = @mapping_array[a-1]%>,
 <%=@A= @A.to_s%>,
 
-<%@X = @mapping_array[@xml_input_x.to_i]%>,
+<%@X = @mapping_array[x-1]%>,
 <%=@X= @X.to_s%>,
 
-<%@Y = @mapping_array[@xml_input_y.to_i]%>,
+<%@Y = @mapping_array[y-1]%>,
 <%=@Y= @Y.to_s%>,
 
-<%@AD = @mapping_array[@xml_input_ad.to_i]%>,
+<%@AD = @mapping_array[ad-1]%>,
 <%=@AD= @AD.to_s%>,
 
 
-<%@C = @mapping_array[@xml_input_c.to_i]%>
+<%@C = @mapping_array[c-1]%>
 <%=@C= @C.to_s%>
 
-<%@D = @mapping_array[@xml_input_d.to_i]%>
+<%@D = @mapping_array[d-1]%>
 <%@D= @D.to_s%>
 
-<%@E = @mapping_array[@xml_input_e.to_i]%>
+<%@E = @mapping_array[e-1]%>
 <%=@E= @E.to_s%>
 
-<%@F = @mapping_array[@xml_input_f.to_i]%>
+<%@F = @mapping_array[f-1]%>
 <%=@F= @F.to_s%>
 
-<%=@G = @mapping_array[@xml_input_g.to_i]%>
+<%=@G = @mapping_array[g-1]%>
 <%=@G= @G.to_s%>
 <p>works here</p>
 
@@ -740,11 +714,11 @@ labelsArray.push('<%=@labelURI %>');
            <script>
              var csv = '<%=@csvFileLocation%>'; 
              var csvActual = '<%=@file5%>';
-              var col3 = '<%=@csvColumn3%>';
+              var col3 = '<%=@X%>';
                  var csvRead = '<%=@csvRead%>';
              console.log(csv);
              console.log('actual  file =' + csvActual);
-              console.log(col3);
+              console.log('all = ' + col3);
                console.log(csvRead);
                  
            </script>
@@ -812,17 +786,6 @@ labelsArray.push('<%=@labelURI %>');
 <% ###################################end %>  
 
  
-   -->
-           <script>
-    
-              var col3 = '<%=@mapping_array[d]%>';
-     
-    
-             console.log('from mapping array 3 =' + col3);
-
-                 
-           </script>
-      <!--
      
            
       <center>
