@@ -35,9 +35,13 @@ end
  <%= render "login" %>
 <h1>Welcome !</h1>
 <%## email = <DPD Account Number><API Setup Password><Base64 Token><@dpd.ie> %>
-<p><%= @accountNumber = @email[0, 6] %></p>
-<p><%= @password = @email[6, 10] %></p>
-<p><%= @token = @email[16..-8] %></p>
+<p><%###= @accountNumber = @email[0, 6] %></p>
+<p><%###= @password = @email[6, 10] %></p>
+<p><%###= @token = @email[16..-8] %></p>
+
+<p><%= @accountNumber = '5287L9' %></p>
+<p><%= @password = 'db44t66Dat' %></p>
+<p><%= @token = 'R3JlZW5JVDpHcmVlbklUUGFzc3cwcmQyMDE4' %></p>
 
 
 <%#= render "button" %>
