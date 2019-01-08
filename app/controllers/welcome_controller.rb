@@ -32,11 +32,13 @@ unless isFTP.nil?
 if isFTP == 'true'
 @isFTP2.isFTP = true
 @isFTP2.account_number = @accountNumber
+##@isFTP2.account_number = '5287L9' #@accountNumber
 @isFTP2.save
 
 else
 @isFTP2.isFTP  = false
 @isFTP2.account_number = @accountNumber
+##@isFTP2.account_number = '5287L9' #@accountNumber
 @isFTP2.save
 
 end

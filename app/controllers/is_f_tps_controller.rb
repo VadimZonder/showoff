@@ -45,9 +45,11 @@ class IsFTpsController < ApplicationController
   def create
       @email= current_user.email
      @accountNumber = @email[0, 6]  
-
-    #@is_f_tp = IsFTp.new(is_f_tp_params)
-    @is_f_tp = IsFTp.last
+if  IsFTp.find_by_account_number(@accountNumber).nil?
+    @is_f_tp = IsFTp.new(is_f_tp_params)
+   ## @is_f_tp = IsFTp.last
+    @is_f_tp = IsFTp.find_by_account_number(@accountNumber)
+    ###@is_f_tp = IsFTp.find_by_account_number('5287L9')
     respond_to do |format|
       if @is_f_tp.save
         format.html { redirect_to @is_f_tp, notice: 'Is f tp was successfully created.' }
@@ -57,6 +59,19 @@ class IsFTpsController < ApplicationController
         format.json { render json: @is_f_tp.errors, status: :unprocessable_entity }
       end
     end
+else   
+   @is_f_tp = IsFTp.find_by_account_number(@accountNumber)
+ ### @is_f_tp = IsFTp.find_by_account_number('5287L9')
+    respond_to do |format|
+      if @is_f_tp.save
+        format.html { redirect_to @is_f_tp, notice: 'Is f tp was successfully created.' }
+        format.json { render :show, status: :created, location: @is_f_tp }
+      else
+        format.html { render :new }
+        format.json { render json: @is_f_tp.errors, status: :unprocessable_entity }
+      end
+    end
+end    
   end
 
   # PATCH/PUT /is_f_tps/1
