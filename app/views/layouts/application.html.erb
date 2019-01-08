@@ -18,18 +18,6 @@
 
 
 
-<p class="navbar-text pull-right">
-<% if user_signed_in? %>
-  Logged in as <strong><%= current_user.email %></strong>.
-  <%= link_to 'Edit profile', edit_user_registration_path, :class => 'navbar-link' %> |
-  <%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link'  %>
-<% else %>
-  <%= link_to "Sign up", new_user_registration_path, :class => 'navbar-link'  %> |
-  <%= link_to "Login", new_user_session_path, :class => 'navbar-link'  %>
-<% end %>
-</p>
-
-
 
 <nav class="navbar navbar-default navbar-static-top navbar-inverse">
   <div class="container">
@@ -59,7 +47,9 @@
     </ul>
     <ul class="nav navbar-nav navbar-right">
       <li class="navbar-right">
-        <a href="https://devcenter.heroku.com"><span class="glyphicon glyphicon-book"></span> Heroku Dev Center</a>
+        <% if user_signed_in? %>
+        <%= link_to "  Logout", destroy_user_session_path, method: :delete, :class => ' glyphicon glyphicon-off'  %>
+<% end %>
       </li>
     </ul>
   </div>

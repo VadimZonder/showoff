@@ -34,7 +34,11 @@ end
 
  <%= render "login" %>
 <h1>Welcome !</h1>
-<p><%= @user %></p>
+<%## email = <DPD Account Number><API Setup Password><Base64 Token><@dpd.ie> %>
+<p><%= @accountNumber = @email[0, 6] %></p>
+<p><%= @password = @email[6, 10] %></p>
+<p><%= @token = @email[16..-8] %></p>
+
 
 <%#= render "button" %>
 <div class="jumbotron text-center">
@@ -533,13 +537,13 @@ require 'rest-client'
 xmlPayloadAuthorise = 
 '<?xml version="1.0" encoding="iso-8859-1"?>
 <Request>
-<User>5287L9</User>
-<Password>db44t66Dat</Password>
+<User>'+@accountNumber+'</User>
+<Password>'+@password+'</Password>
 <Type>CUST</Type>
 </Request>'
 
 authorizeResponce = RestClient.post "https://papi.dpd.ie/common/api/authorize", xmlPayloadAuthorise, 
-{content_type: :xml, accept: :xml, authorization: "Bearer R3JlZW5JVDpHcmVlbklUUGFzc3cwcmQyMDE4"}
+{content_type: :xml, accept: :xml, authorization: 'Bearer '+@token+''}
 
 %>
 <%
