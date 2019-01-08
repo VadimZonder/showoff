@@ -1,29 +1,51 @@
 class IsFTpsController < ApplicationController
   before_action :set_is_f_tp, only: [:show, :edit, :update, :destroy]
+   before_action :authenticate_user!
+#check if they need to be present in each method if so then add to helpers application
 
+
+ #@email= User.current_user.email
+ #@accountNumber = @email[0, 6] 
+ 
   # GET /is_f_tps
   # GET /is_f_tps.json
   def index
+      @email= current_user.email
+     @accountNumber = @email[0, 6]  
+
+    
     @is_f_tps = IsFTp.all
   end
 
   # GET /is_f_tps/1
   # GET /is_f_tps/1.json
   def show
+      @email= current_user.email
+     @accountNumber = @email[0, 6]  
+
   end
 
   # GET /is_f_tps/new
   def new
+      @email= current_user.email
+     @accountNumber = @email[0, 6]  
+
     @is_f_tp = IsFTp.new
   end
 
   # GET /is_f_tps/1/edit
   def edit
+      @email= current_user.email
+     @accountNumber = @email[0, 6]  
+
   end
 
   # POST /is_f_tps
   # POST /is_f_tps.json
   def create
+      @email= current_user.email
+     @accountNumber = @email[0, 6]  
+
     #@is_f_tp = IsFTp.new(is_f_tp_params)
     @is_f_tp = IsFTp.last
     respond_to do |format|

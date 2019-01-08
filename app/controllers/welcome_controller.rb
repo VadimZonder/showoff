@@ -4,7 +4,7 @@ class WelcomeController < ApplicationController
   def index
        
         @email= current_user.email
-      
+     @accountNumber = @email[0, 6]  
 
 
      @bulletin      = Bulletin.new
@@ -16,22 +16,27 @@ class WelcomeController < ApplicationController
   @resume = Resume.new
 
   @isFtp= IsFTp.last.isFTP
-  @isFTP2 = IsFTp.last
+  
+  #######@isFTP2 = IsFTp.last
+    @isFTP2 = IsFTp.find_by_account_number(@accountNumber)
+ 
 
   #@isFTP2.save
   
   
    isFTP = cookies[:cl]
-   @isFTPC = IsFTp.last
+   @isFTPC = IsFTp.find_by_account_number(@accountNumber)
 unless isFTP.nil?
 
   
 if isFTP == 'true'
 @isFTP2.isFTP = true
+@isFTP2.account_number = @accountNumber
 @isFTP2.save
 
 else
 @isFTP2.isFTP  = false
+@isFTP2.account_number = @accountNumber
 @isFTP2.save
 
 end

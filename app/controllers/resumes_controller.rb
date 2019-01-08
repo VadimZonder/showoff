@@ -5,6 +5,7 @@ class ResumesController < ApplicationController
    
    def new
       @resume = Resume.new
+      #@resume = current_user.resume.new
    end
    
    def create
@@ -12,10 +13,12 @@ class ResumesController < ApplicationController
       if  Resume.first.nil?
         #true=make new one
         @resume = Resume.new(resume_params)
+        # @resume = current_user.resumes.new(resume_params)
       else
         #false=delete the old one and make new one
         Resume.last.destroy
         @resume = Resume.new(resume_params)
+        # @resume = current_user.resumes.new(resume_params)
         
       end
       

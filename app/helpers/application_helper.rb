@@ -1,2 +1,3 @@
 module ApplicationHelper
-end
+    #@email= User.current_user.email
+end    

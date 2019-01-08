@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_07_130603) do
+ActiveRecord::Schema.define(version: 2019_01_08_091133) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -51,6 +51,7 @@ ActiveRecord::Schema.define(version: 2019_01_07_130603) do
     t.boolean "isFTP"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "account_number"
   end
 
   create_table "resumes", force: :cascade do |t|

@@ -15,6 +15,11 @@
     <%= form.label :isFTP %>
     <%= form.check_box :isFTP %>
   </div>
+  
+    <div class="field">
+    <%= form.label :account_number %>
+    <%= form.text_field :accountNumber, :value => @current_user.email[0, 6]   %>
+  </div>
 
   <div class="actions">
     <%= form.submit %>
