@@ -77,6 +77,8 @@ end
   # PATCH/PUT /is_f_tps/1
   # PATCH/PUT /is_f_tps/1.json
   def update
+      @email= current_user.email
+     @accountNumber = @email[0, 6]  
     respond_to do |format|
       if @is_f_tp.update(is_f_tp_params)
         format.html { redirect_to @is_f_tp, notice: 'Is f tp was successfully updated.' }
@@ -91,6 +93,8 @@ end
   # DELETE /is_f_tps/1
   # DELETE /is_f_tps/1.json
   def destroy
+      @email= current_user.email
+     @accountNumber = @email[0, 6]  
     @is_f_tp.destroy
     respond_to do |format|
       format.html { redirect_to is_f_tps_url, notice: 'Is f tp was successfully destroyed.' }

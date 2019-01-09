@@ -460,11 +460,11 @@ end
      <%end%>  
           
       
-<%#= take each row in csv and get rid of the quotes%>      
+
   
 
 <%
- #save all entrie from .csv into an array
+ #save all entrie from reading .csv into an array
  @mapping_array = [@csvColumn1,  @csvColumn2,  @csvColumn3,  @csvColumn4, 
                    @csvColumn5,  @csvColumn6,  @csvColumn7,  @csvColumn8,
                    @csvColumn9,  @csvColumn10, @csvColumn11, @csvColumn12, 
@@ -481,30 +481,64 @@ end
                    
   #user_input_mapping = change all to integers
   ##########################ORIGINAL
-  #a = @a1.to_i
-  #b = @b2.to_i
-  #c = @c3.to_i
-  #d = @d4.to_i
-  #e = @e5.to_i
-  #f = @f6.to_i
-  #g = @g7.to_i
-  #h = @h8.to_i
-  #i = @i9.to_i
-  #j = @j10.to_i
-  #k = @k11.to_i
-  #l = @l12.to_i
-  #m = @m13.to_i
-  #n = @n14.to_i
-  #x = @x24.to_i
-  #y = @y25.to_i
-  #z = @z26.to_i
-  #aa = @aa27.to_i
-  #ad = @ad30.to_i
-  #ae = @ae31.to_i
-  #af = @af32.to_i
+  a = @a1
+  b = @b2
+  c = @c3
+  d = @d4
+  e = @e5
+  f = @f6
+  g = @g7
+  h = @h8
+  i = @i9
+  j = @j10
+  
+  k = @k11
+  l = @l12
+  m = @m13
+  n = @n14
+  o= @o15 
+  p = @p16
+  q= @q17
+  r= @r18
+  s= @s19
+  t= @t20
+    
+  u= @u21
+  v= @v22
+  w= @w23
+  x = @x24
+  y = @y25
+  z = @z26
+  aa = @aa27
+  ab= @ab28
+  ac= @ac29
+  
+    ad = @ad30
+    ae = @ae31
+    af = @af32
+    ag= @ag33
+    ah= @ah34
+    ai= @ai35
+    aj= @aj36
+    ak= @ak37
+    al= @al38
+    am= @am39
+    an= @an40
+    
+    ao= @ao41
+    ap= @ap42
+    aq= @aq43
+    ar= @ar44
+    as= @as45
+    at= @at46
+    au= @au47
+    av= @av48
+    aw= @aw49
+    ax= @ax50
   
   
   ##############before mapping db (fi import file is in our format) + make full 50 letters
+=begin  
   a = 1
   b = 2
   c = 3
@@ -526,6 +560,7 @@ end
   ad = 30
   ae = 31
   af = 32
+=end  
  %>
  
  
