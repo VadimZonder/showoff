@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
    
+  resources :mappings
   devise_for :users
   
   resources :users do
