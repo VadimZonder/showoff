@@ -598,35 +598,63 @@ accessToken = xmlAuthorizeDoc.xpath("//AccessToken").text
 <p>works here1</p>
 
 <%######___________________________________MAPPING AN ARRAY_________________________________%> 
-<%=@mapping_array[@xml_input_d.to_i-1]%>,
+<%=@mapping_array[@xml_input_d.to_i-1]%>
 
-<%@A = @mapping_array[a-1]%>,
-<%=@A= @A.to_s%>,
+<%@A1 = @mapping_array[a-1]%>,
+<%=@A1= @A1.to_s%>
 
-<%@X = @mapping_array[x-1]%>,
-<%=@X= @X.to_s%>,
+<%@C3 = @mapping_array[c-1]%>
+<%=@C3= @C3.to_s%>
 
-<%@Y = @mapping_array[y-1]%>,
-<%=@Y= @Y.to_s%>,
+<%@D4 = @mapping_array[d-1]%>
+<%@D4= @D4.to_s%>
 
-<%@AD = @mapping_array[ad-1]%>,
-<%=@AD= @AD.to_s%>,
+<%@E5 = @mapping_array[e-1]%>
+<%=@E5= @E5.to_s%>
+
+<%@F6 = @mapping_array[f-1]%>
+<%=@F6= @F6.to_s%>
+
+<%=@G7 = @mapping_array[g-1]%>
+<%=@G7= @G7.to_s%>
+
+<%=@H8 = @mapping_array[h-1]%>
+<%=@H8= @H8.to_s%>
+
+<%=@I9 = @mapping_array[i-1]%>
+<%=@I9= @I9.to_s%>
+
+<%=@J10 = @mapping_array[j-1]%>
+<%=@J10= @J10.to_s%>
+
+<%=@K11 = @mapping_array[k-1]%>
+<%=@K11= @K11.to_s%>
+
+<%=@L12 = @mapping_array[l-1]%>
+<%=@L12= @L12.to_s%>
+
+<%=@M13 = @mapping_array[g-1]%>
+<%=@M13= @M13.to_s%>
+
+<%=@N14 = @mapping_array[m-1]%>
+<%=@N14= @N14.to_s%>
 
 
-<%@C = @mapping_array[c-1]%>
-<%=@C= @C.to_s%>
 
-<%@D = @mapping_array[d-1]%>
-<%@D= @D.to_s%>
+<%@X24 = @mapping_array[x-1]%>,
+<%=@X24= @X24.to_s%>
 
-<%@E = @mapping_array[e-1]%>
-<%=@E= @E.to_s%>
+<%@Y25 = @mapping_array[y-1]%>,
+<%=@Y25= @Y25.to_s%>
 
-<%@F = @mapping_array[f-1]%>
-<%=@F= @F.to_s%>
+<%@Z26 = @mapping_array[y-1]%>,
+<%=@Z26= @Z26.to_s%>
 
-<%=@G = @mapping_array[g-1]%>
-<%=@G= @G.to_s%>
+<%@AD30 = @mapping_array[ad-1]%>,
+<%=@AD30= @AD30.to_s%>
+
+
+
 <p>works here</p>
 
 <%
@@ -640,8 +668,8 @@ xmlPayloadAuthorised =
 '<?xml version="1.0" encoding="iso-8859-1"?>
 <PreAdvice>
     <Consignment>
-        <RecordID>'+ @A +  '</RecordID>
-        <AlertEmailAddress>mhmaechler@gmail.com</AlertEmailAddress>
+        <RecordID>'+ @A1 +  '</RecordID>
+        <AlertEmailAddress>'+ @AD30 +  '</AlertEmailAddress>
         <ConsignmentDescription>LG.124132D</ConsignmentDescription>
         <ConsignmentDate>2018-12-03</ConsignmentDate>
         <CustomerAccount>1111L1</CustomerAccount>
@@ -655,27 +683,28 @@ xmlPayloadAuthorised =
         <ServiceType>1</ServiceType>
         <Weight>10</Weight>
         <DeliveryAddress>
-            <Contact>'+@X  +'</Contact>
-            <ContactTelephone>'+@Y  +'</ContactTelephone>
-            <ContactEmail>'+@AD  +'</ContactEmail>
-            <BusinessName>'+@C  +'</BusinessName>
-            <AddressLine1>'+@D  +'</AddressLine1>
-            <AddressLine2>'+@E  +'</AddressLine2>
-            <AddressLine3>'+@F  +'</AddressLine3>
-            <AddressLine4>'+@G +'</AddressLine4>
-            <PostCode></PostCode>
-            <CountryCode>IE</CountryCode>
+            <Contact>'+@X24  +'</Contact>
+            <ContactTelephone>'+@Y25  +'</ContactTelephone>
+            <ContactEmail>'+@AD30  +'</ContactEmail>
+            <BusinessName>'+@C3  +'</BusinessName>
+            <AddressLine1>'+@D4  +'</AddressLine1>
+            <AddressLine2>'+@E5  +'</AddressLine2>
+            <AddressLine3>'+@F6  +'</AddressLine3>
+            <AddressLine4>'+@G7 +'</AddressLine4>
+            <PostCode>'+@H8 +'</PostCode>
+            <CountryCode>'+@I9 +'</CountryCode>
         </DeliveryAddress>
         <CollectionAddress>
-           <Contact>'+@X  +'</Contact>
-            <ContactTelephone>'+@Y  +'</ContactTelephone>
-            <ContactEmail>'+@AD  +'</ContactEmail>
-            <BusinessName>'+@C  +'</BusinessName>
-            <AddressLine1>'+@D  +'</AddressLine1>
-            <AddressLine2>'+@E  +'</AddressLine2>
-            <AddressLine3>'+@F  +'</AddressLine3>
-            <AddressLine4>'+@G +'</AddressLine4>
-            <CountryCode>IE</CountryCode>
+           <Contact>'+@X24  +'</Contact>
+            <ContactTelephone>'+@Y25  +'</ContactTelephone>
+            <ContactEmail>'+@AD30  +'</ContactEmail>
+            <BusinessName>'+@C3  +'</BusinessName>
+            <AddressLine1>'+@D4  +'</AddressLine1>
+            <AddressLine2>'+@E5  +'</AddressLine2>
+            <AddressLine3>'+@F6  +'</AddressLine3>
+            <AddressLine4>'+@G7 +'</AddressLine4>
+            <PostCode>'+@H8 +'</PostCode>
+            <CountryCode>'+@I9 +'</CountryCode>
         </CollectionAddress>
         <References>
             <Reference>
