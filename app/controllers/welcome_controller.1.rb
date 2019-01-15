@@ -6,14 +6,6 @@ class WelcomeController < ApplicationController
     end
 # GET /welcome
   def index
-      
-    require 'csv' 
-    require 'net/ftp'
-    require 'tempfile'
-    require "open-uri"
-    require 'open-uri'
-    require 'rest-client'
-
       @csvArray2 = Array.new 
       @labelsArray2 = Array.new  
       
@@ -28,7 +20,6 @@ class WelcomeController < ApplicationController
     
     @isFTP2 = IsFTp.find_by_account_number(@accountNumber)
   
-  #need this for initial setup - if no FTP record with this account number then create one and save
   if IsFTp.find_by_account_number(@accountNumber).nil?
       #if is ftp is nil then create a new entry for that account
      @isFTPC2 = IsFTp.create :isFTP => "false" ,:account_number => @accountNumber
@@ -52,14 +43,12 @@ class WelcomeController < ApplicationController
 
   
             if isFTP == 'true'
-                @debug = true
                 @isFTP2.isFTP = true
                 @isFTP2.account_number = @accountNumber
                 ##@isFTP2.account_number = '5287L9' #@accountNumber
                 @isFTP2.save
                 
             else
-                @debug = false
                 @isFTP2.isFTP  = false
                 @isFTP2.account_number = @accountNumber
                 ##@isFTP2.account_number = '5287L9' #@accountNumber
@@ -92,6 +81,10 @@ class WelcomeController < ApplicationController
 
 
 
+require 'csv' 
+require 'net/ftp'
+require 'tempfile'
+require "open-uri"
 
 ##Development or Deployment
 @url =  request.original_url
@@ -105,7 +98,7 @@ end
 
          
         
-##isFtp = IsFTp.last ############ORIGINAL LINE    isFtp = IsFTp.last
+isFtp = IsFTp.last ############ORIGINAL LINE    isFtp = IsFTp.last
         
 
 #Read from FTP
@@ -113,7 +106,7 @@ ftp = Net::FTP::new("ftp.dpd.ie")
 ftp.login("3L4", "3l4123")
 ftp.chdir("/users/3L4/WebAppImport")
 
- ## files = ftp.list
+  files = ftp.list
 
   ftp.passive = true
   ##file is downloaded from ftp to a local folder name "FromFTP"
@@ -130,7 +123,7 @@ ftp.close
       
   
 # If on LOCAL_____________________________________________________________________________________________________%>
-if     @isFTP2.isFTP == false                    ############ORIGINAL LINE  isFtp.isFTP == false %>      
+if    isFtp.isFTP== false                    ############ORIGINAL LINE  isFtp.isFTP == false %>      
  #if on DEVELOPMENT LOCAL-----------------------------------------------
           if @deployment == false
               #get the 1st and the only file location where the file is stored
@@ -171,95 +164,6 @@ if     @isFTP2.isFTP == false                    ############ORIGINAL LINE  isFt
 
 @csvArray2.push(@csvColumn3 )
 
- end
-
-
- 
- 
-#IF ON DEPLOYMENT LOCAL----------------------------------------------------
-          else
-              ###not a problem -  there are less Resume entries on deployment than development but the ids are the same
-              @csvFileLocationOpen = open('https://label-gen-is-ftp.herokuapp.com/uploads/resume/attachment/1/OurFormatTest.csv')
-                  open('OurFormatTest.csv', 'wb') do |file|
-                   file << open('https://label-gen-is-ftp.herokuapp.com/uploads/resume/attachment/1/OurFormatTest.csv').read
-                   @file5 = file
-                 end
-                 #read that variable
-                 @csvRead = CSV.read(@file5)
-                 
-                 #read ech column and save it to a variable
-                   CSV.foreach(@file5) do |row1|
-@csvColumn1 =  row1[0].inspect.gsub!('"', '') #+  @csvRow1.inspect 
-@csvColumn2 =  row1[1].inspect.gsub!('"', '') 
-@csvColumn3 =  row1[2].inspect.gsub!('"', '') 
-@csvColumn4 =  row1[3].inspect.gsub!('"', '') 
-@csvColumn5 =  row1[4].inspect.gsub!('"', '') 
-@csvColumn6 =  row1[5].inspect.gsub!('"', '')  
-@csvColumn7 =  row1[6].inspect.gsub!('"', '')  
-@csvColumn8 =  row1[7].inspect.gsub!('"', '')  
-@csvColumn9 =  row1[8].inspect.gsub!('"', '')  
-@csvColumn10 =  row1[9].inspect.gsub!('"', '')  
-@csvColumn11 =  row1[10].inspect.gsub!('"', '')  
-@csvColumn12 =  row1[11].inspect.gsub!('"', '')  
-@csvColumn13 =  row1[12].inspect.gsub!('"', '')  
-@csvColumn14 =  row1[13].inspect.gsub!('"', '')  
-@csvColumn24 =  row1[23].inspect.gsub!('"', '')  
-@csvColumn25 =  row1[24].inspect.gsub!('"', '')  
-@csvColumn26 =  row1[25].inspect.gsub!('"', '')  
-@csvColumn27 =  row1[26].inspect.gsub!('"', '') 
-@csvColumn30 =  row1[29].inspect.gsub!('"', '')  
-@csvColumn31 =  row1[30].inspect.gsub!('"', '')  
-@csvColumn32 =  row1[31].inspect.gsub!('"', '')  
-end
-              
-          end
-          
- 
-    
-
- ##IF on FTP DEV + DEPL all is ONE------------------------------------------------------------------------------------------------------        
-          else
-           
-           
-
-           
-           
-            @csvFileLocation =  './FromFTP'
-           customers = CSV.read(@csvFileLocation.chomp("/*"))
-          
-          
-             CSV.foreach(@csvFileLocation.chomp("/*")) do |row1|
-@csvColumn1 =  row1[0].inspect.gsub!('"', '') #+  @csvRow1.inspect 
-@csvColumn2 =  row1[1].inspect.gsub!('"', '') 
-@csvColumn3 =  row1[2].inspect.gsub!('"', '') 
-@csvColumn4 =  row1[3].inspect.gsub!('"', '') 
-@csvColumn5 =  row1[4].inspect.gsub!('"', '') 
-@csvColumn6 =  row1[5].inspect.gsub!('"', '')  
-@csvColumn7 =  row1[6].inspect.gsub!('"', '')  
-@csvColumn8 =  row1[7].inspect.gsub!('"', '')  
-@csvColumn9 =  row1[8].inspect.gsub!('"', '')  
-@csvColumn10 =  row1[9].inspect.gsub!('"', '')  
-@csvColumn11 =  row1[10].inspect.gsub!('"', '')  
-@csvColumn12 =  row1[11].inspect.gsub!('"', '')  
-@csvColumn13 =  row1[12].inspect.gsub!('"', '')  
-@csvColumn14 =  row1[13].inspect.gsub!('"', '')  
-@csvColumn24 =  row1[23].inspect.gsub!('"', '')  
-@csvColumn25 =  row1[24].inspect.gsub!('"', '')  
-@csvColumn26 =  row1[25].inspect.gsub!('"', '')  
-@csvColumn27 =  row1[26].inspect.gsub!('"', '') 
-@csvColumn30 =  row1[29].inspect.gsub!('"', '')  
-@csvColumn31 =  row1[30].inspect.gsub!('"', '')  
-@csvColumn32 =  row1[31].inspect.gsub!('"', '')  
-
-
-end
-
-
-
-          
-    end
-          
-
 
 
 
@@ -286,129 +190,7 @@ end
                    
  #user_input_mapping = change all to integers
   ##########################ORIGINAL
-  
-  
-  #Mappings_____________________________________________________________BEGIN
-#all the colums from the DB  -  Mapping for that particular account
-@mappings = Mapping.find_by_account_number(@accountNumber)
-
-#if no mapping was created yet then use the default
-if @mappings.nil?
-    @a1= 1
-    @b2= 2
-    @c3= 3
-    @d4= 4
-    @e5= 5
-    @f6= 6
-    @g7= 7
-    @h8= 8
-    @i9= 9
-    @j10= 10
-    
-    @k11= 11
-    @l12= 12
-    @m13= 13
-    @n14= 14
-    @o15= 15
-    @p16= 16
-    @q17= 17
-    @r18= 18
-    @s19= 19
-    @t20= 20
-    
-    @u21= 21
-    @v22= 22
-    @w23= 23
-    @x24= 24
-    @y25= 25
-    @z26= 26
-    @aa27= 27
-    @ab28= 28
-    @ac29= 29
-    @ad30= 30
-    
-    @ae31= 31
-    @af32= 32
-    @ag33= 33
-    @ah34= 34
-    @ai35= 35
-    @aj36= 36
-    @ak37= 37
-    @al38= 38
-    @am39= 39
-    @an40= 40
-    
-    @ao41= 41
-    @ap42= 42
-    @aq43= 43
-    @ar44= 44
-    @as45= 45
-    @at46= 46
-    @au47= 47
-    @av48= 48
-    @aw49= 49
-    @ax50= 50
-
-
-else
-    @a1= @mappings.a1
-    @b2= @mappings.b2
-    @c3= @mappings.c3
-    @d4= @mappings.d4
-    @e5= @mappings.e5
-    @f6= @mappings.f6
-    @g7= @mappings.g7
-    @h8= @mappings.h8
-    @i9= @mappings.i9
-    @j10= @mappings.j10
-    
-    @k11= @mappings.k11
-    @l12= @mappings.l12
-    @m13= @mappings.m13
-    @n14= @mappings.n14
-    @o15= @mappings.o15
-    @p16= @mappings.p16
-    @q17= @mappings.q17
-    @r18= @mappings.r18
-    @s19= @mappings.s19
-    @t20= @mappings.t20
-    
-    @u21= @mappings.u21
-    @v22= @mappings.v22
-    @w23= @mappings.w23
-    @x24= @mappings.x24
-    @y25= @mappings.y25
-    @z26= @mappings.z26
-    @aa27= @mappings.aa27
-    @ab28= @mappings.ab28
-    @ac29= @mappings.ac29
-    @ad30= @mappings.ad30
-    
-    @ae31= @mappings.ae31
-    @af32= @mappings.af32
-    @ag33= @mappings.ag33
-    @ah34= @mappings.ah34
-    @ai35= @mappings.ai35
-    @aj36= @mappings.aj36
-    @ak37= @mappings.ak37
-    @al38= @mappings.al38
-    @am39= @mappings.am39
-    @an40= @mappings.an40
-    
-    @ao41= @mappings.ao41
-    @ap42= @mappings.ap42
-    @aq43= @mappings.aq43
-    @ar44= @mappings.ar44
-    @as45= @mappings.as45
-    @at46= @mappings.at46
-    @au47= @mappings.au47
-    @av48= @mappings.av48
-    @aw49= @mappings.aw49
-    @ax50= @mappings.ax50
-end
-
-
-
+=begin  
   a = @a1
   b = @b2
   c = @c3
@@ -463,8 +245,8 @@ end
     av= @av48
     aw= @aw49
     ax= @ax50
+=end
 
-=begin  
   a = 1
   b = 2
   c = 3
@@ -486,17 +268,15 @@ end
   ad = 30
   ae = 31
   af = 32
-=end
-  #Mappings_____________________________________________________________END
-  
-  
-##need to get the prin value from cookies to generate labels onclick.
+
+
  print = cookies[:print]
  unless print.nil?
     if print == 'true'
        @print = true
        
-
+       require 'open-uri'
+require 'rest-client'
 
 #get the authorise token
 xmlPayloadAuthorise = 
@@ -677,6 +457,7 @@ end
     ####rmakes sure that label wont be generated on the reload
 
 
+ end
 
 end
 ###############################needed
@@ -684,6 +465,94 @@ end
  
  
  
+ 
+ 
+#IF ON DEPLOYMENT LOCAL----------------------------------------------------
+          else
+              ###not a problem -  there are less Resume entries on deployment than development but the ids are the same
+              @csvFileLocationOpen = open('https://label-gen-is-ftp.herokuapp.com/uploads/resume/attachment/1/OurFormatTest.csv')
+                  open('OurFormatTest.csv', 'wb') do |file|
+                   file << open('https://label-gen-is-ftp.herokuapp.com/uploads/resume/attachment/1/OurFormatTest.csv').read
+                   @file5 = file
+                 end
+                 #read that variable
+                 @csvRead = CSV.read(@file5)
+                 
+                 #read ech column and save it to a variable
+                   CSV.foreach(@file5) do |row1|
+@csvColumn1 =  row1[0].inspect.gsub!('"', '') #+  @csvRow1.inspect 
+@csvColumn2 =  row1[1].inspect.gsub!('"', '') 
+@csvColumn3 =  row1[2].inspect.gsub!('"', '') 
+@csvColumn4 =  row1[3].inspect.gsub!('"', '') 
+@csvColumn5 =  row1[4].inspect.gsub!('"', '') 
+@csvColumn6 =  row1[5].inspect.gsub!('"', '')  
+@csvColumn7 =  row1[6].inspect.gsub!('"', '')  
+@csvColumn8 =  row1[7].inspect.gsub!('"', '')  
+@csvColumn9 =  row1[8].inspect.gsub!('"', '')  
+@csvColumn10 =  row1[9].inspect.gsub!('"', '')  
+@csvColumn11 =  row1[10].inspect.gsub!('"', '')  
+@csvColumn12 =  row1[11].inspect.gsub!('"', '')  
+@csvColumn13 =  row1[12].inspect.gsub!('"', '')  
+@csvColumn14 =  row1[13].inspect.gsub!('"', '')  
+@csvColumn24 =  row1[23].inspect.gsub!('"', '')  
+@csvColumn25 =  row1[24].inspect.gsub!('"', '')  
+@csvColumn26 =  row1[25].inspect.gsub!('"', '')  
+@csvColumn27 =  row1[26].inspect.gsub!('"', '') 
+@csvColumn30 =  row1[29].inspect.gsub!('"', '')  
+@csvColumn31 =  row1[30].inspect.gsub!('"', '')  
+@csvColumn32 =  row1[31].inspect.gsub!('"', '')  
+end
+              
+          end
+          
+ 
+    
+
+ ##IF on FTP DEV + DEPL all is ONE------------------------------------------------------------------------------------------------------        
+          else
+           
+           
+
+           
+           
+            @csvFileLocation =  './FromFTP'
+           customers = CSV.read(@csvFileLocation.chomp("/*"))
+          
+          
+             CSV.foreach(@csvFileLocation.chomp("/*")) do |row1|
+@csvColumn1 =  row1[0].inspect.gsub!('"', '') #+  @csvRow1.inspect 
+@csvColumn2 =  row1[1].inspect.gsub!('"', '') 
+@csvColumn3 =  row1[2].inspect.gsub!('"', '') 
+@csvColumn4 =  row1[3].inspect.gsub!('"', '') 
+@csvColumn5 =  row1[4].inspect.gsub!('"', '') 
+@csvColumn6 =  row1[5].inspect.gsub!('"', '')  
+@csvColumn7 =  row1[6].inspect.gsub!('"', '')  
+@csvColumn8 =  row1[7].inspect.gsub!('"', '')  
+@csvColumn9 =  row1[8].inspect.gsub!('"', '')  
+@csvColumn10 =  row1[9].inspect.gsub!('"', '')  
+@csvColumn11 =  row1[10].inspect.gsub!('"', '')  
+@csvColumn12 =  row1[11].inspect.gsub!('"', '')  
+@csvColumn13 =  row1[12].inspect.gsub!('"', '')  
+@csvColumn14 =  row1[13].inspect.gsub!('"', '')  
+@csvColumn24 =  row1[23].inspect.gsub!('"', '')  
+@csvColumn25 =  row1[24].inspect.gsub!('"', '')  
+@csvColumn26 =  row1[25].inspect.gsub!('"', '')  
+@csvColumn27 =  row1[26].inspect.gsub!('"', '') 
+@csvColumn30 =  row1[29].inspect.gsub!('"', '')  
+@csvColumn31 =  row1[30].inspect.gsub!('"', '')  
+@csvColumn32 =  row1[31].inspect.gsub!('"', '')  
+
+
+end
+
+
+
+          
+    end
+          
+
+
+
 
 
 
@@ -691,6 +560,124 @@ end
      
      
 
+
+#Mappings
+#all the colums
+@mappings = Mapping.find_by_account_number(@accountNumber)
+
+if @mappings.nil?
+    @a1= 1
+    @b2= 2
+    @c3= 3
+    @d4= 4
+    @e5= 5
+    @f6= 6
+    @g7= 7
+    @h8= 8
+    @i9= 9
+    @j10= 10
+    
+    @k11= 11
+    @l12= 12
+    @m13= 13
+    @n14= 14
+    @o15= 15
+    @p16= 16
+    @q17= 17
+    @r18= 18
+    @s19= 19
+    @t20= 20
+    
+    @u21= 21
+    @v22= 22
+    @w23= 23
+    @x24= 24
+    @y25= 25
+    @z26= 26
+    @aa27= 27
+    @ab28= 28
+    @ac29= 29
+    @ad30= 30
+    
+    @ae31= 31
+    @af32= 32
+    @ag33= 33
+    @ah34= 34
+    @ai35= 35
+    @aj36= 36
+    @ak37= 37
+    @al38= 38
+    @am39= 39
+    @an40= 40
+    
+    @ao41= 41
+    @ap42= 42
+    @aq43= 43
+    @ar44= 44
+    @as45= 45
+    @at46= 46
+    @au47= 47
+    @av48= 48
+    @aw49= 49
+    @ax50= 50
+
+
+else
+    @a1= @mappings.a1
+    @b2= @mappings.b2
+    @c3= @mappings.c3
+    @d4= @mappings.d4
+    @e5= @mappings.e5
+    @f6= @mappings.f6
+    @g7= @mappings.g7
+    @h8= @mappings.h8
+    @i9= @mappings.i9
+    @j10= @mappings.j10
+    
+    @k11= @mappings.k11
+    @l12= @mappings.l12
+    @m13= @mappings.m13
+    @n14= @mappings.n14
+    @o15= @mappings.o15
+    @p16= @mappings.p16
+    @q17= @mappings.q17
+    @r18= @mappings.r18
+    @s19= @mappings.s19
+    @t20= @mappings.t20
+    
+    @u21= @mappings.u21
+    @v22= @mappings.v22
+    @w23= @mappings.w23
+    @x24= @mappings.x24
+    @y25= @mappings.y25
+    @z26= @mappings.z26
+    @aa27= @mappings.aa27
+    @ab28= @mappings.ab28
+    @ac29= @mappings.ac29
+    @ad30= @mappings.ad30
+    
+    @ae31= @mappings.ae31
+    @af32= @mappings.af32
+    @ag33= @mappings.ag33
+    @ah34= @mappings.ah34
+    @ai35= @mappings.ai35
+    @aj36= @mappings.aj36
+    @ak37= @mappings.ak37
+    @al38= @mappings.al38
+    @am39= @mappings.am39
+    @an40= @mappings.an40
+    
+    @ao41= @mappings.ao41
+    @ap42= @mappings.ap42
+    @aq43= @mappings.aq43
+    @ar44= @mappings.ar44
+    @as45= @mappings.as45
+    @at46= @mappings.at46
+    @au47= @mappings.au47
+    @av48= @mappings.av48
+    @aw49= @mappings.aw49
+    @ax50= @mappings.ax50
+end
 
 
   end

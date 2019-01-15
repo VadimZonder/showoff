@@ -7,17 +7,53 @@ require "open-uri"
 
 <% if user_signed_in?  %>
 
+<!--
+<p>from controller url   <%##@hardcodedURLsC = @labelsArray2%></p>
+-->
 <%########URLs from controller with all the labels %>
 <%@hardcodedURLsC = @labelsArray2%>
+<%###=@hardcodedURLs = " [&quot;https://label.dpd.ie/RestPreadvice/service/label/pdf/581bc6c0-ba95-451e-b6b5-e39cbee398c6&quot;, &quot;https://label.dpd.ie/RestPreadvice/service/label/pdf/f69bfbd9-b81f-4592-8805-a2d79695032b&quot;]"%></p>
+
+
+<%#=@hardcodedURLsSplit = @hardcodedURLs.split(",")%>
+<%########=@hardcodedURLsSplit = @hardcodedURLs.split("&quot;")%>
+<%#=@hardcodedURLsSplit.length %>
+
+<!--
+<P>final processed url = <%##=@hardcodedURLs[3]%></P>
+<p>this is it -  <%##=@labelsArray2%></p>
+<p><%##= @csvRead%></p>
+<p><%##= @csvArray2%></p>
+-->
+
+<%###= @urlsCounter = 1
+@hardcodedURLsJS = []
+%>
+<%###=
+while @urlsCounter <= @hardcodedURLsSplit.length do
+@hardcodedURLsJS = @hardcodedURLsJS.push(@hardcodedURLsSplit[@urlsCounter]) ## + @hardcodedURLsSplit[3]  ## .push(@hardcodedURLs[@urlsCounter])
+@urlsCounter += 2 
+end
+%>
+<%###=@hardcodedURLsJS%>
+
    <script>
+   //var labelsArrayString = '<%###=@hardcodedURLs%>';
    //Save to JS string
    var labelsArrayStringC = '<%=@hardcodedURLsC%>';
-
+   //var labelsArray;
    //Declare JS array
    var labelsArrayC;
+  //labelsArray =  labelsArrayString.split("quot;");
   
   //Split the JS string into tan JS array
   labelsArrayC =  labelsArrayStringC.split("quot;");
+  
+  console.log("labels array string CCCCC= "+labelsArrayStringC);
+ 
+   //console.log("labels array string = "+labelsArrayString);
+   //console.log("labels array-------------- = "+labelsArray[1].slice(0, -5));
+   console.log("labels array-------------- CCCCC= "+labelsArrayC[1].slice(0, -5));
    
    //Open all the urls
    var o = 1;
@@ -28,14 +64,49 @@ require "open-uri"
      window.open(tempURLC, '_blank'); 
        o = o+ 2;
    }
-;
+   var labelsArray3 = [];
    //OPENS ALL LABEL URLS
+    ///console.log(labelsArray);
     function printLabels(){
         //reload before print so that lates file is loaded
+       //  location.reload();
          document.cookie = "print=true;";
        location.reload();
 
+ labelsArray3 = '<%=@labelsArray2 %>';
+ console.log(labelsArray3);
+ 
+ 
+ 
+ ///parce each url and print it
+ 
+ /*
+ [&quot;https://label.dpd.ie/RestPreadvice/service/label/pdf/581bc6c0-ba95-451e-b6b5-e39cbee398c6&quot;, &quot;https://label.dpd.ie/RestPreadvice/service/label/pdf/f69bfbd9-b81f-4592-8805-a2d79695032b&quot;]
+var i = 0;
+        while (i < labelsArray3.length) {
+          window.open(labelsArray3[i], '_blank'); 
+          i++;
+          }
+          */
+/* 
 
+var v = document.cookie.match('(^|;) ?' + "print" + '=([^;]*)(;|$)');
+console.log("cookie = " + v[2]);
+
+   ////on reload nor xml request is made
+   /////// have to press print twice to get the labels
+   print  = '<%###########=@print%>';
+    if (print == "true") {
+        var i = 0;
+        while (i < labelsArray.length) {
+          window.open(labelsArray[i], '_blank'); 
+          i++;
+          }
+          
+           document.cookie = "print=false;";
+          
+    }
+        */     
         }
         
 </script>
@@ -135,8 +206,6 @@ var isFtp = '<%=@isFtp%>';
 %>
 <script>
  var isFTP2 = '<%=@isFTP2%>';
- var debug = '<%=@debug%>';
- console.log("debug="+debug);
 </script>
 
 

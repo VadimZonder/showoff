@@ -1,3 +1,11 @@
+ <div class="row">
+   <!-- <div class="col-xs-5  col-md-2 col-md-offset-5">-->
+ <div class="col-xs-12">
+
+<table class="table">
+ 
+  
+  
 <%= form_with(model: mapping, local: true) do |form| %>
   <% if mapping.errors.any? %>
     <div id="error_explanation">
@@ -10,263 +18,495 @@
       </ul>
     </div>
   <% end %>
+  
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Data Required</th>
+      <th scope="col">Corresponding Column No.</th>
+      <th scope="col">Notes</th>
+      <th scope="col">General Note</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">0</th>
+        <div class="field">
+          <td><%= form.label :account_number %></td>
+          <td> <%= form.text_field :account_number, :class => 'inputWidth', :value => @current_user.email[0, 6],:readonly => true  %></td>
+          <td>DPD account number</td>
+          <td>
+            <p>
+              The input data should be numeric values only except the account number field.
+          However this would be populated with your DPD account number and locked from edditing.
+          
+          </p>
+          The most important data that we require for propper GAZZing is marked with * sign.</td>
+        </div>
+    </tr>
+    
+    <tr>
+      <th scope="row">1</th>
+        <div class="field">
+           <td> <%= form.label :a1, 'Order ID*'  %></td>
+           <td> <%= form.number_field :a1, :class => 'inputWidth', :value => 1, in: 1..100 %></td>
+           <td>Your unique order ID</td>
+        </div>
+    </tr>
+    
+    <tr>
+      <th scope="row">2</th>
+        <div class="field">
+          <td><%= form.label :b2, 'Client Code' %></td>
+          <td><%= form.number_field :b2, :class => 'inputWidth', :value => 2, in: 1..100%></td>
+          <td>Your unique client code which enables to select that customer from the database </td>
+      </div>
+    </tr>
+    
+    <tr>
+      <th scope="row">3</th>
+        <div class="field">
+          <td><%= form.label :c3 , 'Delivery Name*' %></td>
+          <td><%= form.number_field :c3, :class => 'inputWidth', :value => 3, in: 1..100 %></td>
+          <td>Delivery name of the person to whom the item is being delivered for</td>
+      </div>
+    </tr>
+    
+    <tr>
+      <th scope="row">4</th>
+        <div class="field">
+          <td><%= form.label :d4 , 'Delivery Address 1*' %></td>
+          <td><%= form.number_field :d4, :class => 'inputWidth', :value => 4, in: 1..100 %></td>
+          <td>First line of address - generally house/appartment number/name + street name</td>
+      </div>
+    </tr>  
+    
+    <tr>
+      <th scope="row">5</th>
+        <div class="field">
+          <td><%= form.label :e5 , 'Delivery Address 2' %></td>
+          <td><%= form.number_field :e5, :class => 'inputWidth', :value => 5, in: 1..100 %></td>
+          <td>The rest of the address that is betwween the address line no. 1 and the city/town</td>
+      </div>
+    </tr>     
+    
+    <tr>
+      <th scope="row">6</th>
+        <div class="field">
+          <td><%= form.label :f6 , 'Delivery City/Town*' %></td>
+          <td><%= form.number_field :f6, :class => 'inputWidth', :value => 6, in: 1..100%></td>
+          <td>Could also be a village</td>
+      </div>
+    </tr>     
+    
+    <tr>
+      <th scope="row">7</th>
+        <div class="field">
+          <td><%= form.label :g7 , 'Delivery County/State*' %></td>
+          <td><%= form.number_field :g7, :class => 'inputWidth', :value => 7, in: 1..100%></td>
+          <td>Name of the wider are where this city/town/vilage is located</td>
+      </div>
+    </tr>    
+    
+    <tr>
+      <th scope="row">8</th>
+        <div class="field">
+          <td><%= form.label :h8 , 'Delivery Postcode' %></td>
+          <td><%= form.number_field :h8, :class => 'inputWidth', :value => 8, in: 1..100%></td>
+           <td>Only for the postcodes outside of Rep. of Ireland, eircodes should be located in notes</td>
+      </div>
+    </tr>  
+    
+    <tr>
+      <th scope="row">9</th>
+        <div class="field">
+          <td><%= form.label :i9 , 'Delivery Country Code*' %></td>
+          <td><%= form.number_field :i9, :class => 'inputWidth', :value => 9, in: 1..100 %></td>
+          <td>ISO 3166 country codes only</td>
+      </div>
+    </tr>
+    
+    <tr>
+      <th scope="row">10</th>
+        <div class="field">
+          <td><%= form.label :j10 , 'No. of Parcels' %></td>
+          <td><%= form.number_field :j10, :class => 'inputWidth', :value => 10, in: 1..100 %></td>
+          <td>The number of parces for this consigment (10 parcels max/consigment)</td>
+      </div>
+    </tr>    
+    
+    <tr>
+      <th scope="row">11</th>
+        <div class="field">
+          <td><%= form.label :k11 , 'Weight' %></td>
+          <td><%= form.number_field :k11, :class => 'inputWidth', :value => 11, in: 1..100 %></td>
+          <td>Parcel's Weight (units = KGs)</td>
+      </div>
+    </tr> 
+    
+    <tr>
+      <th scope="row">12</th>
+        <div class="field">
+          <td><%= form.label :l12 , 'Extra Insurance' %></td>
+          <td><%= form.number_field :l12, :class => 'inputWidth' , :value => 12, in: 1..100%></td>
+          <td>Should be marked as 'Y' or 'N' in your import file. It's 'N' by default</td>
+      </div>
+    </tr>  
+    
+    <tr>
+      <th scope="row">13</th>
+        <div class="field">
+          <td><%= form.label :m13 , 'Service Type' %></td>
+          <td><%= form.number_field :m13, :class => 'inputWidth', :value => 13, in: 1..100 %></td>
+          <td> 1 – Overnight, 2 – Saturday delivery, 3 – Timed, 4 – Special, 5 – Cancelled On Arrival, 6 – 2 day service </td>
+      </div>
+    </tr>    
+    
+    <tr>
+      <th scope="row">14</th>
+        <div class="field">
+          <td><%= form.label :n14 , 'Time' %></td>
+          <td><%= form.number_field :n14, :class => 'inputWidth', :value => 14, in: 1..100 %></td>
+          <td>Time for delivery</td>
+      </div>
+    </tr>    
+    
+    <tr>
+      <th scope="row">15</th>
+        <div class="field">
+          <td><%= form.label :o15 , 'COD Amount' %></td>
+          <td><%= form.number_field :o15, :class => 'inputWidth', :value => 15, in: 1..100 %></td>
+          <td>COD Amount</td>
+      </div>
+    </tr>     
+    
+    <tr>
+      <th scope="row">16</th>
+        <div class="field">
+          <td><%= form.label :p16 , 'Currency' %></td>
+          <td><%= form.number_field :p16, :class => 'inputWidth', :value => 16, in: 1..100 %></td>
+          <td>e.g. 'EUR'</td>
+      </div>
+    </tr> 
+    
+    <tr>
+      <th scope="row">17</th>
+        <div class="field">
+          <td><%= form.label :q17 , 'Service Type' %></td>
+          <td><%= form.number_field :q17, :class => 'inputWidth', :value => 17, in: 1..100 %></td>
+          <td></td>
+      </div>
+    </tr>     
+    
+    <tr>
+      <th scope="row">18</th>
+        <div class="field">
+          <td><%= form.label :r18 , 'Return Consignment Number' %></td>
+          <td><%= form.number_field :r18, :class => 'inputWidth', :value => 18, in: 1..100 %></td>
+          <td></td>
+      </div>
+    </tr> 
+    
+    <tr>
+      <th scope="row">19</th>
+        <div class="field">
+          <td><%= form.label :s19 , 'Return Name' %></td>
+          <td><%= form.number_field :s19, :class => 'inputWidth', :value => 19, in: 1..100 %></td>
+          <td></td>
+      </div>
+    </tr>    
+    
+    <tr>
+      <th scope="row">20</th>
+        <div class="field">
+          <td><%= form.label :t20 , 'Return Address 1' %></td>
+          <td><%= form.number_field :t20, :class => 'inputWidth', :value => 20, in: 1..100%></td>
+          <td></td>
+      </div>
+    </tr>
+     
+    <tr>
+      <th scope="row">21</th>
+        <div class="field">
+          <td><%= form.label :u21 , 'Return Address 2' %></td>
+          <td><%= form.number_field :u21, :class => 'inputWidth', :value => 21, in: 1..100 %></td>
+          <td></td>
+      </div>
+    </tr>   
+     
+    <tr>
+      <th scope="row">22</th>
+        <div class="field">
+          <td><%= form.label :v22 , 'Return City/Town' %></td>
+          <td><%= form.number_field :v22, :class => 'inputWidth', :value => 22, in: 1..100 %></td>
+          <td></td>
+      </div>
+    </tr>   
+    
+    <tr>
+      <th scope="row">23</th>
+        <div class="field">
+          <td><%= form.label :w23 , 'Return County/State' %></td>
+          <td><%= form.number_field :w23, :class => 'inputWidth', :value => 23, in: 1..100 %></td>
+          <td></td>
+      </div>
+    </tr>    
+    
+    <tr>
+      <th scope="row">24</th>
+        <div class="field">
+          <td><%= form.label :x24 , 'Contact' %></td>
+          <td><%= form.number_field :x24, :class => 'inputWidth', :value => 24, in: 1..100 %></td>
+          <td></td>
+      </div>
+    </tr>
+    
+    <tr>
+      <th scope="row">25</th>
+        <div class="field">
+          <td><%= form.label :y25 , 'Phone Number' %></td>
+          <td><%= form.number_field :y25, :class => 'inputWidth', :value => 25, in: 1..100 %></td>
+          <td></td>
+      </div>
+    </tr>    
+    
+     
+    <tr>
+      <th scope="row">26</th>
+        <div class="field">
+          <td><%= form.label :z26 , 'Reference 1' %></td>
+          <td><%= form.number_field :z26, :class => 'inputWidth', :value => 26, in: 1..100 %></td>
+          <td></td>
+      </div>
+    </tr>   
+      
+    <tr>
+      <th scope="row">27</th>
+        <div class="field">
+          <td><%= form.label :aa27 , 'Reference 2' %></td>
+          <td><%= form.number_field :aa27, :class => 'inputWidth', :value => 27, in: 1..100 %></td>
+          <td></td>
+      </div>
+    </tr>  
+     
+    <tr>
+      <th scope="row">28</th>
+        <div class="field">
+          <td><%= form.label :ab28 , 'Packing List Reference' %></td>
+          <td><%= form.number_field :ab28, :class => 'inputWidth', :value => 28, in: 1..100 %></td>
+          <td></td>
+      </div>
+    </tr>   
+     
+    <tr>
+      <th scope="row">29</th>
+        <div class="field">
+          <td><%= form.label :ac29 , 'Account Number' %></td>
+          <td><%= form.number_field :ac29, :class => 'inputWidth', :value => 29, in: 1..100 %></td>
+          <td></td>
+      </div>
+    </tr>
+     
+    <tr>
+      <th scope="row">30</th>
+        <div class="field">
+          <td><%= form.label :ad30 , 'Preadvice Email Address List' %></td>
+          <td><%= form.number_field :ad30, :class => 'inputWidth', :value => 30, in: 1..100 %></td>
+          <td></td>
+      </div>
+    </tr>   
+     
+    <tr>
+      <th scope="row">31</th>
+        <div class="field">
+          <td><%= form.label :ae31 , 'Preadvice Email Flag' %></td>
+          <td><%= form.number_field :ad30, :class => 'inputWidth', :value => 31, in: 1..100 %></td>
+          <td></td>
+      </div>
+    </tr>   
+     
+    <tr>
+      <th scope="row">32</th>
+        <div class="field">
+          <td><%= form.label :af32 , 'Preadvice SMS Flag' %></td>
+          <td><%= form.number_field :af32, :class => 'inputWidth', :value => 32, in: 1..100 %></td>
+          <td></td>
+      </div>
+    </tr>
+     
+    <tr>
+      <th scope="row">33</th>
+        <div class="field">
+          <td><%= form.label :ag33 , 'Preadivce  SMS  Phone Number' %></td>
+          <td><%= form.number_field :ag33, :class => 'inputWidth', :value => 33, in: 1..100 %></td>
+          <td></td>
+      </div>
+    </tr>
+     
+    <tr>
+      <th scope="row">34</th>
+        <div class="field">
+          <td><%= form.label :ah34 , 'Return Postcode' %></td>
+          <td><%= form.number_field :ah34, :class => 'inputWidth', :value => 34, in: 1..100 %></td>
+          <td></td>
+      </div>
+    </tr>
+     
+    <tr>
+      <th scope="row">35</th>
+        <div class="field">
+          <td><%= form.label :ai35 , 'Return Country Code' %></td>
+          <td><%= form.number_field :ai35, :class => 'inputWidth', :value => 35, in: 1..100 %></td>
+          <td></td>
+      </div>
+    </tr>
+     
+    <tr>
+      <th scope="row">36</th>
+        <div class="field">
+          <td><%= form.label :aj36 , 'Destination Reference' %></td>
+          <td><%= form.number_field :aj36, :class => 'inputWidth', :value => 36, in: 1..100 %></td>
+          <td></td>
+      </div>
+    </tr>
+     
+    <tr>
+      <th scope="row">37</th>
+        <div class="field">
+          <td><%= form.label :ak37 , 'Destination Depot' %></td>
+          <td><%= form.number_field :ak37, :class => 'inputWidth', :value => 37, in: 1..100 %></td>
+          <td></td>
+      </div>
+    </tr>    
+    <tr>
+      <th scope="row">38</th>
+        <div class="field">
+          <td><%= form.label :al38 , 'DPD Consignment Number' %></td>
+          <td><%= form.number_field :al38, :class => 'inputWidth', :value => 38, in: 1..100 %></td>
+          <td></td>
+      </div>
+    </tr>   
+     
+    <tr>
+      <th scope="row">39</th>
+        <div class="field">
+          <td><%= form.label :am39 , 'Receivers Vat Number' %></td>
+          <td><%= form.number_field :am39, :class => 'inputWidth', :value => 39, in: 1..100 %></td>
+          <td></td>
+      </div>
+    </tr>   
+     
+    <tr>
+      <th scope="row">40</th>
+        <div class="field">
+          <td><%= form.label :an40 , 'Value of Consignment' %></td>
+          <td><%= form.number_field :an40, :class => 'inputWidth' , :value => 40, in: 1..100%></td>
+          <td>in EUR</td>
+      </div>
+    </tr>
+      
+    <tr>
+      <th scope="row">41</th>
+        <div class="field">
+          <td><%= form.label :ao41 , 'Description of Consignment' %></td>
+          <td><%= form.number_field :ao41, :class => 'inputWidth', :value => 41, in: 1..100 %></td>
+          <td></td>
+      </div>
+    </tr>  
+    
+      
+    <tr>
+      <th scope="row">42</th>
+        <div class="field">
+          <td><%= form.label :ap42 , 'File ID ' %></td>
+          <td><%= form.number_field :ap42, :class => 'inputWidth', :value => 42, in: 1..100 %></td>
+          <td></td>
+      </div>
+    </tr>  
+      
+    <tr>
+      <th scope="row">43</th>
+        <div class="field">
+          <td><%= form.label :aq43 , 'File Order' %></td>
+          <td><%= form.number_field :aq43, :class => 'inputWidth', :value => 43, in: 1..100 %></td>
+          <td></td>
+      </div>
+    </tr>
+      
+    <tr>
+      <th scope="row">44</th>
+        <div class="field">
+          <td><%= form.label :ar44 , 'Order Sequence' %></td>
+          <td><%= form.number_field :ar44, :class => 'inputWidth', :value => 44, in: 1..100 %></td>
+          <td></td>
+      </div>
+    </tr>  
+      
+    <tr>
+      <th scope="row">45</th>
+        <div class="field">
+          <td><%= form.label :as45 , 'Order Quantity' %></td>
+          <td><%= form.number_field :as45, :class => 'inputWidth', :value => 45, in: 1..100 %></td>
+          <td></td>
+      </div>
+    </tr>  
+       
+    <tr>
+      <th scope="row">46</th>
+        <div class="field">
+          <td><%= form.label :at46 , 'Printer Name' %></td>
+          <td><%= form.number_field :at46, :class => 'inputWidth', :value => 46, in: 1..100 %></td>
+          <td></td>
+      </div>
+    </tr> 
+       
+    <tr>
+      <th scope="row">47</th>
+        <div class="field">
+          <td><%= form.label :au47 , 'Secure Pin' %></td>
+          <td><%= form.number_field :au47, :class => 'inputWidth', :value => 47, in: 1..100 %></td>
+          <td></td>
+      </div>
+    </tr> 
+    
+       
+    <tr>
+      <th scope="row">48</th>
+        <div class="field">
+          <td><%= form.label :av48 , 'Delivery Option' %></td>
+          <td><%= form.number_field :av48, :class => 'inputWidth', :value => 48, in: 1..100 %></td>
+          <td></td>
+      </div>
+    </tr> 
+      
+    <tr>
+      <th scope="row">49</th>
+        <div class="field">
+          <td><%= form.label :aw49 , 'Safe Place' %></td>
+          <td><%= form.number_field :aw49, :class => 'inputWidth', :value => 49, in: 1..100 %></td>
+          <td></td>
+      </div>
+    </tr>
+    
+        <tr>
+      <th scope="row">50</th>
+        <div class="field">
+          <td><%= form.label :ax50 , 'Delivery Instruction ' %></td>
+          <td><%= form.number_field :ax50, :class => 'inputWidth', :value => 50, in: 1..100 %></td>
+          <td></td>
+      </div>
+    </tr>
+    
+    
+  </tbody>
 
-  <div class="field">
-    <%= form.label :account_number %>
-     <%= form.text_field :accountNumber, :value => @current_user.email[0, 6]   %>
-  </div>
+</table>
+</div>
+</div>
 
-  <div class="field">
-    <%= form.label :a1 %>
-    <%= form.number_field :a1 %>
-  </div>
 
-  <div class="field">
-    <%= form.label :b2 %>
-    <%= form.number_field :b2 %>
-  </div>
-
-  <div class="field">
-    <%= form.label :c3 %>
-    <%= form.number_field :c3 %>
-  </div>
-
-  <div class="field">
-    <%= form.label :d4 %>
-    <%= form.number_field :d4 %>
-  </div>
-
-  <div class="field">
-    <%= form.label :e5 %>
-    <%= form.number_field :e5 %>
-  </div>
-
-  <div class="field">
-    <%= form.label :f6 %>
-    <%= form.number_field :f6 %>
-  </div>
-
-  <div class="field">
-    <%= form.label :g7 %>
-    <%= form.number_field :g7 %>
-  </div>
-
-  <div class="field">
-    <%= form.label :h8 %>
-    <%= form.number_field :h8 %>
-  </div>
-
-  <div class="field">
-    <%= form.label :i9 %>
-    <%= form.number_field :i9 %>
-  </div>
-
-  <div class="field">
-    <%= form.label :j10 %>
-    <%= form.number_field :j10 %>
-  </div>
-
-  <div class="field">
-    <%= form.label :k11 %>
-    <%= form.number_field :k11 %>
-  </div>
-
-  <div class="field">
-    <%= form.label :l12 %>
-    <%= form.number_field :l12 %>
-  </div>
-
-  <div class="field">
-    <%= form.label :m13 %>
-    <%= form.number_field :m13 %>
-  </div>
-
-  <div class="field">
-    <%= form.label :n14 %>
-    <%= form.number_field :n14 %>
-  </div>
-
-  <div class="field">
-    <%= form.label :o15 %>
-    <%= form.number_field :o15 %>
-  </div>
-
-  <div class="field">
-    <%= form.label :p16 %>
-    <%= form.number_field :p16 %>
-  </div>
-
-  <div class="field">
-    <%= form.label :q17 %>
-    <%= form.number_field :q17 %>
-  </div>
-
-  <div class="field">
-    <%= form.label :r18 %>
-    <%= form.number_field :r18 %>
-  </div>
-
-  <div class="field">
-    <%= form.label :s19 %>
-    <%= form.number_field :s19 %>
-  </div>
-
-  <div class="field">
-    <%= form.label :t20 %>
-    <%= form.number_field :t20 %>
-  </div>
-
-  <div class="field">
-    <%= form.label :u21 %>
-    <%= form.number_field :u21 %>
-  </div>
-
-  <div class="field">
-    <%= form.label :v22 %>
-    <%= form.number_field :v22 %>
-  </div>
-
-  <div class="field">
-    <%= form.label :w23 %>
-    <%= form.number_field :w23 %>
-  </div>
-
-  <div class="field">
-    <%= form.label :x24 %>
-    <%= form.number_field :x24 %>
-  </div>
-
-  <div class="field">
-    <%= form.label :y25 %>
-    <%= form.number_field :y25 %>
-  </div>
-
-  <div class="field">
-    <%= form.label :z26 %>
-    <%= form.number_field :z26 %>
-  </div>
-
-  <div class="field">
-    <%= form.label :aa27 %>
-    <%= form.number_field :aa27 %>
-  </div>
-
-  <div class="field">
-    <%= form.label :ab28 %>
-    <%= form.number_field :ab28 %>
-  </div>
-
-  <div class="field">
-    <%= form.label :ac29 %>
-    <%= form.number_field :ac29 %>
-  </div>
-
-  <div class="field">
-    <%= form.label :ad30 %>
-    <%= form.number_field :ad30 %>
-  </div>
-
-  <div class="field">
-    <%= form.label :ae31 %>
-    <%= form.number_field :ae31 %>
-  </div>
-
-  <div class="field">
-    <%= form.label :af32 %>
-    <%= form.number_field :af32 %>
-  </div>
-
-  <div class="field">
-    <%= form.label :ag33 %>
-    <%= form.number_field :ag33 %>
-  </div>
-
-  <div class="field">
-    <%= form.label :ah34 %>
-    <%= form.number_field :ah34 %>
-  </div>
-
-  <div class="field">
-    <%= form.label :ai35 %>
-    <%= form.number_field :ai35 %>
-  </div>
-
-  <div class="field">
-    <%= form.label :aj36 %>
-    <%= form.number_field :aj36 %>
-  </div>
-
-  <div class="field">
-    <%= form.label :ak37 %>
-    <%= form.number_field :ak37 %>
-  </div>
-
-  <div class="field">
-    <%= form.label :al38 %>
-    <%= form.number_field :al38 %>
-  </div>
-
-  <div class="field">
-    <%= form.label :am39 %>
-    <%= form.number_field :am39 %>
-  </div>
-
-  <div class="field">
-    <%= form.label :an40 %>
-    <%= form.number_field :an40 %>
-  </div>
-
-  <div class="field">
-    <%= form.label :ao41 %>
-    <%= form.number_field :ao41 %>
-  </div>
-
-  <div class="field">
-    <%= form.label :ap42 %>
-    <%= form.number_field :ap42 %>
-  </div>
-
-  <div class="field">
-    <%= form.label :aq43 %>
-    <%= form.number_field :aq43 %>
-  </div>
-
-  <div class="field">
-    <%= form.label :ar44 %>
-    <%= form.number_field :ar44 %>
-  </div>
-
-  <div class="field">
-    <%= form.label :as45 %>
-    <%= form.number_field :as45 %>
-  </div>
-
-  <div class="field">
-    <%= form.label :at46 %>
-    <%= form.number_field :at46 %>
-  </div>
-
-  <div class="field">
-    <%= form.label :au47 %>
-    <%= form.number_field :au47 %>
-  </div>
-
-  <div class="field">
-    <%= form.label :av48 %>
-    <%= form.number_field :av48 %>
-  </div>
-
-  <div class="field">
-    <%= form.label :aw49 %>
-    <%= form.number_field :aw49 %>
-  </div>
-
-  <div class="field">
-    <%= form.label :ax50 %>
-    <%= form.number_field :ax50 %>
-  </div>
 
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit 'Submit' , :class =>  "btn btn-primary"  %>
   </div>
 <% end %>

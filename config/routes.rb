@@ -7,6 +7,10 @@ Rails.application.routes.draw do
     resources :resumes
   end
   
+  post 'mappings/new'
+  get  'welcome/button'
+  post  'welcome/button'
+  
   get 'resumes/index'
   get 'resumes/new'
   get 'resumes/create'

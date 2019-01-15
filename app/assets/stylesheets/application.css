@@ -20,7 +20,7 @@
     */
     margin:10px;
     color: white;
-    background: #DC2032;
+    background: #5cd188; /*#DC2032;*/
   -webkit-transition: background-color 5s ease-out;
   -moz-transition: background-color 5s ease-out;
   -o-transition: background-color 5s ease-out;
@@ -94,6 +94,20 @@ input:checked + .slider:before {
   float:right;
   bottom: 0px;
   
+}
+
+.myFont {
+  font-family: Arial, "Helvetica Neue", Helvetica, sans-serif; 
+  font-size: 18px;
+  
+  padding-top: 0px;
+  padding-right: 25px;
+  padding-bottom: 5px;
+  padding-left: 10px;
+}
+
+.inputWidth {
+    width: 55px;
 }
   
  

@@ -20,40 +20,60 @@
 
 
 <nav class="navbar navbar-default navbar-static-top navbar-inverse">
-  <div class="container">
-    <ul class="nav navbar-nav">
+  <div class="container ">
+    <ul class="nav navbar-nav myFont">
       <li class="active">
-        <a href="/"><span class="glyphicon glyphicon-home"></span> Home</a>
+        <%= link_to " Home ", root_path,  :class => 'navbar-link glyphicon glyphicon-home '%>
+       
       </li>
       <li>
-        <a href="https://devcenter.heroku.com/articles/how-heroku-works"><span class="glyphicon glyphicon-user"></span> How Heroku Works</a>
+        <% if user_signed_in? %>
+          <%= link_to "  Mapping", new_mapping_path, :class => 'navbar-link glyphicon glyphicon-transfer'  %>
+        <%end%>
       </li>
-      <li class="dropdown">
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><span class="glyphicon glyphicon-info-sign"></span> Getting Started Guides <span class="caret"></span></a>
-          <ul class="dropdown-menu" role="menu">
-            <li><a href="https://devcenter.heroku.com/articles/getting-started-with-ruby">Getting Started with Ruby on Heroku</a></li>
-            <li><a href="https://devcenter.heroku.com/articles/getting-started-with-nodejs">Getting Started with Node on Heroku</a></li>
-            <li><a href="https://devcenter.heroku.com/articles/getting-started-with-php">Getting Started with PHP on Heroku</a></li>
-            <li><a href="https://devcenter.heroku.com/articles/getting-started-with-python">Getting Started with Python on Heroku</a></li>
-            <li><a href="https://devcenter.heroku.com/articles/getting-started-with-java">Getting Started with Java on Heroku</a></li>
-            <li><a href="https://devcenter.heroku.com/articles/getting-started-with-go">Getting Started with Go on Heroku</a></li>
-            <li><a href="https://devcenter.heroku.com/articles/getting-started-with-clojure">Getting Started with Clojure on Heroku</a></li>
-            <li><a href="https://devcenter.heroku.com/articles/getting-started-with-scala">Getting Started with Scala on Heroku</a></li>
-            <li class="divider"></li>
-            <li><a href="https://devcenter.heroku.com/articles/getting-started-with-heroku-and-connect-without-local-dev">Getting Started on Heroku with Heroku Connect</a></li>
-            <li><a href="https://devcenter.heroku.com/articles/getting-started-with-jruby">Getting Started with Ruby on Heroku (Microsoft Windows)</a></li>
-          </ul>
-      </li>
+     
+
     </ul>
-    <ul class="nav navbar-nav navbar-right">
+ 
+    <ul class="nav navbar-nav navbar-right myFont">
       <li class="navbar-right">
         <% if user_signed_in? %>
-        <%= link_to "  Logout", destroy_user_session_path, method: :delete, :class => ' glyphicon glyphicon-off'  %>
+        <%= link_to "   Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link glyphicon glyphicon-off'  %>
 <% end %>
       </li>
     </ul>
+    
+    
+    <ul class="nav navbar-nav navbar-right">
+      <li class="navbar-right">
+        <p></p>
+      </li>
+    </ul>
+       
+     
+    <ul class="nav navbar-nav navbar-right myFont">
+      <li class="navbar-right">
+          <% if user_signed_in? %>
+         <%=  link_to ' '+@accountNumber+' ', edit_user_registration_path, :class => 'navbar-link glyphicon glyphicon-user'  %>
+  <%end%>
+             </ul>
+      </li>
+    </ul>
+    
   </div>
 </nav>
+
+<br>
+<br>
+<div class="jumbotron text-center">
+  <div class="container">
+    <a href="/" class="lang-logo">
+      <img src="<%= asset_path('Dpdlog') %>">
+    </a>
+    <h1>DPD Label Generator App</h1>
+    <p>From APIs to a Label</p>
+  </div>
+</div>
 
 <%= yield %>
 </body>

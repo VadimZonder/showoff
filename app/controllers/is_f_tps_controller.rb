@@ -10,6 +10,7 @@ class IsFTpsController < ApplicationController
   # GET /is_f_tps
   # GET /is_f_tps.json
   def index
+    
       @email= current_user.email
      @accountNumber = @email[0, 6]  
 
