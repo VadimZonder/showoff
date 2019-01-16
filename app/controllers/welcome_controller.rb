@@ -6,6 +6,7 @@ class WelcomeController < ApplicationController
     end
 # GET /welcome
   def index
+      @debug1 = true
       @print = "default"
       
     require 'csv' 
@@ -91,7 +92,7 @@ class WelcomeController < ApplicationController
 @password = @email[6, 10] 
 @token = @email[16..-8] 
 
-
+@debug2 = true
 
 
 ##Development or Deployment
@@ -134,6 +135,7 @@ ftp.close
 if     @isFTP2.isFTP == false                    ############ORIGINAL LINE  isFtp.isFTP == false %>      
  #if on DEVELOPMENT LOCAL-----------------------------------------------
           if @deployment == false
+              @debug3 = true
               #get the 1st and the only file location where the file is stored
               @csvFileLocationOpen = open('https://api-to-labels-base-vadimmalakhovski.c9users.io/uploads/resume/attachment/1/OurFormatTest.csv')
               #open each line and save it to a variable
@@ -179,6 +181,7 @@ if     @isFTP2.isFTP == false                    ############ORIGINAL LINE  isFt
  
 #IF ON DEPLOYMENT LOCAL----------------------------------------------------
           else
+              @debug4 = true
               ###not a problem -  there are less Resume entries on deployment than development but the ids are the same
               @csvFileLocationOpen = open('https://label-gen-is-ftp.herokuapp.com/uploads/resume/attachment/1/OurFormatTest.csv')
                   open('OurFormatTest.csv', 'wb') do |file|
@@ -221,7 +224,7 @@ end
  ##IF on FTP DEV + DEPL all is ONE------------------------------------------------------------------------------------------------------        
           else
            
-           
+           @debu5g = true
 
            
            
@@ -264,7 +267,7 @@ end
 
 
 
-
+@debug6 = true
 
 
 
@@ -292,7 +295,7 @@ end
   #Mappings_____________________________________________________________BEGIN
 #all the colums from the DB  -  Mapping for that particular account
 @mappings = Mapping.find_by_account_number(@accountNumber)
-
+@debug7 = true
 #if no mapping was created yet then use the default
 if @mappings.nil?
     @a1= 1
@@ -492,13 +495,15 @@ end
   
   
 ##need to get the prin value from cookies to generate labels onclick.
+@debug8 = true
+
  @print = cookies[:print]
  unless @print.nil?
     if @print == 'true'
        @print = true
        
 
-
+@debug9 = true
 #get the authorise token
 xmlPayloadAuthorise = 
 '<?xml version="1.0" encoding="iso-8859-1"?>
@@ -655,7 +660,7 @@ xmlLabelDoc  = Nokogiri::XML(labelResponse)
 
 
 @labelsArray2.push(@labelURI)
-
+@debug10 = true
 =begin
     arrayCounter = 0
 while arrayCounter < labelsArray.length do
@@ -666,12 +671,12 @@ end
 
 ##################
     else
-        
+        @debug11 = true
         @print = false
     
     end
  
-       
+ @debug12 = true      
 ########redirect_to @labelURI
 
 ################redirect_to @labelURI
@@ -683,14 +688,13 @@ end
 ###############################needed
  cookies[:print] = "false" 
  
+ @debug13 = true
  
- 
 
 
 
 
-     
-     
+   
 
 
 
