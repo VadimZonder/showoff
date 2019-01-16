@@ -6,6 +6,7 @@ class WelcomeController < ApplicationController
     end
 # GET /welcome
   def index
+      @print = "default"
       
     require 'csv' 
     require 'net/ftp'
