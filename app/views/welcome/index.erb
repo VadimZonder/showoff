@@ -10,6 +10,8 @@ require "open-uri"
 <%########URLs from controller with all the labels %>
 <%=@hardcodedURLsC = @labelsArray2%>
 <P>enabling to print = <%=@print%></P>
+<P>deployment status = <%=@deployment%></P>
+<P>deployment status = <%=@deployment%></P>
    <script>
    //Save to JS string
    var labelsArrayStringC = '<%=@hardcodedURLsC%>';
@@ -29,7 +31,7 @@ require "open-uri"
      window.open(tempURLC, '_blank'); 
        o = o+ 2;
    }
-;
+
    //OPENS ALL LABEL URLS
     function printLabels(){
         //reload before print so that lates file is loaded
