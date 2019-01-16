@@ -492,7 +492,7 @@ end
   
   
 ##need to get the prin value from cookies to generate labels onclick.
- print = cookies[:print]
+ @print = cookies[:print]
  unless print.nil?
     if print == 'true'
        @print = true
