@@ -8,7 +8,7 @@ require "open-uri"
 <% if user_signed_in?  %>
 
 <%########URLs from controller with all the labels %>
-<%@hardcodedURLsC = @labelsArray2%>
+<%=@hardcodedURLsC = @labelsArray2%>
    <script>
    //Save to JS string
    var labelsArrayStringC = '<%=@hardcodedURLsC%>';
