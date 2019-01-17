@@ -6,10 +6,8 @@ class WelcomeController < ApplicationController
     ##Development or Deployment____________
     @url =  request.original_url
     if @url.include? 'c9users.io' 
-        @debug1 = 'hi'
         @deployment = false
     else
-        @debug1 = 'hi' 
         @deployment = true
         
     end  
