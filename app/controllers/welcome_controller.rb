@@ -49,6 +49,7 @@ class WelcomeController < ApplicationController
     ### @accountNumberDB = User.find_by_account_number(@accountNumber)
 ##_______________________________________________________________________________________________________IF SIGNED IN    
     if user_signed_in? 
+=begin         
         @isFTP2 = IsFTp.find_by_account_number(@accountNumber)
         isFTP = cookies[:cl]
         @isFTPC = IsFTp.find_by_account_number(@accountNumber)
@@ -103,7 +104,7 @@ class WelcomeController < ApplicationController
             @deployment = true
         end
                 
-=begin        
+       
         #Read from FTP__________________________________________
         ftp = Net::FTP::new("ftp.dpd.ie")
         ftp.login("3L4", "3l4123")

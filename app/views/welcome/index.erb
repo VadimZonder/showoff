@@ -68,15 +68,6 @@ require "open-uri"
 </script>
 
 
-<%
-##Development or Deployment
-@url =  request.original_url
-if @url.include? 'c9users.io' 
-    @deployment = false
-else
-    @deployment = true
-end
-%>
 
 <%#= render "login" %>
 <%## email = <DPD Account Number><API Setup Password><Base64 Token><@dpd.ie> %>
