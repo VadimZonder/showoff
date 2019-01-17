@@ -3,9 +3,6 @@ class WelcomeController < ApplicationController
 
 # GET /welcome
   def index
-    @debug1 = true  
-    if @debug1 == true
-        
       #default values
     @print = "default"
       
@@ -100,8 +97,10 @@ class WelcomeController < ApplicationController
         @url =  request.original_url
         if @url.include? 'c9users.io' 
             @deployment = false
+            @debug1 = true 
         else
             @deployment = true
+            @debug1 = true 
         end
                 
         
@@ -653,7 +652,6 @@ class WelcomeController < ApplicationController
          
         @debug13 = true
 
-    end
     end 
   end
   
