@@ -6,7 +6,6 @@ class MappingsController < ApplicationController
   # GET /mappings
   # GET /mappings.json
   def index
-    @debug18 = true
       @email= current_user.email
      @accountNumber = @email[0, 6]  
     @mappings = Mapping.all
