@@ -7,7 +7,7 @@ class WelcomeController < ApplicationController
 # GET /welcome
   def index
       #default values
-    @debug1 = true
+    @debug1 = "true"
     @print = "default"
       
     require 'csv' 
