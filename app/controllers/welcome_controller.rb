@@ -103,7 +103,7 @@ class WelcomeController < ApplicationController
             @deployment = true
         end
                 
-        
+=begin        
         #Read from FTP__________________________________________
         ftp = Net::FTP::new("ftp.dpd.ie")
         ftp.login("3L4", "3l4123")
@@ -457,6 +457,8 @@ class WelcomeController < ApplicationController
           ae = 31
           af = 32
 =end
+
+=begin
 #Mappings_____________________________________________________________END
           
           
@@ -627,13 +629,7 @@ class WelcomeController < ApplicationController
                 
                 @labelsArray2.push(@labelURI)
                 @debug10 = true
-=begin
-                    arrayCounter = 0
-                while arrayCounter < labelsArray.length do
-                    redirect_to labelsArray[arrayCounter]
-                    arrayCounter = arrayCounter +1
-                end   
-=end
+
                 
                 ##################
             else
@@ -651,8 +647,9 @@ class WelcomeController < ApplicationController
         cookies[:print] = "false" 
          
         @debug13 = true
-
+=end 
     end
+   
   end  
   
   
