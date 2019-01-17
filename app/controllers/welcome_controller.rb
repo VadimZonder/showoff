@@ -17,7 +17,7 @@ class WelcomeController < ApplicationController
     end  
       
     #default values
-    @print = "default"
+    @printX = "default"
       
     require 'csv' 
     require 'net/ftp'

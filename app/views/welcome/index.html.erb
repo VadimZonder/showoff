@@ -11,7 +11,7 @@ require "open-uri"
 <%=@hardcodedURLsC = @labelsArray2%>
 <P>is ftp2= <%##=IsFTp.find_by_account_number(@accountNumber).isFTP%></P>
 <P>labelsArray2= <%=@labelsArray2%></P>
-<P>enabling to print = <%=@print%></P>
+<P>enabling to print = <%=@printX%></P>
 <P>deployment status = <%=@deployment%></P>
 <P>server print = <%=@printServer = cookies[:print]%></P>
 <P>csv Read = <%=@csvRead%></P>
@@ -30,7 +30,7 @@ require "open-uri"
 <P>debug11= <%=@debug11%></P>
 <P>debug12 = <%=@debug12%></P>
 <P>debug13 = <%=@debug13%></P>
-
+<%=@printX%>
    <script>
    var debug1 = '<%=@debug1%>';
    console.log("debug1 = "+debug1);
