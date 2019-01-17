@@ -97,10 +97,10 @@ class WelcomeController < ApplicationController
         @url =  request.original_url
         if @url.include? 'c9users.io' 
             @deployment = false
-            @debug1 = true 
+            @debug1 = 'hi' 
         else
             @deployment = true
-            @debug1 = true 
+            @debug1 = 'hi' 
         end
                 
         
