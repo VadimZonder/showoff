@@ -3,8 +3,10 @@ class WelcomeController < ApplicationController
 
 # GET /welcome
   def index
+    @debug1 = true  
+    if @debug1 == true
+        
       #default values
-    @debug1 = true
     @print = "default"
       
     require 'csv' 
@@ -23,15 +25,11 @@ class WelcomeController < ApplicationController
     @resumes = Resume.all
     @resume = Resume.new
 
-    if IsFTp.find_by_account_number(@accountNumber).nil?
-       @isFTP2 = IsFTp.create :isFTP => "false" ,:account_number => @accountNumber
-       @isFTP2.save
-        
-    else
-        @isFtp= IsFTp.last.isFTP
-        
-        @isFTP2 = IsFTp.find_by_account_number(@accountNumber)        
-    end
+
+    @isFtp= IsFTp.last.isFTP
+    
+    @isFTP2 = IsFTp.find_by_account_number(@accountNumber)        
+
     
     
     #__________________________________________________________________
@@ -656,7 +654,8 @@ class WelcomeController < ApplicationController
         @debug13 = true
 
     end
-  end     
+    end 
+  end
   
     
 end
