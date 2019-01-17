@@ -29,6 +29,7 @@ class WelcomeController < ApplicationController
 
     if IsFTp.find_by_account_number(@accountNumber).nil?
        IsFTp.create :isFTP => "false" ,:account_number => @accountNumber
+       @isFTP2.save
         
     else
         @isFtp= IsFTp.last.isFTP
