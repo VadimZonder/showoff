@@ -1,5 +1,5 @@
 class WelcomeController < ApplicationController
-   ## before_action :authenticate_user!
+    before_action :authenticate_user!
     
     def button
         @button = "contents of a button"
@@ -7,7 +7,7 @@ class WelcomeController < ApplicationController
 # GET /welcome
   def index
       #default values
-    @debug1 = "true"
+    @debug1 = true
     @print = "default"
       
     require 'csv' 
@@ -49,7 +49,6 @@ class WelcomeController < ApplicationController
     ### @accountNumberDB = User.find_by_account_number(@accountNumber)
 ##_______________________________________________________________________________________________________IF SIGNED IN    
     if user_signed_in? 
-=begin         
         @isFTP2 = IsFTp.find_by_account_number(@accountNumber)
         isFTP = cookies[:cl]
         @isFTPC = IsFTp.find_by_account_number(@accountNumber)
@@ -104,7 +103,7 @@ class WelcomeController < ApplicationController
             @deployment = true
         end
                 
-       
+        
         #Read from FTP__________________________________________
         ftp = Net::FTP::new("ftp.dpd.ie")
         ftp.login("3L4", "3l4123")
@@ -458,8 +457,6 @@ class WelcomeController < ApplicationController
           ae = 31
           af = 32
 =end
-
-=begin
 #Mappings_____________________________________________________________END
           
           
@@ -630,7 +627,13 @@ class WelcomeController < ApplicationController
                 
                 @labelsArray2.push(@labelURI)
                 @debug10 = true
-
+=begin
+                    arrayCounter = 0
+                while arrayCounter < labelsArray.length do
+                    redirect_to labelsArray[arrayCounter]
+                    arrayCounter = arrayCounter +1
+                end   
+=end
                 
                 ##################
             else
@@ -648,12 +651,9 @@ class WelcomeController < ApplicationController
         cookies[:print] = "false" 
          
         @debug13 = true
-=end 
+
     end
-   
-  end  
-  
-  
+  end     
 def new
   @resume = Resume.new
 end
