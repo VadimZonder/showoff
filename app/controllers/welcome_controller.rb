@@ -627,7 +627,8 @@ class WelcomeController < ApplicationController
                 
                 
                 @labelsArray2.push(@labelURI)
-                @cookeslabelsArray2 = @labelsArray2
+                
+
                 @debug10 = true
 =begin
                     arrayCounter = 0
@@ -657,5 +658,5 @@ class WelcomeController < ApplicationController
     end 
   end
   
-    
+ cookies[:cookeslabelsArray2] = @labelsArray2   
 end
