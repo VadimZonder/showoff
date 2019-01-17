@@ -7,6 +7,10 @@ Rails.application.routes.draw do
     resources :resumes
   end
   
+  
+  #get 'welcome#debug'
+  
+  
   post 'mappings/new'
   get  'welcome/button'
   post  'welcome/button'
@@ -32,6 +36,7 @@ Rails.application.routes.draw do
   # You can have the root of your site routed with "root"
 
   root 'welcome#index'
+  
 
   #get '/button', to: 'welcome#button', as: 'button'
   # Example of regular route:
