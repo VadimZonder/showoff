@@ -51,7 +51,7 @@ require "open-uri"
        /// console.log("labels array------loop-------- = "+labelsArray[o].slice(0, -5));
        //var tempURL = labelsArray[o].slice(0, -5)
        var tempURLC = labelsArrayC[o].slice(0, -1)
-    /////////////////////// window.open(tempURLC, '_blank'); 
+     window.open(tempURLC, '_blank'); 
        o = o+ 2;
    }
 
@@ -60,7 +60,7 @@ require "open-uri"
         console.log("clicked print labels button**");
         //reload before print so that lates file is loaded
          document.cookie = "print=true;";
-       location.reload();
+      ////////////////////////////////// location.reload();
 
 
         }
