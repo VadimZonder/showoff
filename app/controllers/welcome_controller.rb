@@ -28,10 +28,14 @@ class WelcomeController < ApplicationController
     @resume = Resume.new
 
     if IsFTp.find_by_account_number(@accountNumber).nil?
+
+        
+    else
         @isFtp= IsFTp.last.isFTP
         
-        @isFTP2 = IsFTp.find_by_account_number(@accountNumber)
+        @isFTP2 = IsFTp.find_by_account_number(@accountNumber)        
     end
+    
     
     #__________________________________________________________________
     #need this for initial setup - if no FTP record with this account number then create one and save
