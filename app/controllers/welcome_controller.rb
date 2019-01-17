@@ -6,7 +6,7 @@ class WelcomeController < ApplicationController
     end
 # GET /welcome
   def index
-      @debug1 = true
+      @@debug1 = true
       @print = "default"
       
     require 'csv' 
@@ -92,7 +92,7 @@ class WelcomeController < ApplicationController
 @password = @email[6, 10] 
 @token = @email[16..-8] 
 
-@debug2 = true
+@@debug2 = true
 
 
 ##Development or Deployment
@@ -135,7 +135,7 @@ ftp.close
 if     @isFTP2.isFTP == false                    ############ORIGINAL LINE  isFtp.isFTP == false %>      
  #if on DEVELOPMENT LOCAL-----------------------------------------------
           if @deployment == false
-              @debug3 = true
+              @@debug3 = true
               #get the 1st and the only file location where the file is stored
               @csvFileLocationOpen = open('https://api-to-labels-base-vadimmalakhovski.c9users.io/uploads/resume/attachment/1/OurFormatTest.csv')
               #open each line and save it to a variable
