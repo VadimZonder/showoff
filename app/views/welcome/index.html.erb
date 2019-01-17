@@ -69,10 +69,11 @@ require "open-uri"
 
 <%#= render "login" %>
 <%## email = <DPD Account Number><API Setup Password><Base64 Token><@dpd.ie> %>
-<!--
+
 <p<%= @accountNumber = @email[0, 6] %></p>
 <p><%= @password = @email[6, 10] %></p>
 <p><%= @token = @email[16..-8] %></p>
+<!--
 -->
 
 <%###only for the initial deployment to Heroku DELETE %>
