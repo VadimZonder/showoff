@@ -3,7 +3,18 @@ class WelcomeController < ApplicationController
 
 # GET /welcome
   def index
-      #default values
+    ##Development or Deployment____________
+    @url =  request.original_url
+    if @url.include? 'c9users.io' 
+        @debug1 = 'hi'
+        @deployment = false
+    else
+        @debug1 = 'hi' 
+        @deployment = true
+        
+    end  
+      
+    #default values
     @print = "default"
       
     require 'csv' 
@@ -91,18 +102,6 @@ class WelcomeController < ApplicationController
         @token = @email[16..-8] 
         
         @debug2 = true
-        
-        
-        ##Development or Deployment____________
-        @url =  request.original_url
-        if @url.include? 'c9users.io' 
-            @deployment = false
-            @debug1 = 'hi' 
-        else
-            @deployment = true
-            @debug1 = 'hi' 
-        end
-                
         
         #Read from FTP__________________________________________
         ftp = Net::FTP::new("ftp.dpd.ie")
