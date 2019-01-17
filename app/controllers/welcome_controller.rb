@@ -28,7 +28,7 @@ class WelcomeController < ApplicationController
     @resume = Resume.new
 
     if IsFTp.find_by_account_number(@accountNumber).nil?
-       IsFTp.create :isFTP => "false" ,:account_number => @accountNumber
+       @isFTP2 = IsFTp.create :isFTP => "false" ,:account_number => @accountNumber
        @isFTP2.save
         
     else
