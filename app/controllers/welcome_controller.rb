@@ -8,7 +8,7 @@ class WelcomeController < ApplicationController
     if @url.include? 'c9users.io' 
         @deployment = false
     else
-        @deployment = false ####change to true
+        @deployment = true
         
     end  
       
