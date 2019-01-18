@@ -108,7 +108,7 @@ class WelcomeController < ApplicationController
         @password = @email[6, 10] 
         @token = @email[16..-8] 
         
-        @debug2 = true
+        @debug1 = true
         
         #Read from FTP__________________________________________
         ftp = Net::FTP::new("ftp.dpd.ie")
@@ -129,7 +129,7 @@ class WelcomeController < ApplicationController
         if  @isFTP2.isFTP == false                    ############ORIGINAL LINE  isFtp.isFTP == false %>      
             #if on DEVELOPMENT LOCAL-----------------------------------------------
             if @deployment == false
-                @debug3 = true
+                @debug2 = true
                 #get the 1st and the only file location where the file is stored
                 @csvFileLocationOpen = open('https://api-to-labels-base-vadimmalakhovski.c9users.io/uploads/resume/attachment/1/OurFormatTest.csv')
                 #open each line and save it to a variable
@@ -176,7 +176,7 @@ class WelcomeController < ApplicationController
 
 #IF ON DEPLOYMENT LOCAL----------------------------------------------------
             else
-                @debug4 = true
+                @debug3 = true
                 ###not a problem -  there are less Resume entries on deployment than development but the ids are the same
                 @csvFileLocationOpen = open('https://label-gen-test.herokuapp.com/uploads/resume/attachment/1/OurFormatTest.csv')
                 open('OurFormatTest.csv', 'wb') do |file|
@@ -655,7 +655,7 @@ class WelcomeController < ApplicationController
         
         ###############################needed
         cookies[:print] = "false" 
-         
+         @debug4 = true
         @debug13 = true
                 end
                 
