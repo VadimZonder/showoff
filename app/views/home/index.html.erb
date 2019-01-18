@@ -32,7 +32,7 @@ require "open-uri"
    //////var cookiesLabelsArrayStringC = '<%############=@cookeslabelsArray2%>';
    var labelsArrayStringC = '<%=@hardcodedURLsC%>';
    var labelsArrayStringDB = '<%=@hardcodedURLsDB%>';
-      //////console.log("labecookies label array string= "+cookiesLabelsArrayStringC);
+      console.log("var label array string= "+labelsArrayStringC);
       console.log("label DB label array string= "+labelsArrayStringDB);
 
    //Declare JS array
@@ -47,7 +47,9 @@ require "open-uri"
   labelsArrayDB =  labelsArrayStringDB.split("quot;");
   console.log("label DB label array = "+labelsArrayDB);
      //////cookiesLabelsArrayC =  cookiesLabelsArrayStringC.split("quot;");
-     
+  
+  
+  /*   
      //Open all the urls
    var d = 1;
    while (d < labelsArrayDB.length){
@@ -57,6 +59,8 @@ require "open-uri"
      window.open(tempURLDB, '_blank'); 
        d = d+ 2;
    }
+  */
+  
   
   /*
    //Open all the urls
@@ -71,7 +75,7 @@ require "open-uri"
    */
    
    
-   /*
+   
    //Open all the urls
    var o = 1;
    while (o < labelsArrayC.length){
@@ -82,7 +86,7 @@ require "open-uri"
        o = o+ 2;
    }
    
-   */
+   
 
    //OPENS ALL LABEL URLS
     function printLabels(){
