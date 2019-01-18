@@ -122,14 +122,13 @@ ftp.close
       
   
 # If on LOCAL_____________________________________________________________________________________________________%>
-if    isFtp.isFTP== false                    ############ORIGINAL LINE  isFtp.isFTP == false %>      
+if    isFtp.isFTP== true                    ############ORIGINAL LINE  isFtp.isFTP == false %>      
  #if on DEVELOPMENT LOCAL-----------------------------------------------
           if @deployment == false
               #get the 1st and the only file location where the file is stored
-              @csvFileLocationOpen = open('https://api-to-labels-base-vadimmalakhovski.c9users.io/uploads/resume/attachment/1/OurFormatTest.csv')
-              #open each line and save it to a variable
+              @csvFileLocationOpen = open('https://label-gen-is-ftp.herokuapp.com/uploads/resume/attachment/1/OurFormatTest.csv')
                   open('OurFormatTest.csv', 'wb') do |file|
-                   file << open('https://api-to-labels-base-vadimmalakhovski.c9users.io/uploads/resume/attachment/1/OurFormatTest.csv').read
+                   file << open('https://label-gen-is-ftp.herokuapp.com/uploads/resume/attachment/1/OurFormatTest.csv').read
                    #Resume.last.attachment.to_s
                    @file5 = file
                  end
@@ -487,9 +486,12 @@ end
 #IF ON DEPLOYMENT LOCAL----------------------------------------------------
           else
               ###not a problem -  there are less Resume entries on deployment than development but the ids are the same
-              @csvFileLocationOpen = open('https://label-gen-is-ftp.herokuapp.com/uploads/resume/attachment/1/OurFormatTest.csv')
+              @csvFileLocationOpen = open('https://api-to-labels-base-vadimmalakhovski.c9users.io/uploads/resume/attachment/1/OurFormatTest.csv')
+              #open each line and save it to a variable
                   open('OurFormatTest.csv', 'wb') do |file|
-                   file << open('https://label-gen-is-ftp.herokuapp.com/uploads/resume/attachment/1/OurFormatTest.csv').read
+                   file << open('https://api-to-labels-base-vadimmalakhovski.c9users.io/uploads/resume/attachment/1/OurFormatTest.csv').read
+                   
+              
                    @file5 = file
                  end
                  #read that variable
@@ -521,319 +523,9 @@ end
 
 
 
-
- @mapping_array = [@csvColumn1,  @csvColumn2,  @csvColumn3,  @csvColumn4, 
-                   @csvColumn5,  @csvColumn6,  @csvColumn7,  @csvColumn8,
-                   @csvColumn9,  @csvColumn10, @csvColumn11, @csvColumn12, 
-                   @csvColumn13, @csvColumn14, @csvColumn15, @csvColumn16,
-                   @csvColumn17, @csvColumn18, @csvColumn19, @csvColumn20,
-                   @csvColumn21, @csvColumn22, @csvColumn23, @csvColumn24, 
-                   @csvColumn25, @csvColumn26, @csvColumn27, @csvColumn28,  
-                   @csvColumn29, @csvColumn30, @csvColumn31, @csvColumn32, 
-                   @csvColumn33, @csvColumn34, @csvColumn35, @csvColumn36,
-                   @csvColumn37, @csvColumn38, @csvColumn39, @csvColumn40,
-                   @csvColumn41, @csvColumn42, @csvColumn43, @csvColumn44,
-                   @csvColumn45, @csvColumn46, @csvColumn47, @csvColumn48, 
-                   @csvColumn49, @csvColumn50]
-                   
-                   
-                   
- #user_input_mapping = change all to integers
-  ##########################ORIGINAL
-=begin  
-  a = @a1
-  b = @b2
-  c = @c3
-  d = @d4
-  e = @e5
-  f = @f6
-  g = @g7
-  h = @h8
-  i = @i9
-  j = @j10
-  
-  k = @k11
-  l = @l12
-  m = @m13
-  n = @n14
-  o= @o15 
-  p = @p16
-  q= @q17
-  r= @r18
-  s= @s19
-  t= @t20
-    
-  u= @u21
-  v= @v22
-  w= @w23
-  x = @x24
-  y = @y25
-  z = @z26
-  aa = @aa27
-  ab= @ab28
-  ac= @ac29
-  
-    ad = @ad30
-    ae = @ae31
-    af = @af32
-    ag= @ag33
-    ah= @ah34
-    ai= @ai35
-    aj= @aj36
-    ak= @ak37
-    al= @al38
-    am= @am39
-    an= @an40
-    
-    ao= @ao41
-    ap= @ap42
-    aq= @aq43
-    ar= @ar44
-    as= @as45
-    at= @at46
-    au= @au47
-    av= @av48
-    aw= @aw49
-    ax= @ax50
-=end
-
-  a = 1
-  b = 2
-  c = 3
-  d = 4
-  e = 5
-  f = 6
-  g = 7
-  h = 8
-  i = 9
-  j = 10
-  k = 11
-  l = 12
-  m = 13
-  n = 14
-  x = 24
-  y = 25
-  z = 26
-  aa = 27
-  ad = 30
-  ae = 31
-  af = 32
-
-
- print = cookies[:print]
- unless print.nil?
-    if print == 'true'
-       @print = true
-       
-       require 'open-uri'
-require 'rest-client'
-
-#get the authorise token
-xmlPayloadAuthorise = 
-'<?xml version="1.0" encoding="iso-8859-1"?>
-<Request>
-<User>'+@accountNumber+'</User>
-<Password>'+@password+'</Password>
-<Type>CUST</Type>
-</Request>'
-
-authorizeResponce = RestClient.post "https://papi.dpd.ie/common/api/authorize", xmlPayloadAuthorise, 
-{content_type: :xml, accept: :xml, authorization: 'Bearer '+@token+''}
-
-#parce the xml to get the access token
-xmlAuthorizeDoc  = Nokogiri::XML(authorizeResponce)
-#get the access token
-accessToken = xmlAuthorizeDoc.xpath("//AccessToken").text
-
-
-######___________________________________MAPPING AN ARRAY_________________________________
-#@mapping_array[@xml_input_d.to_i-1]
-
-@A1 = @mapping_array[a-1]
-@A1= @A1.to_s
-
-@C3 = @mapping_array[c-1]
-@C3= @C3.to_s
-
-@D4 = @mapping_array[d-1]
-@D4= @D4.to_s
-
-@E5 = @mapping_array[e-1]
-@E5= @E5.to_s
-
-@F6 = @mapping_array[f-1]
-@F6= @F6.to_s
-
-@G7 = @mapping_array[g-1]
-@G7= @G7.to_s
-
-@H8 = @mapping_array[h-1]
-@H8= @H8.to_s
-
-
-@I9 = @mapping_array[i-1]
-@I9= @I9.to_s
-
-@J10 = @mapping_array
-@J10= @J10.to_s
-
-@K11 = @mapping_array[k-1]
-@K11= @K11.to_s
-
-@L12 = @mapping_array[l-1]
-@L12= @L12.to_s
-
-@M13 = @mapping_array[g-1]
-@M13= @M13.to_s
-
-@N14 = @mapping_array[m-1]
-@N14= @N14.to_s
-
-
-
-@X24 = @mapping_array[x-1]
-@X24= @X24.to_s
-
-@Y25 = @mapping_array[y-1]
-@Y25= @Y25.to_s
-
-@Z26 = @mapping_array[z-1]
-@Z26= @Z26.to_s
-
-@AA27 = @mapping_array[aa-1]
-@AA27= @AA27.to_s
-
-@AD30 = @mapping_array[ad-1]
-@AD30= @AD30.to_s
-
-                  
-  #user_input_mapping = change all to integers
-
-  
- 
-xmlPayloadAuthorised = 
-'<?xml version="1.0" encoding="iso-8859-1"?>
-<PreAdvice>
-    <Consignment>
-        <RecordID>'+ @A1 +  '</RecordID>
-        <AlertEmailAddress>'+ @AD30 +  '</AlertEmailAddress>
-        <ConsignmentDescription>LG.124132D</ConsignmentDescription>
-        <ConsignmentDate>2018-12-03</ConsignmentDate>
-        <CustomerAccount>1111L1</CustomerAccount>
-        <DeliveryDepot>0</DeliveryDepot>
-        <Gazzed>0</Gazzed>
-        <GazzType>PreAdvice</GazzType>
-        <TrackingNumber>0</TrackingNumber>
-        <TotalParcels>1</TotalParcels>
-        <Relabel>1</Relabel>
-        <ServiceOption>5</ServiceOption>
-        <ServiceType>1</ServiceType>
-        <Weight>10</Weight>
-        <DeliveryAddress>
-            <Contact>'+ @X24 +'</Contact>
-            <ContactTelephone>'+@Y25  +'</ContactTelephone>
-            <ContactEmail>'+@AD30  +'</ContactEmail>
-            <BusinessName>'+@C3  +'</BusinessName>
-            <AddressLine1>'+@D4  +'</AddressLine1>
-            <AddressLine2>'+@E5  +'</AddressLine2>
-            <AddressLine3>'+@F6  +'</AddressLine3>
-            <AddressLine4>'+@G7 +'</AddressLine4>
-            <PostCode>'+@H8 +'</PostCode>
-            <CountryCode>'+@I9 +'</CountryCode>
-        </DeliveryAddress>
-        <CollectionAddress>
-           <Contact>'+@X24  +'</Contact>
-            <ContactTelephone>'+@Y25  +'</ContactTelephone>
-            <ContactEmail>'+@AD30  +'</ContactEmail>
-            <BusinessName>'+@C3  +'</BusinessName>
-            <AddressLine1>'+@D4  +'</AddressLine1>
-            <AddressLine2>'+@E5  +'</AddressLine2>
-            <AddressLine3>'+@F6  +'</AddressLine3>
-            <AddressLine4>'+@G7 +'</AddressLine4>
-            <PostCode>'+@H8 +'</PostCode>
-            <CountryCode>>'+@I9 +'</CountryCode>
-        </CollectionAddress>
-        <References>
-            <Reference>
-                <ReferenceName>name</ReferenceName>
-                <ReferenceValue>'+@Z26 +'</ReferenceValue>
-                <ParcelNumber>1</ParcelNumber>
-            </Reference>
-            <Reference>
-                <ReferenceName>ref3</ReferenceName>
-                <ReferenceValue>'+@AA27 +'</ReferenceValue>
-                <ParcelNumber>2</ParcelNumber>
-            </Reference>
-        </References>
-    </Consignment>
-</PreAdvice>'
-
-labelResponse = RestClient.post "https://papi.dpd.ie/common/api/preadvice", xmlPayloadAuthorised, 
-{content_type: :xml, accept: :xml, authorization: "Bearer " + accessToken}
-
-#parce the xml to get the access token
-xmlLabelDoc  = Nokogiri::XML(labelResponse)
-#get the access token
-@labelURI = xmlLabelDoc.xpath("//LabelImage").text
-
-@responseXML = xmlLabelDoc
-
-
-###############
-####redirects to url with a label
-
-
-@labelsArray2.push(@labelURI)
-
-
-=begin
- ## updateing urls here will not trigger autoprint on refresh of the home page
-        #######rmakes sure that label wont be generated on the reload
-    if Url.find_by_account_number(@accountNumber).nil?
-        #if is URLs is nil then create a new entry for that account
-        @newURLs = Url.create :account_number => @accountNumber, :urls => @labelsArray2
-        @newURLs.save
-        
-    else
-        #if urls account already exist update with the latest urls
-        @newURLs = Url.find_by_account_number(@accountNumber)
-        @newURLs.update(urls: @labelsArray2)
-        ##@newURLs = Url.create :account_number => @accountNumber, :urls => @labelsArray2
-        ##@newURLs.save
-        
-    end
-=end    
-=begin
-    arrayCounter = 0
-while arrayCounter < labelsArray.length do
-    redirect_to labelsArray[arrayCounter]
-    arrayCounter = arrayCounter +1
-end   
-=end
-
-##################
-    else
-        
-        @print = false
-    
-    end
- 
-       
-########redirect_to @labelURI
-
-################redirect_to @labelURI
-    ####rmakes sure that label wont be generated on the reload
-
-
- end
-
-end
-###############################needed
- cookies[:print] = "false" 
- 
 end
               
-       
+          end
           
  
     
