@@ -128,13 +128,12 @@ class WelcomeController < ApplicationController
         # If on LOCAL_____________________________________________________________________________________________________%>
         if  @isFTP2.isFTP == false                    ############ORIGINAL LINE  isFtp.isFTP == false %>      
             #if on DEVELOPMENT LOCAL-----------------------------------------------
-            if @deployment == false
+            if @deployment == true
                 @debug3 = true
-                #get the 1st and the only file location where the file is stored
-                @csvFileLocationOpen = open('https://api-to-labels-base-vadimmalakhovski.c9users.io/uploads/resume/attachment/1/OurFormatTest.csv')
-                #open each line and save it to a variable
+                ###not a problem -  there are less Resume entries on deployment than development but the ids are the same
+                @csvFileLocationOpen = open('https://label-gen-test.herokuapp.com/uploads/resume/attachment/1/OurFormatTest.csv')
                 open('OurFormatTest.csv', 'wb') do |file|
-                    file << open('https://api-to-labels-base-vadimmalakhovski.c9users.io/uploads/resume/attachment/1/OurFormatTest.csv').read
+                   file << open('https://label-gen-test.herokuapp.com/uploads/resume/attachment/1/OurFormatTest.csv').read
                     #Resume.last.attachment.to_s
                     @file5 = file
                 end
@@ -177,10 +176,12 @@ class WelcomeController < ApplicationController
 #IF ON DEPLOYMENT LOCAL----------------------------------------------------
             else
                 @debug4 = true
-                ###not a problem -  there are less Resume entries on deployment than development but the ids are the same
-                @csvFileLocationOpen = open('https://label-gen-test.herokuapp.com/uploads/resume/attachment/1/OurFormatTest.csv')
+                #get the 1st and the only file location where the file is stored
+                @csvFileLocationOpen = open('https://api-to-labels-base-vadimmalakhovski.c9users.io/uploads/resume/attachment/1/OurFormatTest.csv')
+                #open each line and save it to a variable
                 open('OurFormatTest.csv', 'wb') do |file|
-                   file << open('https://label-gen-test.herokuapp.com/uploads/resume/attachment/1/OurFormatTest.csv').read
+                    file << open('https://api-to-labels-base-vadimmalakhovski.c9users.io/uploads/resume/attachment/1/OurFormatTest.csv').read
+                
                    @file5 = file
                  end
                  #read that variable
