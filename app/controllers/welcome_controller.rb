@@ -1082,7 +1082,7 @@ class WelcomeController < ApplicationController
                 #######cookies[:cookeslabelsArray2] = cookies[:cookeslabelsArray2] +'~'+ @labelURI
                 @debug10 = true
                 
-=begin
+
 ## updateing urls here will not trigger autoprint on refresh of the home page
         #######rmakes sure that label wont be generated on the reload
     if Url.find_by_account_number(@accountNumber).nil?
@@ -1098,7 +1098,7 @@ class WelcomeController < ApplicationController
         ##@newURLs.save
         
     end 
-=end
+
 
 =begin
                     arrayCounter = 0
