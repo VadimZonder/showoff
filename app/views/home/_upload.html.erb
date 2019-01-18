@@ -1,0 +1,82 @@
+<% if !@resume.errors.empty? %>
+   <div class = "alert alert-error">
+      
+      <ul>
+         <% @resume.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+         <% end %>
+      </ul>
+      
+   </div>
+<% end %>
+
+<div class = "well">
+   <%= form_for @resume, html: { multipart: true } do |f| %>
+    <%#eventually remove the name if needed %>
+      <%= f.label :name %>
+      <%= f.text_field :name ,  value: 'Import File' %>
+      <br>
+      <br>
+      <%= f.label :attachment %>
+      <%= f.file_field :attachment %>
+      <%= f.submit "Import", class: "btn btn-primary" %>
+   <% end %>
+</div>
+
+
+<% if !flash[:notice].blank? %>
+   <div class = "alert alert-info">
+      <%= flash[:notice] %>
+   </div>
+<% end %>
+
+
+<h3>Uploaded Files</h3>
+<%#= link_to "New Resume", new_resume_path, class: "btn btn-primary" %>
+
+<br />
+
+<table class = "table table-bordered table-striped">
+   <thead>
+      <tr>
+         <th>Name</th>
+         <th>Download Link</th>
+         <th> </th>
+      </tr>
+   </thead>
+   
+   <tbody>
+      <% @resumes.each do |resume| %>
+         
+         <tr>
+            <td><%= resume.name %></td>
+            <td><%= link_to "Download Last Import", resume.attachment_url %></td>
+            <td><%= button_to "Delete",  resume, method: :delete, class: "btn btn-danger", confirm: "Are you sure that you wish to delete #{resume.name}?" %></td>
+         </tr>
+         
+      <% end %>
+   </tbody>
+   
+</table>
+
+<!--delete
+<%#= form_with(model: bulletin, local: true) do |form| %>
+  <%# if bulletin.errors.any? %>
+    <div id="error_explanation">
+      <h2><%#= pluralize(comment.errors.count, "error") %> prohibited this comment from being saved:</h2>
+
+      <ul>
+      <%# bulletin.errors.full_messages.each do |message| %>
+        <li><%#= message %></li>
+      <%# end %>
+      </ul>
+    </div>
+  <%# end %>
+  <div class="form-group">
+    <#%= form.file_field :attachment %><br>
+  </div>
+  <div class="actions">
+    <%#= form.submit("Upload File", class: "btn btn-primary btn-lg") %>
+  </div>
+<%# end %>
+-->
