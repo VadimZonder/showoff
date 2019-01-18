@@ -1,8 +1,15 @@
+<% 
+require 'csv' 
+require 'net/ftp'
+require 'tempfile'
+require "open-uri"
+%>
 
+<% if user_signed_in?  %>
 
 <%########URLs from controller with all the labels %>
 <%=@hardcodedURLsC = @labelsArray2%>
-<P>from the DB urls = <%##=@hardcodedURLsDB = Url.find_by_account_number(@accountNumber).urls%></p>
+<P>from the DB urls = <%=@hardcodedURLsDB = Url.find_by_account_number(@accountNumber).urls%></p>
 <P>is ftp2= <%##=IsFTp.find_by_account_number(@accountNumber).isFTP%></P>
 <P>labelsArray2= <%=@labelsArray2%></P>
 <P>enabling to print = <%=@printX%></P>
@@ -14,3 +21,293 @@
 <P>debug1 = <%=@labelsArrayDB%></P>
 <P>debug2 = <%=@csvLenght%></P>
 <P>@debug  = <%= @debug%></P>
+
+   <script>
+
+   
+   
+   //Save to JS string
+   //////var cookiesLabelsArrayStringC = '<%############=@cookeslabelsArray2%>';
+   var labelsArrayStringC = '<%=@hardcodedURLsC%>';
+   var labelsArrayStringDB = '<%=@hardcodedURLsDB%>';
+      //////console.log("labecookies label array string= "+cookiesLabelsArrayStringC);
+      console.log("label DB label array string= "+labelsArrayStringDB);
+
+   //Declare JS array
+   var labelsArrayC;
+   var labelsArrayDB;
+      //////var cookiesLabelsArray;
+   
+ 
+  
+  //Split the JS string into tan JS array
+  labelsArrayC =  labelsArrayStringC.split("quot;");
+  labelsArrayDB =  labelsArrayStringDB.split("quot;");
+  console.log("label DB label array = "+labelsArrayDB);
+     //////cookiesLabelsArrayC =  cookiesLabelsArrayStringC.split("quot;");
+     
+     //Open all the urls
+   var d = 1;
+   while (d < labelsArrayDB.length){
+       /// console.log("labels array------loop-------- = "+labelsArray[o].slice(0, -5));
+       //var tempURL = labelsArray[o].slice(0, -5)
+       var tempURLDB = labelsArrayDB[d].slice(0, -1)
+     window.open(tempURLDB, '_blank'); 
+       d = d+ 2;
+   }
+  
+  /*
+   //Open all the urls
+   var c = 1;
+   while (c < cookiesLabelsArrayC.length){
+       /// console.log("labels array------loop-------- = "+labelsArray[o].slice(0, -5));
+       //var tempURL = labelsArray[o].slice(0, -5)
+       var cookiesTempURLC = cookiesLabelsArrayC[c].slice(0, -1)
+     window.open(cookiesTempURLC, '_blank'); 
+       c = c+ 2;
+   }
+   */
+   
+   
+   /*
+   //Open all the urls
+   var o = 1;
+   while (o < labelsArrayC.length){
+       /// console.log("labels array------loop-------- = "+labelsArray[o].slice(0, -5));
+       //var tempURL = labelsArray[o].slice(0, -5)
+       var tempURLC = labelsArrayC[o].slice(0, -1)
+    window.open(tempURLC, '_blank'); 
+       o = o+ 2;
+   }
+   
+   */
+
+   //OPENS ALL LABEL URLS
+    function printLabels(){
+        console.log("clicked print labels button**");
+        //reload before print so that lates file is loaded
+         document.cookie = "print=true;";
+         location.reload();
+
+
+        }
+        
+</script>
+
+<%#= render "login" %>
+<%## email = <DPD Account Number><API Setup Password><Base64 Token><@dpd.ie> %>
+
+<p<%= @accountNumber = @email[0, 6] %></p>
+<p><%= @password = @email[6, 10] %></p>
+<p><%= @token = @email[16..-8] %></p>
+<!--
+-->
+
+<%###only for the initial deployment to Heroku DELETE %>
+<%#= @accountNumber = '5287L9' %>
+<%#= @password = 'db44t66Dat' %>
+<%#= @token = 'R3JlZW5JVDpHcmVlbklUUGFzc3cwcmQyMDE4' %>
+
+
+<%#= render "button" %>
+
+
+
+<div class="container">
+  <div class="row">
+    <label class=" float-right">
+      <h3>Print All Labels</h3>
+      <button id ="print" class ="btn btn-print btn-lg " onclick="printLabels()">Print Labels</button>
+    </label>
+        
+        
+    <h3 id="ftpText"></h3>
+    <br>
+    <label class="switch">
+      <br>
+      <input type="checkbox" id="slider" onchange="isFTP()" >
+      <span class="slider round"></span>
+    </label>
+  </div>
+</div>
+<hr />
+
+<div class="container">
+  <div class="row">
+    <div class="purple-box u-padding-Al">
+      <center>
+         <h3>Local File Upload</h3>
+         <%= render "upload" %>
+      </center>
+    </div>
+    <hr />
+  </div>
+  
+
+<br />
+<%= button_to "File Mapping", new_mapping_path, class: "btn btn-primary"  %>
+   
+
+  <div class="row">
+    <div class="col-md-12">
+
+<%#DELETE%>        
+<%###@isFtp = true%>
+<%###@isFtp2 = true%>  
+<%###@isFtp = true%>  
+<%#DELETE%>  
+
+     
+        
+
+
+   <script>
+  
+    var statusFTP = '<%=@isFTP2.isFTP%>'; 
+  console.log("isFTP STATUS= " + statusFTP);
+//empty an array at the beginning
+var labelsArray = [];
+
+var isFtp = '<%=@isFtp%>';
+
+ </script>
+
+</head>
+<body>
+<%
+@isFTP2 = @isFTP2.isFTP
+%>
+<script>
+ var isFTP2 = '<%=@isFTP2%>';
+ var debug = '<%=@debug%>';
+ console.log("debug="+debug);
+</script>
+
+
+<%#first check the value of what checkbox should be%>
+<script>
+
+     console.log('this is first isFTP2 var ' + isFTP2);
+    if (isFTP2 == 'false'){
+        document.getElementById("slider").checked = false;
+        ftpText.innerText = "Local Import is ON";
+     
+    }
+    else if (isFTP2 == 'true'){
+        document.getElementById("slider").checked = true;
+         ftpText.innerText = "FTP Import is ON";
+    }
+  
+
+    </script>
+
+
+    <script>
+  
+    console.log(slider);
+    
+    function isFTP (){  
+        var slider=document.getElementById("slider").checked;
+        if (slider==false){
+              console.log(slider);
+            
+      document.cookie = "cl=" + slider +  ";";
+        location.reload();
+        }
+        else if (slider==true){
+            document.cookie = "cl=" + slider +  ";";
+              location.reload();
+        }
+        //document.getElementById("slider").value = false;
+      
+    
+        }
+    
+</script>
+
+<br>
+<br>
+<br>
+<br>
+
+
+
+            <!--
+      
+  
+  
+<!--___________________________________________________________________________ uncomment ALL to auto download the labels-->
+
+<h3>XML Response</h3>
+<br>
+    <p><%=@responseXML%></p>
+<script>
+function print(){
+    consosle.log("print");
+}
+
+
+//save a array now to attach one by one and then at the end run script to print an array ech element - make an array of urls and then call all the array until lenght
+
+//get the array of labels URLs and push to an array
+
+//if (labelUri.length < 50) {
+//    var my_window = window.open('<%####= @labelURI %>', '_blank');
+// }
+ </script>
+<!--___________________________________________________________________________ uncomment ALL to auto download the labels--> 
+ 
+
+
+<%#= creates a label link/button for each label%>
+<%#= link_to "LABEL",@labelURI,  :class => "a", :target => "_blank"%>
+                                          
+                                     <!--
+<%
+@labelURI
+# link_to labelURI, target: :_blank 
+
+%>
+
+
+      
+<%= button_to 'Press me',:controller => :welcome, :action => :button %>
+<p><%= @button %></p>
+ <script>
+       
+             var btn = '<%=@button %>'; 
+               console.log(btn);
+                 
+           </script>
+<%= 
+
+#submit_tag("Checkout"), onclick: "print();"
+
+#doc = Nokogiri::HTML(open("http://www.threescompany.com"))
+#doc = Nokogiri::HTML(open(labelURI))
+%>         
+      <center>
+        <ul class="no-bullet">
+          <%# @bulletin_list.each do |bulletin| %>
+            <li>
+              <%# if bulletin.attachment.previewable? %>
+                <%#= link_to(image_tag(bulletin.attachment.preview(resize: "200x200>")),  rails_blob_path(bulletin.attachment, disposition: "attachment"))
+                #%>
+              <%# elsif bulletin.attachment.variable? %>
+                <%#= link_to(image_tag(bulletin.attachment.variant(resize: "200x200")), rails_blob_path(bulletin.attachment, disposition: "attachment"))%>
+              <%# else %>
+                <%#= link_to "Download file", rails_blob_path(bulletin.attachment, disposition: "attachment") %>
+              <%# end %>
+            </li>
+          <%# end %>
+        </ul>
+      </center>
+    </div>
+  </div> <!-- row -->
+</div>
+
+
+
+        <%else%>
+        
+       <% end%>
