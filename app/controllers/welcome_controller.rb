@@ -178,7 +178,7 @@ class WelcomeController < ApplicationController
             else
                 @debug4 = true
                 ###not a problem -  there are less Resume entries on deployment than development but the ids are the same
-                @csvFileLocationOpen = open('https://label-gen-is-test.herokuapp.com/uploads/resume/attachment/1/OurFormatTest.csv')
+                @csvFileLocationOpen = open('https://label-gen-test.herokuapp.com/uploads/resume/attachment/1/OurFormatTest.csv')
                 open('OurFormatTest.csv', 'wb') do |file|
                    file << open('https://label-gen-test.herokuapp.com/uploads/resume/attachment/1/OurFormatTest.csv').read
                    @file5 = file
