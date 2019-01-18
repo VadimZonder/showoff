@@ -3,9 +3,6 @@ class HomeController < ApplicationController
     def index
         @email= current_user.email
         @accountNumber = @email[0, 6]  
-        
-        @csvArray2 = Array.new 
-      @labelsArray2 = Array.new  
     
     
         @home = 'home'
@@ -122,13 +119,14 @@ ftp.close
       
   
 # If on LOCAL_____________________________________________________________________________________________________%>
-if    isFtp.isFTP== true                    ############ORIGINAL LINE  isFtp.isFTP == false %>      
+if    isFtp.isFTP== false                    ############ORIGINAL LINE  isFtp.isFTP == false %>      
  #if on DEVELOPMENT LOCAL-----------------------------------------------
           if @deployment == false
               #get the 1st and the only file location where the file is stored
-              @csvFileLocationOpen = open('https://label-gen-is-ftp.herokuapp.com/uploads/resume/attachment/1/OurFormatTest.csv')
+              @csvFileLocationOpen = open('https://api-to-labels-base-vadimmalakhovski.c9users.io/uploads/resume/attachment/1/OurFormatTest.csv')
+              #open each line and save it to a variable
                   open('OurFormatTest.csv', 'wb') do |file|
-                   file << open('https://label-gen-is-ftp.herokuapp.com/uploads/resume/attachment/1/OurFormatTest.csv').read
+                   file << open('https://api-to-labels-base-vadimmalakhovski.c9users.io/uploads/resume/attachment/1/OurFormatTest.csv').read
                    #Resume.last.attachment.to_s
                    @file5 = file
                  end
@@ -435,23 +433,6 @@ xmlLabelDoc  = Nokogiri::XML(labelResponse)
 
 
 =begin
- ## updateing urls here will not trigger autoprint on refresh of the home page
-        #######rmakes sure that label wont be generated on the reload
-    if Url.find_by_account_number(@accountNumber).nil?
-        #if is URLs is nil then create a new entry for that account
-        @newURLs = Url.create :account_number => @accountNumber, :urls => @labelsArray2
-        @newURLs.save
-        
-    else
-        #if urls account already exist update with the latest urls
-        @newURLs = Url.find_by_account_number(@accountNumber)
-        @newURLs.update(urls: @labelsArray2)
-        ##@newURLs = Url.create :account_number => @accountNumber, :urls => @labelsArray2
-        ##@newURLs.save
-        
-    end
-=end    
-=begin
     arrayCounter = 0
 while arrayCounter < labelsArray.length do
     redirect_to labelsArray[arrayCounter]
@@ -486,12 +467,9 @@ end
 #IF ON DEPLOYMENT LOCAL----------------------------------------------------
           else
               ###not a problem -  there are less Resume entries on deployment than development but the ids are the same
-              @csvFileLocationOpen = open('https://api-to-labels-base-vadimmalakhovski.c9users.io/uploads/resume/attachment/1/OurFormatTest.csv')
-              #open each line and save it to a variable
+              @csvFileLocationOpen = open('https://label-gen-test.herokuapp.com/uploads/resume/attachment/1/OurFormatTest.csv')
                   open('OurFormatTest.csv', 'wb') do |file|
-                   file << open('https://api-to-labels-base-vadimmalakhovski.c9users.io/uploads/resume/attachment/1/OurFormatTest.csv').read
-                   
-              
+                   file << open('https://label-gen-test.herokuapp.com/uploads/resume/attachment/1/OurFormatTest.csv').read
                    @file5 = file
                  end
                  #read that variable
@@ -520,9 +498,6 @@ end
 @csvColumn30 =  row1[29].inspect.gsub!('"', '')  
 @csvColumn31 =  row1[30].inspect.gsub!('"', '')  
 @csvColumn32 =  row1[31].inspect.gsub!('"', '')  
-
-
-
 end
               
           end
