@@ -43,57 +43,9 @@ class WelcomeController < ApplicationController
     
     
     
-=begin    
-    ##_____                                                                  ##_____
-     #get the 1st and the only file location where the file is stored
-                @csvFileLocationOpen = open('https://api-to-labels-base-vadimmalakhovski.c9users.io/uploads/resume/attachment/1/OurFormatTest.csv')
-                #open each line and save it to a variable
-                open('OurFormatTest.csv', 'wb') do |file|
-                    file << open('https://api-to-labels-base-vadimmalakhovski.c9users.io/uploads/resume/attachment/1/OurFormatTest.csv').read
-                    #Resume.last.attachment.to_s
-                    @file5 = file
-                end
-            #read that variable
-            @csvRead = CSV.read(@file5)
-            @csvLenght = @csvRead.length
-            
-            #read ech column and save it to a variable
-            CSV.foreach(@file5) do |row1|
-                @csvColumn1 =  row1[0].inspect.gsub!('"', '') #+  @csvRow1.inspect 
-                @csvColumn2 =  row1[1].inspect.gsub!('"', '') 
-                @csvColumn3 =  row1[2].inspect.gsub!('"', '') 
-                @csvColumn4 =  row1[3].inspect.gsub!('"', '') 
-                @csvColumn5 =  row1[4].inspect.gsub!('"', '') 
-                @csvColumn6 =  row1[5].inspect.gsub!('"', '')  
-                @csvColumn7 =  row1[6].inspect.gsub!('"', '')  
-                @csvColumn8 =  row1[7].inspect.gsub!('"', '')  
-                @csvColumn9 =  row1[8].inspect.gsub!('"', '')  
-                @csvColumn10 =  row1[9].inspect.gsub!('"', '')  
-                @csvColumn11 =  row1[10].inspect.gsub!('"', '')  
-                @csvColumn12 =  row1[11].inspect.gsub!('"', '')  
-                @csvColumn13 =  row1[12].inspect.gsub!('"', '')  
-                @csvColumn14 =  row1[13].inspect.gsub!('"', '')  
-                @csvColumn24 =  row1[23].inspect.gsub!('"', '')  
-                @csvColumn25 =  row1[24].inspect.gsub!('"', '')  
-                @csvColumn26 =  row1[25].inspect.gsub!('"', '')  
-                @csvColumn27 =  row1[26].inspect.gsub!('"', '') 
-                @csvColumn30 =  row1[29].inspect.gsub!('"', '')  
-                @csvColumn31 =  row1[30].inspect.gsub!('"', '')  
-                @csvColumn32 =  row1[31].inspect.gsub!('"', '') 
-                
-     @col3T = @csvColumn3+@csvColumn3
-            end
-            
-###read each line and save cols3 to one var to have the loop going the lenght of the CSV
-                          ##unless @col3T.nil?
-               # @col3T.push(@csvColumn3)
-               
-            ##else
-                
-            ##end
-    ##___# =>                                                            ##_____
+    
 
-=end    
+    
     
     #__________________________________________________________________
     #need this for initial setup - if no FTP record with this account number then create one and save

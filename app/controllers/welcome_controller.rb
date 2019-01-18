@@ -437,6 +437,21 @@ xmlLabelDoc  = Nokogiri::XML(labelResponse)
 
 
 
+ ## updateing urls here will not trigger autoprint on refresh of the home page
+        #######rmakes sure that label wont be generated on the reload
+    if Url.find_by_account_number(@accountNumber).nil?
+        #if is URLs is nil then create a new entry for that account
+        @newURLs = Url.create :account_number => @accountNumber, :urls => @labelsArray2
+        @newURLs.save
+        
+    else
+        #if urls account already exist update with the latest urls
+        @newURLs = Url.find_by_account_number(@accountNumber)
+        @newURLs.update(urls: @labelsArray2)
+        ##@newURLs = Url.create :account_number => @accountNumber, :urls => @labelsArray2
+        ##@newURLs.save
+        
+    end  
 =begin
     arrayCounter = 0
 while arrayCounter < labelsArray.length do
@@ -682,21 +697,7 @@ else
 end
 
 
-        ## updateing urls here will not trigger autoprint on refresh of the home page
-        #######rmakes sure that label wont be generated on the reload
-    if Url.find_by_account_number(@accountNumber).nil?
-        #if is URLs is nil then create a new entry for that account
-        @newURLs = Url.create :account_number => @accountNumber, :urls => @labelsArray2
-        @newURLs.save
-        
-    else
-        #if urls account already exist update with the latest urls
-        @newURLs = Url.find_by_account_number(@accountNumber)
-        @newURLs.update(urls: @labelsArray2)
-        ##@newURLs = Url.create :account_number => @accountNumber, :urls => @labelsArray2
-        ##@newURLs.save
-        
-    end  
+       
   end
   
       
