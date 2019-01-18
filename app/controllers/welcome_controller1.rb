@@ -124,6 +124,7 @@ ftp.close
       
   
 # If on LOCAL_____________________________________________________________________________________________________%>
+###########################CHANGE BACK
 if    isFtp.isFTP== false                    ############ORIGINAL LINE  isFtp.isFTP == false %>      
  #if on DEVELOPMENT LOCAL-----------------------------------------------
           if @deployment == false
