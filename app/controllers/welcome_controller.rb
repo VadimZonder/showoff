@@ -602,9 +602,11 @@ class WelcomeController < ApplicationController
             
             end
                  
-         @debug12 = true      
+         @debug12 = true 
+         @file5.close()
         ## updateing urls here will not trigger autoprint on refresh of the home page
         #######rmakes sure that label wont be generated on the reload
+=begin        
     if Url.find_by_account_number(@accountNumber).nil?
         #if is URLs is nil then create a new entry for that account
         @newURLs = Url.create :account_number => @accountNumber, :urls => @labelsArray2
@@ -616,7 +618,7 @@ class WelcomeController < ApplicationController
         @newURLs.update(urls: @labelsArray2)
         
     end  
-      
+=end      
         end
             end
             
@@ -1110,7 +1112,7 @@ class WelcomeController < ApplicationController
                 end   
 =end
                 
-                ##################
+               ##################
             else
                 @debug11 = true
                 @print = false
@@ -1120,7 +1122,7 @@ class WelcomeController < ApplicationController
             end
                  
          @debug12 = true      
-
+@file5.close()
       
         end
         
