@@ -435,7 +435,6 @@ xmlLabelDoc  = Nokogiri::XML(labelResponse)
 
 @labelsArray2.push(@labelURI)
 
-
  ## updateing urls here will not trigger autoprint on refresh of the home page
         #######rmakes sure that label wont be generated on the reload
     if Url.find_by_account_number(@accountNumber).nil?
