@@ -36,9 +36,9 @@ class WelcomeController < ApplicationController
     @resume = Resume.new
 
 
-    @isFtp= IsFTp.last.isFTP
+   ### @isFtp= IsFTp.last.isFTP
     
-    @isFTP2 = IsFTp.find_by_account_number(@accountNumber)        
+       
 
     
     
@@ -47,22 +47,21 @@ class WelcomeController < ApplicationController
     if IsFTp.find_by_account_number(@accountNumber).nil?
         #if is ftp is nil then create a new entry for that account
         @isFTPC2 = IsFTp.create :isFTP => "false" ,:account_number => @accountNumber
-        if @isFTPC2.nil?
+      ### if @isFTPC2.nil?
              #####default account number for the first time when new user is create for ftp
-            @isFTPC2 = IsFTp.create :isFTP => "false" ,:account_number => '1111X1'  
-        else
+          ###  @isFTPC2 = IsFTp.create :isFTP => "false" ,:account_number => '1111X1'  
+       ### else
             @isFTP2.save
-        end 
+         
     end      
+    
+        @isFTP2 = IsFTp.find_by_account_number(@accountNumber) 
     ###if user does not exist get accoun number from the signup emails tring
     ### or created whn signup button is clicked
     ###first get the data passed from sign up
     ### @accountNumberDB = User.find_by_account_number(@accountNumber)
     
-        
-        #if urls account already exist update with the latest urls
-        @newURLs = Url.find_by_account_number(@accountNumber)
-        @newURLs.update(urls: @labelsArray2)
+
 ##_______________________________________________________________________________________________________IF SIGNED IN    
     if user_signed_in? 
         @isFTP2 = IsFTp.find_by_account_number(@accountNumber)
