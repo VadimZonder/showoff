@@ -7,6 +7,7 @@ class WelcomeController < ApplicationController
 
 # GET /welcome
   def index
+     
     ##Development or Deployment____________
     @url =  request.original_url
     if @url.include? 'c9users.io' 
