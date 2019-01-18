@@ -1,11 +1,4 @@
-<% 
-require 'csv' 
-require 'net/ftp'
-require 'tempfile'
-require "open-uri"
-%>
 
-<% if user_signed_in?  %>
 
 <%########URLs from controller with all the labels %>
 <%=@hardcodedURLsC = @labelsArray2%>
@@ -21,9 +14,3 @@ require "open-uri"
 <P>debug1 = <%=@labelsArrayDB%></P>
 <P>debug2 = <%=@csvLenght%></P>
 <P>@debug  = <%= @debug%></P>
-
-
-
-        <%else%>
-        
-       <% end%>
