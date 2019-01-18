@@ -5,7 +5,7 @@ class HomeController < ApplicationController
         @accountNumber = @email[0, 6]  
     
     
-        @home = 'home'
+        @home = 'another'
         
         
         
