@@ -692,9 +692,9 @@ end
     else
         #if urls account already exist update with the latest urls
         @newURLs = Url.find_by_account_number(@accountNumber)
-        ###@newURLs.update(urls: @labelsArray2)
-        @newURLs = Url.create :account_number => @accountNumber, :urls => @labelsArray2
-        @newURLs.save
+        @newURLs.update(urls: @labelsArray2)
+        ##@newURLs = Url.create :account_number => @accountNumber, :urls => @labelsArray2
+        ##@newURLs.save
         
     end  
   end
