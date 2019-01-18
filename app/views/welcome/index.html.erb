@@ -6,10 +6,11 @@ require "open-uri"
 %>
 
 <% if user_signed_in?  %>
-
+<P>@home  = <%= @home%></P>
 <%########URLs from controller with all the labels %>
 <%=@hardcodedURLsC = @labelsArray2%>
-<P>from the DB urls = <%=@hardcodedURLsDB = Url.find_by_account_number(@accountNumber).urls%></p>
+<P>urls from VAR - = <%=@hardcodedURLsC%></P>
+<P>from the DB urls = <%#########=@hardcodedURLsDB = Url.find_by_account_number(@accountNumber).urls%></p>
 <P>is ftp2= <%##=IsFTp.find_by_account_number(@accountNumber).isFTP%></P>
 <P>labelsArray2= <%=@labelsArray2%></P>
 <P>enabling to print = <%=@printX%></P>
@@ -46,6 +47,8 @@ require "open-uri"
   console.log("label DB label array = "+labelsArrayDB);
      //////cookiesLabelsArrayC =  cookiesLabelsArrayStringC.split("quot;");
      
+     
+     /*
      //Open all the urls
    var d = 1;
    while (d < labelsArrayDB.length){
@@ -55,6 +58,7 @@ require "open-uri"
      window.open(tempURLDB, '_blank'); 
        d = d+ 2;
    }
+   *
   
   /*
    //Open all the urls
@@ -69,7 +73,7 @@ require "open-uri"
    */
    
    
-   /*
+
    //Open all the urls
    var o = 1;
    while (o < labelsArrayC.length){
@@ -80,7 +84,7 @@ require "open-uri"
        o = o+ 2;
    }
    
-   */
+   
 
    //OPENS ALL LABEL URLS
     function printLabels(){

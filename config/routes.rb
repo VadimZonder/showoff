@@ -36,8 +36,8 @@ Rails.application.routes.draw do
 
   # You can have the root of your site routed with "root"
 
-  root 'home#index'
-  #############root 'welcome#index'
+    #############root 'home#index'
+    root 'welcome#index'
   
 
   #get '/button', to: 'welcome#button', as: 'button'
