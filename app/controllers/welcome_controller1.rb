@@ -1,3 +1,4 @@
+=begin
 class WelcomeController < ApplicationController
     before_action :authenticate_user!
     
@@ -249,6 +250,11 @@ if    isFtp.isFTP== false                    ############ORIGINAL LINE  isFtp.is
     ax= @ax50
 =end
 
+
+
+
+
+=begin
   a = 1
   b = 2
   c = 3
@@ -463,6 +469,12 @@ end
 =end
 
 ##################
+
+
+
+
+
+=begin
     else
         
         @print = false
@@ -731,3 +743,4 @@ end
 
   
 end
+=end
