@@ -128,12 +128,13 @@ class WelcomeController < ApplicationController
         # If on LOCAL_____________________________________________________________________________________________________%>
         if  @isFTP2.isFTP == false                    ############ORIGINAL LINE  isFtp.isFTP == false %>      
             #if on DEVELOPMENT LOCAL-----------------------------------------------
-            if @deployment == true
+            if @deployment == false
                 @debug3 = true
-                ###not a problem -  there are less Resume entries on deployment than development but the ids are the same
-                @csvFileLocationOpen = open('https://label-gen-test.herokuapp.com/uploads/resume/attachment/1/OurFormatTest.csv')
+                #get the 1st and the only file location where the file is stored
+                @csvFileLocationOpen = open('https://api-to-labels-base-vadimmalakhovski.c9users.io/uploads/resume/attachment/1/OurFormatTest.csv')
+                #open each line and save it to a variable
                 open('OurFormatTest.csv', 'wb') do |file|
-                   file << open('https://label-gen-test.herokuapp.com/uploads/resume/attachment/1/OurFormatTest.csv').read
+                    file << open('https://api-to-labels-base-vadimmalakhovski.c9users.io/uploads/resume/attachment/1/OurFormatTest.csv').read
                     #Resume.last.attachment.to_s
                     @file5 = file
                 end
@@ -176,12 +177,10 @@ class WelcomeController < ApplicationController
 #IF ON DEPLOYMENT LOCAL----------------------------------------------------
             else
                 @debug4 = true
-                #get the 1st and the only file location where the file is stored
-                @csvFileLocationOpen = open('https://api-to-labels-base-vadimmalakhovski.c9users.io/uploads/resume/attachment/1/OurFormatTest.csv')
-                #open each line and save it to a variable
+                ###not a problem -  there are less Resume entries on deployment than development but the ids are the same
+                @csvFileLocationOpen = open('https://label-gen-is-test.herokuapp.com/uploads/resume/attachment/1/OurFormatTest.csv')
                 open('OurFormatTest.csv', 'wb') do |file|
-                    file << open('https://api-to-labels-base-vadimmalakhovski.c9users.io/uploads/resume/attachment/1/OurFormatTest.csv').read
-                
+                   file << open('https://label-gen-test.herokuapp.com/uploads/resume/attachment/1/OurFormatTest.csv').read
                    @file5 = file
                  end
                  #read that variable
@@ -210,49 +209,18 @@ class WelcomeController < ApplicationController
                     @csvColumn30 =  row1[29].inspect.gsub!('"', '')  
                     @csvColumn31 =  row1[30].inspect.gsub!('"', '')  
                     @csvColumn32 =  row1[31].inspect.gsub!('"', '')  
-                end
-                
-            end
-                  
-         
-            
-        
-##IF on FTP DEV + DEPL all is ONE------------------------------------------------------------------------------------------------------        
-        else
-            @debu5g = true
-            
-            @csvFileLocation =  './FromFTP'
-            customers = CSV.read(@csvFileLocation.chomp("/*"))
-            
-            CSV.foreach(@csvFileLocation.chomp("/*")) do |row1|
-                @csvColumn1 =  row1[0].inspect.gsub!('"', '') #+  @csvRow1.inspect 
-                @csvColumn2 =  row1[1].inspect.gsub!('"', '') 
-                @csvColumn3 =  row1[2].inspect.gsub!('"', '') 
-                @csvColumn4 =  row1[3].inspect.gsub!('"', '') 
-                @csvColumn5 =  row1[4].inspect.gsub!('"', '') 
-                @csvColumn6 =  row1[5].inspect.gsub!('"', '')  
-                @csvColumn7 =  row1[6].inspect.gsub!('"', '')  
-                @csvColumn8 =  row1[7].inspect.gsub!('"', '')  
-                @csvColumn9 =  row1[8].inspect.gsub!('"', '')  
-                @csvColumn10 =  row1[9].inspect.gsub!('"', '')  
-                @csvColumn11 =  row1[10].inspect.gsub!('"', '')  
-                @csvColumn12 =  row1[11].inspect.gsub!('"', '')  
-                @csvColumn13 =  row1[12].inspect.gsub!('"', '')  
-                @csvColumn14 =  row1[13].inspect.gsub!('"', '')  
-                @csvColumn24 =  row1[23].inspect.gsub!('"', '')  
-                @csvColumn25 =  row1[24].inspect.gsub!('"', '')  
-                @csvColumn26 =  row1[25].inspect.gsub!('"', '')  
-                @csvColumn27 =  row1[26].inspect.gsub!('"', '') 
-                @csvColumn30 =  row1[29].inspect.gsub!('"', '')  
-                @csvColumn31 =  row1[30].inspect.gsub!('"', '')  
-                @csvColumn32 =  row1[31].inspect.gsub!('"', '')  
-            end
-            
-            
-        end
-        
-        
-#________________________________________________________________________________________________    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    #________________________________________________________________________________________________    
 
 #________________________________________________________________________________________________ 
 #back to the universal code for all the ifs        
@@ -642,7 +610,7 @@ class WelcomeController < ApplicationController
                 
                 @labelsArray2.push(@labelURI)
                 ###@labelsArrayDB = @labelsArrayDB +" "+ @labelURI
-                ###@labelsArrayDB =  @labelURI +'~'+ @labelURI
+                #@labelsArrayDB =  @labelURI +'~'+ @labelURI
                  ### @labelsArrayDB = @labelsArray2.map(&:inspect).join('') 
                  
             
@@ -689,6 +657,49 @@ class WelcomeController < ApplicationController
         cookies[:print] = "false" 
          
         @debug13 = true
+                end
+                
+            end
+                  
+         
+            
+        
+##IF on FTP DEV + DEPL all is ONE------------------------------------------------------------------------------------------------------        
+        else
+            @debu5g = true
+            
+            @csvFileLocation =  './FromFTP'
+            customers = CSV.read(@csvFileLocation.chomp("/*"))
+            
+            CSV.foreach(@csvFileLocation.chomp("/*")) do |row1|
+                @csvColumn1 =  row1[0].inspect.gsub!('"', '') #+  @csvRow1.inspect 
+                @csvColumn2 =  row1[1].inspect.gsub!('"', '') 
+                @csvColumn3 =  row1[2].inspect.gsub!('"', '') 
+                @csvColumn4 =  row1[3].inspect.gsub!('"', '') 
+                @csvColumn5 =  row1[4].inspect.gsub!('"', '') 
+                @csvColumn6 =  row1[5].inspect.gsub!('"', '')  
+                @csvColumn7 =  row1[6].inspect.gsub!('"', '')  
+                @csvColumn8 =  row1[7].inspect.gsub!('"', '')  
+                @csvColumn9 =  row1[8].inspect.gsub!('"', '')  
+                @csvColumn10 =  row1[9].inspect.gsub!('"', '')  
+                @csvColumn11 =  row1[10].inspect.gsub!('"', '')  
+                @csvColumn12 =  row1[11].inspect.gsub!('"', '')  
+                @csvColumn13 =  row1[12].inspect.gsub!('"', '')  
+                @csvColumn14 =  row1[13].inspect.gsub!('"', '')  
+                @csvColumn24 =  row1[23].inspect.gsub!('"', '')  
+                @csvColumn25 =  row1[24].inspect.gsub!('"', '')  
+                @csvColumn26 =  row1[25].inspect.gsub!('"', '')  
+                @csvColumn27 =  row1[26].inspect.gsub!('"', '') 
+                @csvColumn30 =  row1[29].inspect.gsub!('"', '')  
+                @csvColumn31 =  row1[30].inspect.gsub!('"', '')  
+                @csvColumn32 =  row1[31].inspect.gsub!('"', '')  
+            end
+            
+            
+        end
+        
+        
+
         
            
 
