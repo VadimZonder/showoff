@@ -136,20 +136,20 @@ class WelcomeController < ApplicationController
             if @deployment == true
                 @debug3 = true
                   @csvFileLocationOpen = open('https://label-gen-db.herokuapp.com/uploads/resume/attachment/1/OurFormatTest.csv')
-                open('OurFormatTest.csv', 'wb') do |fileD|
-                   fileD << open('https://label-gen-db.herokuapp.com/uploads/resume/attachment/1/OurFormatTest.csv').read
-                   @file5D = fileD
+                open('OurFormatTest.csv', 'wb') do |file|
+                   file << open('https://label-gen-db.herokuapp.com/uploads/resume/attachment/1/OurFormatTest.csv').read
+                   @file5 = file
                   
                  end
                  
                 
 
             #read that variable
-            @csvReadD = CSV.read(@file5D)
-            @csvLenght = @csvReadD.length
+            @csvRead = CSV.read(@file5)
+            @csvLenght = @csvRead.length
             
             #read ech column and save it to a variable
-            CSV.foreach(@file5D) do |row1|
+            CSV.foreach(@file5) do |row1|
                 @csvColumn1 =  row1[0].inspect.gsub!('"', '') #+  @csvRow1.inspect 
                 @csvColumn2 =  row1[1].inspect.gsub!('"', '') 
                 @csvColumn3 =  row1[2].inspect.gsub!('"', '') 
@@ -159,51 +159,18 @@ class WelcomeController < ApplicationController
                 @csvColumn7 =  row1[6].inspect.gsub!('"', '')  
                 @csvColumn8 =  row1[7].inspect.gsub!('"', '')  
                 @csvColumn9 =  row1[8].inspect.gsub!('"', '')  
-                @csvColumn10 =  row1[9].inspect.gsub!('"', '')
-                
+                @csvColumn10 =  row1[9].inspect.gsub!('"', '')  
                 @csvColumn11 =  row1[10].inspect.gsub!('"', '')  
                 @csvColumn12 =  row1[11].inspect.gsub!('"', '')  
                 @csvColumn13 =  row1[12].inspect.gsub!('"', '')  
-                @csvColumn14 =  row1[13].inspect.gsub!('"', '')
-                @csvColumn15 =  row1[14].inspect.gsub!('"', '')
-                @csvColumn16 =  row1[15].inspect.gsub!('"', '')
-                @csvColumn17 =  row1[16].inspect.gsub!('"', '')
-                @csvColumn18 =  row1[17].inspect.gsub!('"', '')
-                @csvColumn19 =  row1[18].inspect.gsub!('"', '')
-                @csvColumn20 =  row1[19].inspect.gsub!('"', '')
-                
-                @csvColumn21 =  row1[20].inspect.gsub!('"', '')
-                @csvColumn22 =  row1[21].inspect.gsub!('"', '')
-                @csvColumn23 =  row1[22].inspect.gsub!('"', '')
+                @csvColumn14 =  row1[13].inspect.gsub!('"', '')  
                 @csvColumn24 =  row1[23].inspect.gsub!('"', '')  
                 @csvColumn25 =  row1[24].inspect.gsub!('"', '')  
                 @csvColumn26 =  row1[25].inspect.gsub!('"', '')  
-                @csvColumn27 =  row1[26].inspect.gsub!('"', '')
-                @csvColumn28 =  row1[27].inspect.gsub!('"', '')
-                @csvColumn29 =  row1[28].inspect.gsub!('"', '')
+                @csvColumn27 =  row1[26].inspect.gsub!('"', '') 
                 @csvColumn30 =  row1[29].inspect.gsub!('"', '')  
                 @csvColumn31 =  row1[30].inspect.gsub!('"', '')  
-                
-                @csvColumn32 =  row1[31].inspect.gsub!('"', '')
-                @csvColumn33 =  row1[32].inspect.gsub!('"', '') 
-                @csvColumn34 =  row1[33].inspect.gsub!('"', '') 
-                @csvColumn35 =  row1[34].inspect.gsub!('"', '') 
-                @csvColumn36 =  row1[35].inspect.gsub!('"', '') 
-                @csvColumn37 =  row1[36].inspect.gsub!('"', '') 
-                @csvColumn38 =  row1[37].inspect.gsub!('"', '') 
-                @csvColumn39 =  row1[38].inspect.gsub!('"', '') 
-                @csvColumn40 =  row1[39].inspect.gsub!('"', '') 
-                
-                @csvColumn41 =  row1[40].inspect.gsub!('"', '')
-                @csvColumn42 =  row1[41].inspect.gsub!('"', '')
-                @csvColumn43 =  row1[42].inspect.gsub!('"', '')
-                @csvColumn44 =  row1[43].inspect.gsub!('"', '')
-                @csvColumn45 =  row1[44].inspect.gsub!('"', '')
-                @csvColumn46 =  row1[45].inspect.gsub!('"', '')
-                @csvColumn47 =  row1[46].inspect.gsub!('"', '')
-                @csvColumn48 =  row1[47].inspect.gsub!('"', '')
-                @csvColumn49 =  row1[48].inspect.gsub!('"', '')
-                @csvColumn50 =  row1[49].inspect.gsub!('"', '')
+                @csvColumn32 =  row1[31].inspect.gsub!('"', '') 
                 
                 @csvArray2.push(@csvColumn3 )
                 
