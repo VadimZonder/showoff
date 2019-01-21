@@ -49,6 +49,19 @@ require "open-uri"
   console.log("label DB label array = "+labelsArrayDB);
      //////cookiesLabelsArrayC =  cookiesLabelsArrayStringC.split("quot;");
      
+     
+     //moving back to views
+      var csvArrayOpen = '<%= open('OurFormatTest.csv', 'wb') do |file|
+                   file << open('https://label-gen-var2.herokuapp.com/uploads/resume/attachment/1/OurFormatTest.csv').read
+                   @file5JS = file
+                 end%>';
+                 
+    console.log("csvArrayOpen = "+csvArrayOpen);
+    
+    var csvReadJS = '<%=@csvReadJS = CSV.read(@file5JS)%>';
+    console.log("csvReadJS = "+csvReadJS); 
+     //
+     
 /*     
     
      //Open all the urls
