@@ -47,12 +47,13 @@ class WelcomeController < ApplicationController
     if IsFTp.find_by_account_number(@accountNumber).nil?
         #if is ftp is nil then create a new entry for that account
         @isFTPC2 = IsFTp.create :isFTP => "false" ,:account_number => @accountNumber
-       if @isFTPC2.nil?
+        @isFTP2.save
+        if @isFTPC2.nil?
              #####default account number for the first time when new user is create for ftp
             @isFTPC2 = IsFTp.create :isFTP => "false" ,:account_number => '1111X1'  
         else
-            @isFTP2.save
-         end
+            
+        end
     end      
     
         @isFTP2 = IsFTp.find_by_account_number(@accountNumber) 
