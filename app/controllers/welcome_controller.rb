@@ -130,11 +130,14 @@ class WelcomeController < ApplicationController
             ###CHANGE LATER
             if @deployment == true
                 @debug3 = true
-                  @csvFileLocationOpen = open('https://label-gen-var.herokuapp.com/uploads/resume/attachment/1/OurFormatTest.csv')
+                  @csvFileLocationOpen = open('https://label-gen-db.herokuapp.com/uploads/resume/attachment/1/OurFormatTest.csv')
                 open('OurFormatTest.csv', 'wb') do |file|
-                   file << open('https://label-gen-var.herokuapp.com/uploads/resume/attachment/1/OurFormatTest.csv').read
+                   file << open('https://label-gen-db.herokuapp.com/uploads/resume/attachment/1/OurFormatTest.csv').read
                    @file5 = file
+                  
                  end
+                 
+                
 
             #read that variable
             @csvRead = CSV.read(@file5)
@@ -602,8 +605,7 @@ class WelcomeController < ApplicationController
             
             end
                  
-         @debug12 = true 
-         @file5.close()
+         @debug12 = true      
         ## updateing urls here will not trigger autoprint on refresh of the home page
         #######rmakes sure that label wont be generated on the reload
 =begin        
@@ -1067,20 +1069,7 @@ class WelcomeController < ApplicationController
                 ##@labelsArrayDB =  @labelURI +'~'+ @labelURI
                  ### @labelsArrayDB = @labelsArray2.map(&:inspect).join('') 
                          ## updateing urls here will not trigger autoprint on refresh of the home page
-=begin                         
-        #######rmakes sure that label wont be generated on the reload
-    if Url.find_by_account_number(@accountNumber).nil?
-        #if is URLs is nil then create a new entry for that account
-        @newURLs = Url.create :account_number => @accountNumber, :urls => @labelsArray2
-        @newURLs.save
-        
-    else
-        #if urls account already exist update with the latest urls
-        @newURLs = Url.find_by_account_number(@accountNumber)
-        @newURLs.update(urls: @labelsArray2)
-        
-    end 
-=end    
+   
             
                 
                 #######cookies[:cookeslabelsArray2] = cookies[:cookeslabelsArray2] +'~'+ @labelURI
@@ -1122,13 +1111,26 @@ class WelcomeController < ApplicationController
             end
                  
          @debug12 = true      
-@file5.close()
+
       
         end
         
         
         
+                         
+        #######rmakes sure that label wont be generated on the reload
+    if Url.find_by_account_number(@accountNumber).nil?
+        #if is URLs is nil then create a new entry for that account
+        @newURLs = Url.create :account_number => @accountNumber, :urls => @labelsArray2
+        @newURLs.save
         
+    else
+        #if urls account already exist update with the latest urls
+        @newURLs = Url.find_by_account_number(@accountNumber)
+        @newURLs.update(urls: @labelsArray2)
+        
+    end 
+       
         
         
         
