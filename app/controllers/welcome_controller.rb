@@ -59,6 +59,7 @@ class WelcomeController < ApplicationController
     
         #__________________________________________________________________
     #need this for initial setup - if no URL record with this account number then create one and save
+    #I have this code in view becaue here it does not initiate before the code in views hence an errror
     if Url.find_by_account_number(@accountNumber).nil?
         #if is urls is nil then create a new entry for that account
         @urlsDB = Url.create :account_number => @accountNumber, :urls => "no urls yet = default"
