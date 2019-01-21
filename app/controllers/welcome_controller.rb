@@ -128,7 +128,7 @@ class WelcomeController < ApplicationController
         if  @isFTP2.isFTP == false                    ############ORIGINAL LINE  isFtp.isFTP == false %>      
             #if on DEVELOPMENT LOCAL-----------------------------------------------
             ###CHANGE LATER
-            if @deployment == true
+            if @deployment == false
                 @debug3 = true
                   @csvFileLocationOpen = open('https://label-gen-var2.herokuapp.com/uploads/resume/attachment/1/OurFormatTest.csv')
                 open('OurFormatTest.csv', 'wb') do |file|
