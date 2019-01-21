@@ -1,5 +1,5 @@
 Rails.application.configure do
-  config.action_mailer.default_url_options = { host: 'https://label-gen-db.herokuapp.com', port: 8080  }
+  config.action_mailer.default_url_options = { host: 'https://api-to-labels-base-vadimmalakhovski.c9users.io', port: 8080  }
   # Settings specified here will take precedence over those in config/application.rb.
 
   # In the development environment your application's code is reloaded ons
@@ -12,10 +12,9 @@ Rails.application.configure do
 
   # Show full error reports.
   config.consider_all_requests_local = true
-
+#config.action_controller.perform_caching = true
   # Enable/disable caching. By default caching is disabled.
   # Run rails dev:cache to toggle caching.
-  #config.action_controller.perform_caching = true
   if Rails.root.join('tmp', 'caching-dev.txt').exist?
     config.action_controller.perform_caching = true
 
