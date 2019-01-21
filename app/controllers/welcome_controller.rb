@@ -130,9 +130,9 @@ class WelcomeController < ApplicationController
             ###CHANGE LATER
             if @deployment == true
                 @debug3 = true
-                  @csvFileLocationOpen = open('https://label-gen-db2.herokuapp.com/uploads/resume/attachment/1/OurFormatTest.csv')
+                  @csvFileLocationOpen = open('https://label-gen-var2.herokuapp.com/uploads/resume/attachment/1/OurFormatTest.csv')
                 open('OurFormatTest.csv', 'wb') do |file|
-                   file << open('https://label-gen-db2.herokuapp.com/uploads/resume/attachment/1/OurFormatTest.csv').read
+                   file << open('https://label-gen-var2.herokuapp.com/uploads/resume/attachment/1/OurFormatTest.csv').read
                    @file5 = file
                    
                  end
