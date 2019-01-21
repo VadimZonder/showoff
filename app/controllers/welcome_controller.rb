@@ -48,12 +48,6 @@ class WelcomeController < ApplicationController
         #if is ftp is nil then create a new entry for that account
         @isFTPC2 = IsFTp.create :isFTP => "false" ,:account_number => @accountNumber
         @isFTP2.save
-        if @isFTPC2.nil?
-             #####default account number for the first time when new user is create for ftp
-            @isFTPC2 = IsFTp.create :isFTP => "false" ,:account_number => '1111X1'  
-        else
-            
-        end
     end      
     
         @isFTP2 = IsFTp.find_by_account_number(@accountNumber) 
@@ -61,6 +55,15 @@ class WelcomeController < ApplicationController
     ### or created whn signup button is clicked
     ###first get the data passed from sign up
     ### @accountNumberDB = User.find_by_account_number(@accountNumber)
+    
+    
+        #__________________________________________________________________
+    #need this for initial setup - if no URL record with this account number then create one and save
+    if Url.find_by_account_number(@accountNumber).nil?
+        #if is urls is nil then create a new entry for that account
+        @urlsDB = Url.create :account_number => @accountNumber, :urls => "no urls yet = default"
+        @urlsDB.save
+    end 
     
 
 ##_______________________________________________________________________________________________________IF SIGNED IN    
