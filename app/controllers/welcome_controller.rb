@@ -1277,6 +1277,7 @@ class WelcomeController < ApplicationController
          
         @debug13 = true
         
+        @labelsArray2= "back to empty"
            
 
     
