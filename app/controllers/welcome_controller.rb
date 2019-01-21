@@ -128,7 +128,7 @@ class WelcomeController < ApplicationController
         if  @isFTP2.isFTP == false                    ############ORIGINAL LINE  isFtp.isFTP == false %>      
             #if on DEVELOPMENT LOCAL-----------------------------------------------
             ###CHANGE LATER
-            if @deployment == false
+            if @deployment == true
                 @debug3 = true
                   @csvFileLocationOpen = open('https://label-gen-var2.herokuapp.com/uploads/resume/attachment/1/OurFormatTest.csv')
                 open('OurFormatTest.csv', 'wb') do |file|
@@ -631,12 +631,10 @@ class WelcomeController < ApplicationController
             else
                 @debug4 = true
                 #get the 1st and the only file location where the file is stored
-                @csvFileLocationOpen = open('https://api-to-labels-base-vadimmalakhovski.c9users.io/uploads/resume/attachment/1/OurFormatTest.csv')
-                #open each line and save it to a variable
+                  @csvFileLocationOpen = open('https://label-gen-var2.herokuapp.com/uploads/resume/attachment/1/OurFormatTest.csv')
                 open('OurFormatTest.csv', 'wb') do |file|
-                    file << open('https://api-to-labels-base-vadimmalakhovski.c9users.io/uploads/resume/attachment/1/OurFormatTest.csv').read
-                    #Resume.last.attachment.to_s
-                    @file5 = file
+                   file << open('https://label-gen-var2.herokuapp.com/uploads/resume/attachment/1/OurFormatTest.csv').read
+                   @file5 = file
                 end
                  #read that variable
                  @csvRead = CSV.read(@file5)
