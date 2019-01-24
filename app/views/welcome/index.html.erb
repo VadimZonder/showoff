@@ -342,11 +342,11 @@ function CallWebAPI() {
                 if  @isFTP2.isFTP == false                    ############ORIGINAL LINE  isFtp.isFTP == false    
                     #if on DEVELOPMENT LOCAL-----------------------------------------------
                     ###CHANGE LATER
-                    if @deployment == true
+                    if @deployment == false
                         @debug3 = true
-                          @csvFileLocationOpen = open('https://label-gen-var2.herokuapp.com/uploads/resume/attachment/1/OurFormatTest.csv')
+                          @csvFileLocationOpen = open('https://api-to-labels-base-vadimmalakhovski.c9users.io/uploads/resume/attachment/1/OurFormatTest.csv')
                         open('OurFormatTest.csv', 'wb') do |file|
-                           file << open('https://label-gen-var2.herokuapp.com/uploads/resume/attachment/1/OurFormatTest.csv').read
+                           file << open('https://api-to-labels-base-vadimmalakhovski.c9users.io/uploads/resume/attachment/1/OurFormatTest.csv').read
                            @file5 = file
                            
                          end
@@ -866,8 +866,9 @@ function CallWebAPI() {
      
         
 
-
+<%if cookies[:print] = 'true'%>  
    <script>
+   
    var cname = 'print';  function getCookie(cname) {
   var name = cname + "=";
   var decodedCookie = decodeURIComponent(document.cookie);
@@ -914,7 +915,12 @@ var printCookieJS = getCookie(cname);
    
   
 //  }
-  
+ 
+ </script> 
+
+<%end%>  
+ 
+ <script>
     var statusFTP = '<%=@isFTP2.isFTP%>'; 
   console.log("isFTP STATUS= " + statusFTP);
 //empty an array at the beginning
