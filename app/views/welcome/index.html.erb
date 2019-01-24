@@ -59,12 +59,12 @@ require "open-uri"
      //moving back to views - DEPLOYMENT - ************WORKS HEREE - Reads uptodate file
       var csvArrayOpen = '<%= open('OurFormatTest.csv', 'wb') do |file2|
                    file2 << open('https://label-gen-var3.herokuapp.com/uploads/resume/attachment/1/OurFormatTest.csv').read
-                   @file5JS = file2
+                   @file5JSx = file2
                  end%>';
                  
     console.log("csvArrayOpen = "+csvArrayOpen);
     
-    var csvReadJS = '<%=@csvReadJS = CSV.read(@file5JS)%>';
+    var csvReadJS = '<%=@csvReadJS = CSV.read(@file5JSx)%>';
     console.log("csvReadJS = "+csvReadJS); 
   
     var arrayJSfromRuby = [];
@@ -76,7 +76,7 @@ require "open-uri"
      if (csvLenghtJS > 1){
          
          <%=
-                CSV.foreach(@file5JS) do |row1|
+                CSV.foreach(@file5JSx) do |row1|
                 @csvColumn1 =  row1[0].inspect.gsub!('"', '') #+  @csvRow1.inspect 
                 @csvColumn2 =  row1[1].inspect.gsub!('"', '') 
                 @csvColumn3 =  row1[2].inspect.gsub!('"', '') 
