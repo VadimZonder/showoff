@@ -108,7 +108,7 @@ class WelcomeController < ApplicationController
         @token = @email[16..-8] 
         
         @debug2 = true
-        
+=begin        
         #Read from FTP__________________________________________
         ftp = Net::FTP::new("ftp.dpd.ie")
         ftp.login("3L4", "3l4123")
@@ -393,7 +393,9 @@ class WelcomeController < ApplicationController
           af = 32
 =end
 #Mappings_____________________________________________________________END
-          
+
+=begin
+###          
           
         ##need to get the prin value from cookies to generate labels onclick.
         @debug8 = true
@@ -597,6 +599,7 @@ class WelcomeController < ApplicationController
 =end
                 
                 ##################
+=begin                
             else
                 @debug11 = true
                 @print = false
@@ -620,7 +623,10 @@ class WelcomeController < ApplicationController
         @newURLs.update(urls: @labelsArray2)
         
     end  
-=end      
+=end
+
+=begin
+###
         end
             end
             
@@ -897,7 +903,9 @@ class WelcomeController < ApplicationController
           af = 32
 =end
 #Mappings_____________________________________________________________END
-          
+
+=begin
+###
           
         ##need to get the prin value from cookies to generate labels onclick.
         @debug8 = true
@@ -1086,7 +1094,7 @@ class WelcomeController < ApplicationController
             
                 
                 #######cookies[:cookeslabelsArray2] = cookies[:cookeslabelsArray2] +'~'+ @labelURI
-                @debug10 = true
+                ###@debug10 = true
                 
 =begin
 ## updateing urls here will not trigger autoprint on refresh of the home page
@@ -1115,6 +1123,8 @@ class WelcomeController < ApplicationController
 =end
                 
                ##################
+=begin
+###
             else
                 @debug11 = true
                 @print = false
@@ -1200,18 +1210,18 @@ class WelcomeController < ApplicationController
            
 
     
-
+=end     
     end 
     
 
 
         
 
-    
+
         
  
    
   end
   
-  
+
 end
