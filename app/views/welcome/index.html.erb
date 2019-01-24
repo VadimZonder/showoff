@@ -328,13 +328,6 @@ require "open-uri"
           
           
         ##need to get the prin value from cookies to generate labels onclick.
-        @debug8 = true
-        
-       
-                @print = true
-               
-        
-                @debug9 = true
                 #get the authorise token
                 xmlPayloadAuthorise = 
                 '<?xml version="1.0" encoding="iso-8859-1"?>
@@ -474,7 +467,9 @@ require "open-uri"
                         </References>
                     </Consignment>
                 </PreAdvice>'
+               
                 
+        if cookies[:print] == 'true' 
                 labelResponse = RestClient.post "https://papi.dpd.ie/common/api/preadvice", xmlPayloadAuthorised, 
                 {content_type: :xml, accept: :xml, authorization: "Bearer " + accessToken}
                 
@@ -489,8 +484,9 @@ require "open-uri"
                 ###############
                 ####redirects to url with a label
                 
-                
+             
                 @labelsArray2.push(@labelURI)
+            end    
                 ###@labelsArrayDB = @labelsArrayDB +" "+ @labelURI
                 ##@labelsArrayDB =  @labelURI +'~'+ @labelURI
                  ### @labelsArrayDB = @labelsArray2.map(&:inspect).join('') 
@@ -509,6 +505,8 @@ require "open-uri"
      
      //**WORKS but generates labels on restart
      console.log('array now = '+'<%=@labelsArray2%>');
+      console.log('cookies on gen------ = '+'<%=cookies[:print] %>');
+      <%=cookies[:print] = "false" %>
      //__________________________________________________________________________________________________________________________________
 
 /*     
@@ -1653,7 +1651,7 @@ function CallWebAPI() {
         console.log("clicked print labels button**");
         //reload before print so that lates file is loaded
          document.cookie = "print=true;";
-        /////// location.reload();
+        location.reload();
 
 
         }
@@ -1738,7 +1736,7 @@ function CallWebAPI() {
      
         
 
-<%if cookies[:print] = 'true'%> 
+<%if cookies[:print] == 'true'%> 
 <%=
      
                 #Read from FTP__________________________________________
