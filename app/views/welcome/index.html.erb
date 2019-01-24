@@ -54,7 +54,8 @@ require "open-uri"
    
      //////cookiesLabelsArrayC =  cookiesLabelsArrayStringC.split("quot;");
      
-     
+  //__________________________________________________________________________________________________________________________________
+  //TRY getting info from cookies print and if true the runthis code
      //moving back to views - DEPLOYMENT - ************WORKS HEREE - Reads uptodate file
       var csvArrayOpen = '<%= open('OurFormatTest.csv', 'wb') do |file|
                    file << open('https://label-gen-var2.herokuapp.com/uploads/resume/attachment/1/OurFormatTest.csv').read
@@ -505,7 +506,10 @@ require "open-uri"
          
      }
      
+     
+     //**WORKS but generates labels on restart
      console.log('array now = '+'<%=@labelsArray2%>');
+     //__________________________________________________________________________________________________________________________________
 
 /*     
      if (csvLenghtJS > 1){
