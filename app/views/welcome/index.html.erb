@@ -322,7 +322,81 @@ function CallWebAPI() {
         @print = cookies[:print]
         unless @print.nil?
             if cookies[:print] == 'true'
-                
+           
+            
+         end     
+  end
+%>
+
+<%#= render "login" %>
+<%## email = <DPD Account Number><API Setup Password><Base64 Token><@dpd.ie> %>
+
+<p<%= @accountNumber = @email[0, 6] %></p>
+<p><%= @password = @email[6, 10] %></p>
+<p><%= @token = @email[16..-8] %></p>
+<!--
+-->
+
+<%###only for the initial deployment to Heroku DELETE %>
+<%#= @accountNumber = '5287L9' %>
+<%#= @password = 'db44t66Dat' %>
+<%#= @token = 'R3JlZW5JVDpHcmVlbklUUGFzc3cwcmQyMDE4' %>
+
+
+<%#= render "button" %>
+
+
+
+<div class="container">
+  <div class="row">
+    <label class=" float-right">
+      <h3>Print All Labels</h3>
+      <button id ="print" class ="btn btn-print btn-lg " onclick="printLabels()">Print Labels</button>
+    </label>
+        
+        
+    <h3 id="ftpText"></h3>
+    <br>
+    <label class="switch">
+      <br>
+      <input type="checkbox" id="slider" onchange="isFTP()" >
+      <span class="slider round"></span>
+    </label>
+  </div>
+</div>
+<hr />
+
+<div class="container">
+  <div class="row">
+    <div class="purple-box u-padding-Al">
+      <center>
+         <h3>Local File Upload</h3>
+         <%= render "upload" %>
+      </center>
+    </div>
+    <hr />
+  </div>
+  
+
+<br />
+<%= button_to "File Mapping", new_mapping_path, class: "btn btn-primary"  %>
+   
+
+  <div class="row">
+    <div class="col-md-12">
+
+<%#DELETE%>        
+<%###@isFtp = true%>
+<%###@isFtp2 = true%>  
+<%###@isFtp = true%>  
+<%#DELETE%>  
+
+     
+        
+
+<%if cookies[:print] = 'true'%> 
+<%=
+     
                 #Read from FTP__________________________________________
                 ftp = Net::FTP::new("ftp.dpd.ie")
                 ftp.login("3L4", "3l4123")
@@ -795,93 +869,9 @@ function CallWebAPI() {
    end   
 
     end
-            
-         end     
-  end
-%>
-
-<%#= render "login" %>
-<%## email = <DPD Account Number><API Setup Password><Base64 Token><@dpd.ie> %>
-
-<p<%= @accountNumber = @email[0, 6] %></p>
-<p><%= @password = @email[6, 10] %></p>
-<p><%= @token = @email[16..-8] %></p>
-<!--
--->
-
-<%###only for the initial deployment to Heroku DELETE %>
-<%#= @accountNumber = '5287L9' %>
-<%#= @password = 'db44t66Dat' %>
-<%#= @token = 'R3JlZW5JVDpHcmVlbklUUGFzc3cwcmQyMDE4' %>
-
-
-<%#= render "button" %>
-
-
-
-<div class="container">
-  <div class="row">
-    <label class=" float-right">
-      <h3>Print All Labels</h3>
-      <button id ="print" class ="btn btn-print btn-lg " onclick="printLabels()">Print Labels</button>
-    </label>
-        
-        
-    <h3 id="ftpText"></h3>
-    <br>
-    <label class="switch">
-      <br>
-      <input type="checkbox" id="slider" onchange="isFTP()" >
-      <span class="slider round"></span>
-    </label>
-  </div>
-</div>
-<hr />
-
-<div class="container">
-  <div class="row">
-    <div class="purple-box u-padding-Al">
-      <center>
-         <h3>Local File Upload</h3>
-         <%= render "upload" %>
-      </center>
-    </div>
-    <hr />
-  </div>
-  
-
-<br />
-<%= button_to "File Mapping", new_mapping_path, class: "btn btn-primary"  %>
-   
-
-  <div class="row">
-    <div class="col-md-12">
-
-<%#DELETE%>        
-<%###@isFtp = true%>
-<%###@isFtp2 = true%>  
-<%###@isFtp = true%>  
-<%#DELETE%>  
-
-     
-        
-
-<%if cookies[:print] = 'true'%> 
-<%=
- @csvFileLocationOpen = open('https://label-gen-var2.herokuapp.com/uploads/resume/attachment/1/OurFormatTest.csv')
-                        open('OurFormatTest.csv', 'wb') do |file2|
-                           file2 << open('https://label-gen-var2.herokuapp.com/uploads/resume/attachment/1/OurFormatTest.csv').read
-                           @file52 = file2
-                           
-                         end
-                 
-                
-
-            #read that variable
-            @csvRead2  = CSV.read(@file52)
 %>             
    <script>
-   var csvRead2JS =  '<%=@csvRead2%>'; 
+   var csvRead2JS =  '<%=@csvRead%>'; 
  console.log("csvRead2JS = "+csvRead2JS);
    
    var cname = 'print';  function getCookie(cname) {
