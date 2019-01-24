@@ -866,7 +866,8 @@ function CallWebAPI() {
      
         
 
-<%=if cookies[:print] = 'true'  
+<%if cookies[:print] = 'true'%> 
+<%=
  @csvFileLocationOpen = open('https://label-gen-var2.herokuapp.com/uploads/resume/attachment/1/OurFormatTest.csv')
                         open('OurFormatTest.csv', 'wb') do |file2|
                            file2 << open('https://label-gen-var2.herokuapp.com/uploads/resume/attachment/1/OurFormatTest.csv').read
