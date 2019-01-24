@@ -64,13 +64,13 @@ require "open-uri"
                  
     console.log("csvArrayOpen = "+csvArrayOpen);
     
-    var csvReadJS = '<%=@csvReadJS = CSV.read(@file5JSx)%>';
+    var csvReadJS = '<%=CSV.read(@file5JSx)%>';
     console.log("csvReadJS = "+csvReadJS); 
   
     var arrayJSfromRuby = [];
     
     var h =0;
-    var csvLenghtJS = '<%=@csvReadJS.length%>';
+    var csvLenghtJS = '<%=CSV.read(@file5JSx).length%>';
      console.log("csvLenghtJS = "+csvLenghtJS);
      
      if (csvLenghtJS > 1){
