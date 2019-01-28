@@ -3,6 +3,7 @@ require 'csv'
 require 'net/ftp'
 require 'tempfile'
 require "open-uri"
+require 'rubygems'
 %>
 
 <% if user_signed_in?  %>
@@ -57,6 +58,15 @@ require "open-uri"
   //__________________________________________________________________________________________________________________________________
   //TRY getting info from cookies print and if true the runthis code
      //moving back to views - DEPLOYMENT - ************WORKS HEREE - Reads uptodate file
+      //  var csvArrayOpen = '<%#= open('OurFormatTest.csv', 'r')%>';  
+       // csvArrayOpen = '<%#= @file5JSx = open('https://label-gen-var3.herokuapp.com/uploads/resume/attachment/1/OurFormatTest.csv').read%>';
+                 
+    //console.log("csvArrayOpen = "+csvArrayOpen);
+    
+    //var csvReadJS = '<%#=CSV.read(@file5JSx)%>';
+    
+    
+   
       var csvArrayOpen = '<%= open('OurFormatTest.csv', 'wb') do |file2|
                    file2 << open('https://label-gen-var3.herokuapp.com/uploads/resume/attachment/1/OurFormatTest.csv').read
                    @file5JSx = file2
