@@ -1,3 +1,4 @@
+=begin
 class WelcomeController < ApplicationController
     before_action :authenticate_user!
     
@@ -399,7 +400,8 @@ class WelcomeController < ApplicationController
 =end
 #Mappings_____________________________________________________________END
           
-          
+=begin
+###          
         ##need to get the prin value from cookies to generate labels onclick.
         @debug8 = true
         
@@ -602,6 +604,8 @@ class WelcomeController < ApplicationController
 =end
                 
                 ##################
+=begin
+###                  
             else
                 @debug11 = true
                 @print = false
@@ -625,7 +629,10 @@ class WelcomeController < ApplicationController
         @newURLs.update(urls: @labelsArray2)
         
     end  
-=end      
+=end
+
+=begin
+###  
         end
             end
             
@@ -903,7 +910,8 @@ class WelcomeController < ApplicationController
 =end
 #Mappings_____________________________________________________________END
           
-          
+=begin
+###            
         ##need to get the prin value from cookies to generate labels onclick.
         @debug8 = true
         
@@ -1107,6 +1115,8 @@ class WelcomeController < ApplicationController
 =end
                 
                ##################
+=begin
+###  
             else
                 @debug11 = true
                 @print = false
@@ -1121,7 +1131,8 @@ class WelcomeController < ApplicationController
         end
         
         
-        
+=end
+###
                          
         #######rmakes sure that label wont be generated on the reload
     if Url.find_by_account_number(@accountNumber).nil?
