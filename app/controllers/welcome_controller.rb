@@ -1344,9 +1344,6 @@ class WelcomeController < ApplicationController
     
     
 
-
-        
-
     
         
  
