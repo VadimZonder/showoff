@@ -108,22 +108,154 @@ class WelcomeController < ApplicationController
         @token = @email[16..-8] 
         
         @debug2 = true
-=begin        
-        #Read from FTP__________________________________________
-        ftp = Net::FTP::new("ftp.dpd.ie")
-        ftp.login("3L4", "3l4123")
-        ftp.chdir("/users/3L4/WebAppImport")
-        ## files = ftp.list
-        ftp.passive = true
-        ##file is downloaded from ftp to a local folder name "FromFTP"
-        ftp.getbinaryfile("OurFormatEmailVadimTest.csv", "FromFTP")
-        #tgz = ftp.list("ruby-*.tar.gz").sort.last
-        #print "the latest version is ", tgz, "\n"
-        #ftp.getbinaryfile(tgz, tgz)
-        ftp.close
-        
-              
+      
+#Read from FTP__________________________________________
+        @print = cookies[:print]
+        unless @print.nil?
+            if @print == 'true' 
+
+                
+                ftp = Net::FTP::new("ftp.dpd.ie")
+                ftp.login("3L4", "3l4123")
+                ftp.chdir("/users/3L4/WebAppImport")
+                ##files = ftp.list
+                ftp.passive = true
+                #most recent
+                ##files = ftp.nlst('Our/*.*')
+               ## most_recent = files.sort_by { |filename| ftp.mtime(filename) }.last
+                files = ftp.nlst("OurFormatEmailVadimTest.csv*.csv")
+                ###maybe will need all the files in loop and append to 1 csv
+                most_recent = files.sort_by { |filename| ftp.mtime(filename) }.last
+                ##file is downloaded from ftp to a local folder name "FromFTP"
+                ftp.getbinaryfile(most_recent, "FromFTP.csv")
+                ######ftp.getbinaryfile("OurFormatEmailVadimTest.csv", "FromFTP")
+                #tgz = ftp.list("ruby-*.tar.gz").sort.last
+                #print "the latest version is ", tgz, "\n"
+                #ftp.getbinaryfile(tgz, tgz)
+                ftp.close
+                
+                
+             
+            # ##triger this onclick??   
+           @csvFileLocation =  './FromFTP.csv'
           
+           ### @customers = CSV.read(@csvFileLocation.chomp("/*")) #.chomp(',')
+           @localFileRead = File.read("FromFTP.csv")##.gsub(/,\s+\"/,',\"')
+           
+           ## @localFileRead.write(@localFileRead.gsub(/,\s+\"/,',\"'))
+            
+             ##@localFileRe.close
+             
+            ##@localFileRead = File.read("FromFTP.csv")
+            ##open('FromFTP' , 'wb') do |file|
+              ##     file << open(Rails.root.to_s+'/FromFTP').read
+              ##    @fileFTP = file
+                   
+              ##   end
+
+            #read that variable
+          ### @csvReadFTP = CSV.read('./FromFTP.csv')
+         @csvReadFTP =   CSV.read('./FromFTP.csv', encoding: "utf-8", quote_char: '|')
+        # @csvReadFTP = @csvReadFTP.chomp("")#.chomp("&quot;")
+         
+         CSV.foreach(@csvFileLocation.chomp("\*"), encoding: "utf-8", liberal_parsing: true) do |row1|
+                @csvColumn1 =  row1[0].gsub('"\\"', '').gsub!('"', '') #+  @csvRow1.inspect 
+                @csvColumn2 =  row1[1].gsub('"\\"', '').gsub!('"', '') 
+                @csvColumn3 =  row1[2].gsub('"\\"', '').gsub!('"', '') 
+                @csvColumn4 =  row1[3].gsub('"\\"', '').gsub!('"', '') 
+                @csvColumn5 =  row1[4].gsub('"\\"', '').gsub!('"', '')
+                @csvColumn6 =  row1[5].gsub('"\\"', '').gsub!('"', '')  
+                @csvColumn7 =  row1[6].gsub('"\\"', '').gsub!('"', '')  
+                @csvColumn8 =  row1[7].gsub('"\\"', '').gsub!('"', '') 
+                @csvColumn10 =  row1[9].gsub('"\\"', '').gsub!('"', '')  
+                @csvColumn11 =  row1[10].gsub('"\\"', '').gsub!('"', '')  
+                @csvColumn12 =  row1[11].gsub('"\\"', '').gsub!('"', '')  
+                @csvColumn13 =  row1[12].gsub('"\\"', '').gsub!('"', '')  
+                @csvColumn14 =  row1[13].gsub('"\\"', '').gsub!('"', '') 
+                @csvColumn24 =  row1[23].gsub('"\\"', '').gsub!('"', '')  
+                @csvColumn25 =  row1[24].gsub('"\\"', '').gsub!('"', '') 
+                @csvColumn26 =  row1[25].gsub('"\\"', '').gsub!('"', '') 
+                @csvColumn27 =  row1[26].gsub('"\\"', '').gsub!('"', '')
+                @csvColumn30 =  row1[29].gsub('"\\"', '').gsub!('"', '')  
+                @csvColumn31 =  row1[30].gsub('"\\"', '').gsub!('"', '') 
+                @csvColumn32 =  row1[31].gsub('"\\"', '').gsub!('"', '') 
+                
+                #@csvArrayFTP.push(@csvColumn3)
+                
+                
+                 @mapping_array = [@csvColumn1,  @csvColumn2,  @csvColumn3,  @csvColumn4, 
+               @csvColumn5,  @csvColumn6,  @csvColumn7,  @csvColumn8,
+               @csvColumn9,  @csvColumn10, @csvColumn11, @csvColumn12, 
+               @csvColumn13, @csvColumn14, @csvColumn15, @csvColumn16,
+               @csvColumn17, @csvColumn18, @csvColumn19, @csvColumn20,
+               @csvColumn21, @csvColumn22, @csvColumn23, @csvColumn24, 
+               @csvColumn25, @csvColumn26, @csvColumn27, @csvColumn28,  
+               @csvColumn29, @csvColumn30, @csvColumn31, @csvColumn32, 
+               @csvColumn33, @csvColumn34, @csvColumn35, @csvColumn36,
+               @csvColumn37, @csvColumn38, @csvColumn39, @csvColumn40,
+               @csvColumn41, @csvColumn42, @csvColumn43, @csvColumn44,
+               @csvColumn45, @csvColumn46, @csvColumn47, @csvColumn48, 
+               @csvColumn49, @csvColumn50]
+
+          
+           
+            end
+            
+           
+           ##@customers = CSV.read(@csvFileLocation.chomp("/*"))
+=begin          
+                CSV.foreach(@csvFileLocation.chomp("/*")) do |row1|
+                @csvColumn1 =  row1[0].inspect.gsub!('"', '') #+  @csvRow1.inspect 
+                @csvColumn2 =  row1[1].inspect.gsub!('"', '') 
+                @csvColumn3 =  row1[2].inspect.gsub!('"', '') 
+                @csvColumn4 =  row1[3].inspect.gsub!('"', '') 
+                @csvColumn5 =  row1[4].inspect.gsub!('"', '') 
+                @csvColumn6 =  row1[5].inspect.gsub!('"', '')  
+                @csvColumn7 =  row1[6].inspect.gsub!('"', '')  
+                @csvColumn8 =  row1[7].inspect.gsub!('"', '')  
+                @csvColumn9 =  row1[8].inspect.gsub!('"', '')  
+                @csvColumn10 =  row1[9].inspect.gsub!('"', '')  
+                @csvColumn11 =  row1[10].inspect.gsub!('"', '')  
+                @csvColumn12 =  row1[11].inspect.gsub!('"', '')  
+                @csvColumn13 =  row1[12].inspect.gsub!('"', '')  
+                @csvColumn14 =  row1[13].inspect.gsub!('"', '')  
+                @csvColumn24 =  row1[23].inspect.gsub!('"', '')  
+                @csvColumn25 =  row1[24].inspect.gsub!('"', '')  
+                @csvColumn26 =  row1[25].inspect.gsub!('"', '')  
+                @csvColumn27 =  row1[26].inspect.gsub!('"', '') 
+                @csvColumn30 =  row1[29].inspect.gsub!('"', '')  
+                @csvColumn31 =  row1[30].inspect.gsub!('"', '')  
+                @csvColumn32 =  row1[31].inspect.gsub!('"', '') 
+                
+                
+                
+                @csvArrayFTP.push(@csvColumn3)
+                
+                
+        @mapping_array = [@csvColumn1,  @csvColumn2,  @csvColumn3,  @csvColumn4, 
+               @csvColumn5,  @csvColumn6,  @csvColumn7,  @csvColumn8,
+               @csvColumn9,  @csvColumn10, @csvColumn11, @csvColumn12, 
+               @csvColumn13, @csvColumn14, @csvColumn15, @csvColumn16,
+               @csvColumn17, @csvColumn18, @csvColumn19, @csvColumn20,
+               @csvColumn21, @csvColumn22, @csvColumn23, @csvColumn24, 
+               @csvColumn25, @csvColumn26, @csvColumn27, @csvColumn28,  
+               @csvColumn29, @csvColumn30, @csvColumn31, @csvColumn32, 
+               @csvColumn33, @csvColumn34, @csvColumn35, @csvColumn36,
+               @csvColumn37, @csvColumn38, @csvColumn39, @csvColumn40,
+               @csvColumn41, @csvColumn42, @csvColumn43, @csvColumn44,
+               @csvColumn45, @csvColumn46, @csvColumn47, @csvColumn48, 
+               @csvColumn49, @csvColumn50]
+
+          
+            end
+=end    
+        
+        
+            end
+        end
+=begin  
+
+
         # If on LOCAL_____________________________________________________________________________________________________%>
         if  @isFTP2.isFTP == false                    ############ORIGINAL LINE  isFtp.isFTP == false %>      
             #if on DEVELOPMENT LOCAL-----------------------------------------------
@@ -393,10 +525,8 @@ class WelcomeController < ApplicationController
           af = 32
 =end
 #Mappings_____________________________________________________________END
-
-=begin
-###          
           
+=begin          
         ##need to get the prin value from cookies to generate labels onclick.
         @debug8 = true
         
@@ -597,9 +727,10 @@ class WelcomeController < ApplicationController
                     arrayCounter = arrayCounter +1
                 end   
 =end
+
+=begin
                 
                 ##################
-=begin                
             else
                 @debug11 = true
                 @print = false
@@ -625,8 +756,8 @@ class WelcomeController < ApplicationController
     end  
 =end
 
+
 =begin
-###
         end
             end
             
@@ -903,10 +1034,8 @@ class WelcomeController < ApplicationController
           af = 32
 =end
 #Mappings_____________________________________________________________END
-
-=begin
-###
           
+=begin          
         ##need to get the prin value from cookies to generate labels onclick.
         @debug8 = true
         
@@ -1090,11 +1219,13 @@ class WelcomeController < ApplicationController
         @newURLs.update(urls: @labelsArray2)
         
     end 
-=end    
+=end  
+
+=begin
             
                 
                 #######cookies[:cookeslabelsArray2] = cookies[:cookeslabelsArray2] +'~'+ @labelURI
-                ###@debug10 = true
+                @debug10 = true
                 
 =begin
 ## updateing urls here will not trigger autoprint on refresh of the home page
@@ -1123,8 +1254,7 @@ class WelcomeController < ApplicationController
 =end
                 
                ##################
-=begin
-###
+=begin               
             else
                 @debug11 = true
                 @print = false
@@ -1207,21 +1337,19 @@ class WelcomeController < ApplicationController
          
         @debug13 = true
         
-           
+=end         
 
     
-=end     
-    end 
+
+    
     
 
 
         
 
-
+    
         
  
-   
+    end   
   end
-  
-
 end
