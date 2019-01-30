@@ -87,7 +87,7 @@ tempfile = Tempfile.new(['OurFormatEmailVadimTest.csv', '.csv'], options)
 if @deployment == false
 @csvFileLocation3 = open('https://api-to-labels-base-vadimmalakhovski.c9users.io'+@resume.attachment.to_s)
 ######@csvFileLocation3 = open('https://label-gen-is-ftp.herokuapp.com'+rails_blob_path(Bulletin.last.attachment))
-open('OurFormatTest.csv', 'wb') do |file|
+open('FromFTP.csv', 'wb') do |file|
 file << open('https://api-to-labels-base-vadimmalakhovski.c9users.io'+@resume.attachment.to_s).read
  ##### file << open('https://label-gen-is-ftp.herokuapp.com'+rails_blob_path(Bulletin.last.attachment)).read
   @file = file
@@ -97,7 +97,7 @@ end
 else
  @csvFileLocation3 = open('https://label-gen-var3.herokuapp.com'+@resume.attachment.to_s)
 ######@csvFileLocation3 = open('https://label-gen-is-ftp.herokuapp.com'+rails_blob_path(Bulletin.last.attachment))
-open('OurFormatTest.csv', 'wb') do |file|
+open('FromFTP.csv', 'wb') do |file|
 file << open('https://label-gen-var3.herokuapp.com'+@resume.attachment.to_s).read
  ##### file << open('https://label-gen-is-ftp.herokuapp.com'+rails_blob_path(Bulletin.last.attachment)).read
   @file = file
