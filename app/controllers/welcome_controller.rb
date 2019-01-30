@@ -155,10 +155,10 @@ class WelcomeController < ApplicationController
 
             #read that variable
           ### @csvReadFTP = CSV.read('./FromFTP.csv')
-         @csvReadFTP =   CSV.read('./FromFTP.csv', encoding: "utf-8", quote_char: '|')
+         @csvReadFTP =   CSV.read('./FromFTP.csv', encoding: "utf-8", quote_char: '|')#.length
         # @csvReadFTP = @csvReadFTP.chomp("")#.chomp("&quot;")
          
-         CSV.foreach(@csvFileLocation.chomp("\*"), encoding: "utf-8", liberal_parsing: true) do |row1|
+         CSV.foreach(@csvFileLocation.chomp("/*"), encoding: "utf-8", liberal_parsing: true) do |row1|
                 @csvColumn1 =  row1[0].gsub('"\\"', '').gsub!('[[', '').gsub!('"', '') #+  @csvRow1.inspect 
                 @csvColumn2 =  row1[1].gsub('"\\"', '').gsub!('"', '') 
                 @csvColumn3 =  row1[2].gsub('"\\"', '').gsub!('"', '') 
@@ -492,7 +492,10 @@ class WelcomeController < ApplicationController
                 #@H8 = "N37 VK44"
                   
                  #{!@H8.nil? ? @H8 : ''}
+                 #{!@H8.nil? ? <PostCode>@H8</PostCode> : ''}
                  #<PostCode>#{!@H8.nil? ? @H8 : ''}</PostCode>
+                 @postcodeYes = "<PostCode>"+@H8+"</PostCode>"
+                 @postcode = "#{!@H8.nil? ? @postcodeYes : ''}"
                 xmlPayloadAuthorised = 
                 '<?xml version="1.0" encoding="iso-8859-1"?>
                 <PreAdvice>
@@ -520,7 +523,7 @@ class WelcomeController < ApplicationController
                             <AddressLine2>'+@E5  +'</AddressLine2>
                             <AddressLine3>'+@F6  +'</AddressLine3>
                             <AddressLine4>'+@G7 +'</AddressLine4>
-                          
+                           '+@postcode+'
                             <CountryCode>'+@I9 +'</CountryCode>
                         </DeliveryAddress>
                         <CollectionAddress>
@@ -532,7 +535,7 @@ class WelcomeController < ApplicationController
                             <AddressLine2>'+@E5  +'</AddressLine2>
                             <AddressLine3>'+@F6  +'</AddressLine3>
                             <AddressLine4>'+@G7 +'</AddressLine4>
-                            
+                          '+@postcode+'
                             <CountryCode>'+@I9 +'</CountryCode>
                         </CollectionAddress>
                         <References>
@@ -566,48 +569,9 @@ class WelcomeController < ApplicationController
                 
                 
                 @labelsArray2.push(@labelURI)
-                ###@labelsArrayDB = @labelsArrayDB +" "+ @labelURI
-                ##@labelsArrayDB =  @labelURI +'~'+ @labelURI
-                 ### @labelsArrayDB = @labelsArray2.map(&:inspect).join('') 
-                         ## updateing urls here will not trigger autoprint on refresh of the home page
-=begin                         
-        #######rmakes sure that label wont be generated on the reload
-    if Url.find_by_account_number(@accountNumber).nil?
-        #if is URLs is nil then create a new entry for that account
-        @newURLs = Url.create :account_number => @accountNumber, :urls => @labelsArray2
-        @newURLs.save
-        
-    else
-        #if urls account already exist update with the latest urls
-        @newURLs = Url.find_by_account_number(@accountNumber)
-        @newURLs.update(urls: @labelsArray2)
-        
-    end 
-=end  
-
-=begin
-            
                 
-                #######cookies[:cookeslabelsArray2] = cookies[:cookeslabelsArray2] +'~'+ @labelURI
-                @debug10 = true
-                
-=begin
-## updateing urls here will not trigger autoprint on refresh of the home page
-        #######rmakes sure that label wont be generated on the reload
-    if Url.find_by_account_number(@accountNumber).nil?
-        #if is URLs is nil then create a new entry for that account
-        @newURLs = Url.create :account_number => @accountNumber, :urls => @labelsArray2
-        @newURLs.save
-        
-    else
-        #if urls account already exist update with the latest urls
-        @newURLs = Url.find_by_account_number(@accountNumber)
-        @newURLs.update(urls: @labelsArray2)
-        ##@newURLs = Url.create :account_number => @accountNumber, :urls => @labelsArray2
-        ##@newURLs.save
-        
-    end 
-=end
+                @xmlPayload =  xmlPayloadAuthorised
+               
 
 =begin
                     arrayCounter = 0
@@ -619,21 +583,12 @@ class WelcomeController < ApplicationController
                 
                ##################
              
-            else
-             
+      else
         ###############################needed
         cookies[:print] = "false" 
          
         @print = false
         
-
-
-
-
-
-
-          
-           
             end
     
         

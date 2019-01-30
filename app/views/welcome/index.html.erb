@@ -19,14 +19,14 @@ require 'rubygems'
 <P>deployment status = <%=@deployment%></P>
 <P>server print = <%=@printServer = cookies[:print]%></P>
 <P>csv Read = <%=@csvRead%></P>
-<P>col 3 array T= <%=@col3T%></P>
+<P>localFileRead= <%=@localFileRead%></P>
 <P>labels uri = <%=@labelURI%></P>
 <P>labelsArray2 = <%=@labelsArray2%></P>
 <P>@debug2  = <%=@mapping_array %></P>
-<P>@debug3  = <%= @csvColumn9 %></P>
+<P>@ @xmlPayload  = <%= @xmlPayload %></P>
 <P>@csvArrayFTP  = <%= @csvArrayFTP%></P>
-<P> <%= @debugFile = File.read("FromFTP.csv") %></P>
-<P> <%= @csvReadFTP%></P>
+<P> Read csv file straight from File.read<%= @debugFile = File.read("FromFTP.csv") %></P>
+<P>CSV Read from FTP =  <%= @csvReadFTP%></P>
 <P>@csvColumn1  = <%= @csvColumn1 %></P>
 <P>@csvColumn3  = <%= @csvColumn3 %></P>
 <P>@csvColumn4  = <%= @csvColumn4 %></P>
