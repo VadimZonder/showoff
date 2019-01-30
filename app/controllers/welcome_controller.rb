@@ -123,7 +123,8 @@ class WelcomeController < ApplicationController
                 #most recent
                 ##files = ftp.nlst('Our/*.*')
                ## most_recent = files.sort_by { |filename| ftp.mtime(filename) }.last
-                files = ftp.nlst("OurFormatEmailVadimTest.csv*.csv")
+                ###files = ftp.nlst("OurFormatEmailVadimTest.csv*.csv")
+                files = ftp.nlst("OurFormatEmailVadimTest*")
                 ###maybe will need all the files in loop and append to 1 csv
                most_recent = files.sort_by { |filename| ftp.mtime(filename) }.last
                 ##file is downloaded from ftp to a local folder name "FromFTP"
