@@ -11,7 +11,7 @@ class ResumesController < ApplicationController
    def create
            require 'csv' 
     require 'net/ftp'
-    require 'tempfile'
+  ############################  require 'tempfile'
     require "open-uri"
     require 'rest-client'
     
@@ -58,12 +58,12 @@ ftp.chdir("/users/3L4/WebAppImport")
 # name_start = 'my_special_file'
 #name_end = '.txt'
 #location = '/path/to/some/dir'
-options = { encoding: Encoding::UTF_8 }
+############################options = { encoding: Encoding::UTF_8 }
 #tempfile = Tempfile.new([name_start, name_end],  options) do |file|
 # file.write('Hello, tempfile!')
 #end
 
-tempfile = Tempfile.new(['OurFormatEmailVadimTest', '.csv'], options)
+############################tempfile = Tempfile.new(['OurFormatEmailVadimTest', '.csv'], options)
 #tempfile.write("22This is some text data I want to upload via FTP.")
 
 #get the link of the file
@@ -85,13 +85,16 @@ tempfile = Tempfile.new(['OurFormatEmailVadimTest', '.csv'], options)
 ####################@@bulletin3 = CSV.read(@file)
 
 if @deployment == false
+=begin
 @csvFileLocation3 = open('https://api-to-labels-base-vadimmalakhovski.c9users.io'+@resume.attachment.to_s)
-######@csvFileLocation3 = open('https://label-gen-is-ftp.herokuapp.com'+rails_blob_path(Bulletin.last.attachment))
 open('OurFormatTest.csv', 'wb') do |file|
 file << open('https://api-to-labels-base-vadimmalakhovski.c9users.io'+@resume.attachment.to_s).read
- ##### file << open('https://label-gen-is-ftp.herokuapp.com'+rails_blob_path(Bulletin.last.attachment)).read
   @file = file
 end
+=end
+###@file = open('https://api-to-labels-base-vadimmalakhovski.c9users.io'+@resume.attachment.to_s).read
+##################here need to create lines for each lni and not just one string
+ @file = CSV.read('/home/ubuntu/workspace/public'+@resume.attachment.to_s)
 
 
 else
@@ -105,7 +108,8 @@ end
 end
 
 ####################@@bulletin3 = CSV.read(@file)
-@fileReadCSV = CSV.read(@file)
+###################################################@fileReadCSV = CSV.read(@file)
+@fileReadCSV = @file
 ##@csvFileLocation2 = rails_blob_path(Bulletin.last.attachment, disposition: "attachment")
 ##@bulletin2 = CSV.read(@csvFileLocation2.chomp("/*")) 
 
@@ -116,7 +120,7 @@ end
 ####################@tempfile.write(@bulletin3)
 ####################tempfile.write(@resume.attachment)
 ##@fileReadCSV = @fileReadCSV.gsub(/"/, '|')
-tempfile.write(@fileReadCSV)
+############################tempfile.write(@fileReadCSV)
 
 #link_to "Download my", rails_blob_path(Bulletin.last.attachment, disposition: "attachment")
 
@@ -129,19 +133,19 @@ tempfile.write(@fileReadCSV)
 #= link_to "Download file", rails_blob_path(bulletin.attachment, disposition: "attachment")
 
 
-tempfile.rewind
-ftp.putbinaryfile(tempfile)
-  
+###################tempfile.rewind
+#############ftp.putbinaryfile(tempfile)
+ftp.putbinaryfile('/home/ubuntu/workspace/public'+@resume.attachment.to_s)
 ####################@  @bulletin3  = tempfile.read
   
-  tempfile.unlink
+###################tempfile.unlink
 
 
 
 
 
 ftp.close
-tempfile.close
+###################tempfile.close
 
 
         
