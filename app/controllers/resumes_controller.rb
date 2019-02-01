@@ -94,22 +94,25 @@ end
 =end
 ###@file = open('https://api-to-labels-base-vadimmalakhovski.c9users.io'+@resume.attachment.to_s).read
 ##################here need to create lines for each lni and not just one string
- @file = CSV.read('/home/ubuntu/workspace/public'+@resume.attachment.to_s)
+ @locationCSV = './public'+@resume.attachment.to_s
 
 
 else
+ @locationCSV = './public'+@resume.attachment.to_s
+=begin    
  @csvFileLocation3 = open('https://label-gen-var3.herokuapp.com'+@resume.attachment.to_s)
 ######@csvFileLocation3 = open('https://label-gen-is-ftp.herokuapp.com'+rails_blob_path(Bulletin.last.attachment))
 open('OurFormatTest.csv', 'wb') do |file|
 file << open('https://label-gen-var3.herokuapp.com'+@resume.attachment.to_s).read
  ##### file << open('https://label-gen-is-ftp.herokuapp.com'+rails_blob_path(Bulletin.last.attachment)).read
   @file = file
-end   
+end  
+=end
 end
 
 ####################@@bulletin3 = CSV.read(@file)
 ###################################################@fileReadCSV = CSV.read(@file)
-@fileReadCSV = @file
+
 ##@csvFileLocation2 = rails_blob_path(Bulletin.last.attachment, disposition: "attachment")
 ##@bulletin2 = CSV.read(@csvFileLocation2.chomp("/*")) 
 
@@ -135,7 +138,7 @@ end
 
 ###################tempfile.rewind
 #############ftp.putbinaryfile(tempfile)
-ftp.putbinaryfile('/home/ubuntu/workspace/public'+@resume.attachment.to_s)
+ftp.putbinaryfile(@locationCSV)
 ####################@  @bulletin3  = tempfile.read
   
 ###################tempfile.unlink
