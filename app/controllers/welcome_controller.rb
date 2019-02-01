@@ -182,7 +182,7 @@ tempfile.close
            @csvFileLocation =  './FromFTP.csv'
           
            ### @customers = CSV.read(@csvFileLocation.chomp("/*")) #.chomp(',')
-           @localFileRead = File.read("FromFTP.csv")##.gsub(/,\s+\"/,',\"')
+           @localFileRead = File.read("./tmp/FromFTP.csv")##.gsub(/,\s+\"/,',\"')
            
            ## @localFileRead.write(@localFileRead.gsub(/,\s+\"/,',\"'))
             
