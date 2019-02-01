@@ -25,7 +25,8 @@ require 'rubygems'
 <P>@debug2  = <%=@mapping_array %></P>
 <P>@ @xmlPayload  = <%= @xmlPayload %></P>
 <P>@csvArrayFTP  = <%= @csvArrayFTP%></P>
-<P> Read csv file straight from File.read<%=if !File.read("./tmp/FromFTP.csv").nil? 
+<P> Read csv file straight from File.read<%=
+if !File.exists?("./tmp/FromFTP.csv")
 @debugFile = File.read("./tmp/FromFTP.csv") 
 end%></P>
 <P>CSV Read from FTP =  <%= @csvReadFTP%></P>
