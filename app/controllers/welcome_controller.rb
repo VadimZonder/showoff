@@ -130,7 +130,7 @@ class WelcomeController < ApplicationController
                 ##file is downloaded from ftp to a local folder name "FromFTP"
                 #############DONT SAVE INTO THE HEROKU FILEPATH BUT RATHER SAVE TO SOME TEMP LOCATION LIKE CLIPPER?
                 ftp.getbinaryfile(most_recent, "FromFTP.csv")
-                @tempFTP = ftp.getbinaryfile(most_recent, "/app/public/uploads/tmp/FromFTP.csv") ##public/uploads
+                @tempFTP = ftp.getbinaryfile(most_recent, './tmp/FromFTP.csv') ##public/uploads
                 ##"/app/public/uploads/resume/attachment/1/OurFormatTest.csv"
                 ######ftp.getbinaryfile("OurFormatEmailVadimTest.csv", "FromFTP")
                 #tgz = ftp.list("ruby-*.tar.gz").sort.last
