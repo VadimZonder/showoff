@@ -197,7 +197,7 @@ tempfile.close
 
             #read that variable
           ### @csvReadFTP = CSV.read('./FromFTP.csv')
-         @csvReadFTP =   CSV.read('./FromFTP.csv', encoding: "utf-8", quote_char: '|')#.length
+         @csvReadFTP =   CSV.read('./tmp/FromFTP.csv', encoding: "utf-8", quote_char: '|')#.length
         # @csvReadFTP = @csvReadFTP.chomp("")#.chomp("&quot;")
          
         ######## CSV.foreach(@csvFileLocation.chomp("/*"), encoding: "utf-8", liberal_parsing: true) do |row1|
