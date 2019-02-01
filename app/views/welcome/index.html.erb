@@ -39,28 +39,28 @@ require 'rubygems'
 <P>@csvColumn25  = <%= @csvColumn25 %></P>
 <P>@csvColumn30  = <%= @csvColumn30 %></P>
 
-<P>__CORRECTLY READS CSV IMPORTED MANNUALY AS ARRAY OF LINES/ROWS__%></P>
+<P>__CORRECTLY READS CSV IMPORTED MANNUALY AS ARRAY OF LINES/ROWS__</P>
 <P>@correct CSV opne + read -   = <%= #read that variable
 
             @csvRead = CSV.read("./OurFormatTest.csv")
 
             
                 %></P>
- <P>@correct CSV opne + LENGHT -   = <%=   @csvRead.length        %></P>
+ <P>@correct CSV opne + LENGHT -   = <%##=   #@csvRead.length        %></P>
 
-<P>@csvRead = CSV FOREACH  = <%=@csvRead.each do |row1|
-   @csvColumn3 =  row1[2].inspect.gsub!('"', '') + @csvColumn3.to_s 
-end%></P>
-<P>@csvColumn3 ARRAY = <%= @csvColumn3 %></P>
+<P>@csvRead = CSV FOREACH  = <%##=###@csvRead.each do |row1|
+  ### @csvColumn3 =  row1[2].inspect.gsub!('"', '') + @csvColumn3.to_s 
+###end%></P>
+<P>@csvColumn3 ARRAY = <%##=### @csvColumn3 %></P>
 
-<P>__CORRECTLY READS CSV IMPORTED AUTOMATICALLY__%></P>
-<P>@correct CSV opne + read -   = <%= #read that variable
- @file = open(Rails.root.to_s+'/FromFTP.csv').read
- @file = @file.gsub!('[[', '').gsub!('"', '').gsub!(']]', '')
+<P>__CORRECTLY READS CSV IMPORTED AUTOMATICALLY_</P>
+<P>@correct CSV opne + read -   = <%##=#### #read that variable
+### @file = open(Rails.root.to_s+'/FromFTP.csv').read
+ ###@file = @file.gsub!('[[', '').gsub!('"', '').gsub!(']]', '')
  ###make the file the same as when manually add
           ###  @csvReadFTP = CSV.read( @file)
                 %></P>
- <P>@correct CSV csvReadFTP + LENGHT -   = <%=   @file.length        %></P>
+ <P>@correct CSV csvReadFTP + LENGHT -   = <%##=  #### @file.length        %></P>
    <script>
 
    

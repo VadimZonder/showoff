@@ -159,7 +159,29 @@ class WelcomeController < ApplicationController
         # @csvReadFTP = @csvReadFTP.chomp("")#.chomp("&quot;")
          
          CSV.foreach(@csvFileLocation.chomp("/*"), encoding: "utf-8", liberal_parsing: true) do |row1|
-                @csvColumn1 =  row1[0].gsub('"\\"', '').gsub!('[[', '').gsub!('"', '') #+  @csvRow1.inspect 
+                             @csvColumn1 =  row1[0].inspect.gsub!('"', '') #+  @csvRow1.inspect 
+                @csvColumn2 =  row1[1].inspect.gsub!('"', '') 
+                @csvColumn3 =  row1[2].inspect.gsub!('"', '') 
+                @csvColumn4 =  row1[3].inspect.gsub!('"', '') 
+                @csvColumn5 =  row1[4].inspect.gsub!('"', '') 
+                @csvColumn6 =  row1[5].inspect.gsub!('"', '')  
+                @csvColumn7 =  row1[6].inspect.gsub!('"', '')  
+                @csvColumn8 =  row1[7].inspect.gsub!('"', '')  
+                @csvColumn9 =  row1[8].inspect.gsub!('"', '')  
+                @csvColumn10 =  row1[9].inspect.gsub!('"', '')  
+                @csvColumn11 =  row1[10].inspect.gsub!('"', '')  
+                @csvColumn12 =  row1[11].inspect.gsub!('"', '')  
+                @csvColumn13 =  row1[12].inspect.gsub!('"', '')  
+                @csvColumn14 =  row1[13].inspect.gsub!('"', '')  
+                @csvColumn24 =  row1[23].inspect.gsub!('"', '')  
+                @csvColumn25 =  row1[24].inspect.gsub!('"', '')  
+                @csvColumn26 =  row1[25].inspect.gsub!('"', '')  
+                @csvColumn27 =  row1[26].inspect.gsub!('"', '') 
+                @csvColumn30 =  row1[29].inspect.gsub!('"', '')  
+                @csvColumn31 =  row1[30].inspect.gsub!('"', '')  
+                @csvColumn32 =  row1[31].inspect.gsub!('"', '') 
+=begin             
+                @csvColumn1 =  row1[0].gsub('"\\"', '').gsub!('"', '') #+  @csvRow1.inspect 
                 @csvColumn2 =  row1[1].gsub('"\\"', '').gsub!('"', '') 
                 @csvColumn3 =  row1[2].gsub('"\\"', '').gsub!('"', '') 
                 @csvColumn4 =  row1[3].gsub('"\\"', '').gsub!('"', '') 
@@ -167,7 +189,7 @@ class WelcomeController < ApplicationController
                 @csvColumn6 =  row1[5].gsub('"\\"', '').gsub!('"', '')  
                 @csvColumn7 =  row1[6].gsub('"\\"', '').gsub!('"', '')  
                 @csvColumn8 =  row1[7].gsub('"\\"', '').gsub!('"', '')
-                @csvColumn9 =  row1[8].gsub('"\\"', '').gsub!('"', '').gsub(/\s+/, "") 
+                @csvColumn9 =  row1[8].gsub('"\\"', '').gsub!('"', '')###.gsub(/\s+/, "") 
                 @csvColumn10 =  row1[9].gsub('"\\"', '').gsub!('"', '')  
                 @csvColumn11 =  row1[10].gsub('"\\"', '').gsub!('"', '')  
                 @csvColumn12 =  row1[11].gsub('"\\"', '').gsub!('"', '')  
@@ -181,7 +203,7 @@ class WelcomeController < ApplicationController
                 @csvColumn31 =  row1[30].gsub('"\\"', '').gsub!('"', '') 
                 @csvColumn32 =  row1[31].gsub('"\\"', '').gsub!('"', '')
                 #@csvColumn50 =  row1[49].gsub('"\\"', '').gsub!(']]', '').gsub!('"', '')
-                
+=end                
                 #@csvArrayFTP.push(@csvColumn3)
                 
                #each cell of a column (one row by one)
