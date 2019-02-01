@@ -130,7 +130,7 @@ class WelcomeController < ApplicationController
                 ##file is downloaded from ftp to a local folder name "FromFTP"
                 #############DONT SAVE INTO THE HEROKU FILEPATH BUT RATHER SAVE TO SOME TEMP LOCATION LIKE CLIPPER?
                 ftp.getbinaryfile(most_recent, "FromFTP.csv")
-                @tempFTP = ftp.getbinaryfile(most_recent, './tmp/FromFTP.csv') ##public/uploads
+                 @tempFTP = ftp.getbinaryfile(most_recent, nil ) ##public/uploads
                 ##"/app/public/uploads/resume/attachment/1/OurFormatTest.csv"
                 ######ftp.getbinaryfile("OurFormatEmailVadimTest.csv", "FromFTP")
                 #tgz = ftp.list("ruby-*.tar.gz").sort.last
@@ -200,9 +200,9 @@ tempfile.close
          @csvReadFTP =   CSV.read('./tmp/FromFTP.csv', encoding: "utf-8", quote_char: '|')#.length
         # @csvReadFTP = @csvReadFTP.chomp("")#.chomp("&quot;")
          
-        ######## CSV.foreach(@csvFileLocation.chomp("/*"), encoding: "utf-8", liberal_parsing: true) do |row1|
-        @tempFTPPath = './tmp/FromFTP.csv'
-        CSV.foreach(@tempFTPPath.chomp("/*"), encoding: "utf-8", liberal_parsing: true) do |row1|
+         CSV.foreach(@csvFileLocation.chomp("/*"), encoding: "utf-8", liberal_parsing: true) do |row1|
+        ########@tempFTPPath = './tmp/FromFTP.csv'
+        ########CSV.foreach(@tempFTPPath.chomp("/*"), encoding: "utf-8", liberal_parsing: true) do |row1|
                              @csvColumn1 =  row1[0].inspect.gsub!('"', '') #+  @csvRow1.inspect 
                 @csvColumn2 =  row1[1].inspect.gsub!('"', '') 
                 @csvColumn3 =  row1[2].inspect.gsub!('"', '') 
