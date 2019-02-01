@@ -41,7 +41,10 @@ require 'rubygems'
 
 <P>__CORRECTLY READS CSV IMPORTED MANNUALY AS ARRAY OF LINES/ROWS__%></P>
 <P>@correct CSV opne + read -   = <%= #read that variable
-            @csvRead = CSV.read("/home/ubuntu/workspace/OurFormatTest.csv")
+
+            @csvRead = CSV.read("./OurFormatTest.csv")
+
+            
                 %></P>
  <P>@correct CSV opne + LENGHT -   = <%=   @csvRead.length        %></P>
 
