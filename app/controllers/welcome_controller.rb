@@ -200,8 +200,9 @@ tempfile.close
          @csvReadFTP =   CSV.read('./FromFTP.csv', encoding: "utf-8", quote_char: '|')#.length
         # @csvReadFTP = @csvReadFTP.chomp("")#.chomp("&quot;")
          
-         CSV.foreach(@csvFileLocation.chomp("/*"), encoding: "utf-8", liberal_parsing: true) do |row1|
-       ###### CSV.foreach(@tempFTPPath.chomp("/*"), encoding: "utf-8", liberal_parsing: true) do |row1|
+        ######## CSV.foreach(@csvFileLocation.chomp("/*"), encoding: "utf-8", liberal_parsing: true) do |row1|
+        @tempFTPPath = './tmp/FromFTP.csv'
+        CSV.foreach(@tempFTPPath.chomp("/*"), encoding: "utf-8", liberal_parsing: true) do |row1|
                              @csvColumn1 =  row1[0].inspect.gsub!('"', '') #+  @csvRow1.inspect 
                 @csvColumn2 =  row1[1].inspect.gsub!('"', '') 
                 @csvColumn3 =  row1[2].inspect.gsub!('"', '') 
