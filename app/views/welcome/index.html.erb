@@ -14,7 +14,7 @@ require 'rubygems'
 <P>urls from VAR - = <%=@hardcodedURLsC%></P>
 <P>from the DB urls = <%=@hardcodedURLsDB = Url.find_by_account_number(@accountNumber).urls%></p>
 <P>is ftp2= <%##=IsFTp.find_by_account_number(@accountNumber).isFTP%></P>
-<P>labelsArray2= <%=@labelsArray2%></P>
+<P>@locationCSV= <%=@locationCSV%></P>
 <P>enabling to print = <%=@printX%></P>
 <P>deployment status = <%=@deployment%></P>
 <P>server print = <%=@printServer = cookies[:print]%></P>
@@ -42,7 +42,7 @@ require 'rubygems'
 <P>__CORRECTLY READS CSV IMPORTED MANNUALY AS ARRAY OF LINES/ROWS__</P>
 <P>@correct CSV opne + read -   = <%= #read that variable
 
-            @csvRead = CSV.read("./OurFormatTest.csv")
+            @csvRead = CSV.read("./public/uploads/resume/attachment/FromFTP.csv")
 
             
                 %></P>
