@@ -118,66 +118,31 @@ class WelcomeController < ApplicationController
 
 
 #FTP Get the CSV file________________________________________________________________________________________BEGIN                
-             #################################   ftp = Net::FTP::new("ftp.dpd.ie")
-                           #################################     ftp.login("3L4", "3l4123")
-                          #################################      ftp.chdir("/users/3L4/WebAppImport")
+ftp = Net::FTP::new("ftp.dpd.ie")
+ftp.login("3L4", "3l4123")
+ftp.chdir("/users/3L4/WebAppImport")
                 ##files = ftp.list
-                          #################################      ftp.passive = true
+ftp.passive = true
                 #most recent
                 ##files = ftp.nlst('Our/*.*')
                ## most_recent = files.sort_by { |filename| ftp.mtime(filename) }.last
-                         #################################       files = ftp.nlst("*.csv")
+files = ftp.nlst("*.csv")
                 ##files = ftp.nlst("OurFormatEmailVadimTest*.csv")
                 ###maybe will need all the files in loop and append to 1 csv
-                       #################################        most_recent = files.sort_by { |filename| ftp.mtime(filename) }.last
+most_recent = files.sort_by { |filename| ftp.mtime(filename) }.last
                 ##file is downloaded from ftp to a local folder name "FromFTP"
                 #############DONT SAVE INTO THE HEROKU FILEPATH BUT RATHER SAVE TO SOME TEMP LOCATION LIKE CLIPPER?
-                         #################################       ftp.getbinaryfile(most_recent, "./public/uploads/resume/attachment/1/FromFTP.csv")
+ftp.getbinaryfile(most_recent, "./public/uploads/resume/attachment/1/FromFTP.csv")
                 ##!stopped here
-                     #################################            @tempFTP = ftp.getbinaryfile(most_recent, nil ) ##public/uploads
-                     #################################          cookies[:csv1] =  ftp.getbinaryfile(most_recent, nil )
+@tempFTP = ftp.getbinaryfile(most_recent, nil ) ##public/uploads
+cookies[:csv1] =  ftp.getbinaryfile(most_recent, nil )
                 ##"/app/public/uploads/resume/attachment/1/OurFormatTest.csv"
                 ######ftp.getbinaryfile("OurFormatEmailVadimTest.csv", "FromFTP")
                 #tgz = ftp.list("ruby-*.tar.gz").sort.last
                 #print "the latest version is ", tgz, "\n"
                 #ftp.getbinaryfile(tgz, tgz)
                 
- 
- 
- filename = 'OurFormatTest.csv'
-temp_file = Tempfile.new("download-#{filename}")
-temp_file.binmode
-import_options = {chunk_size: 10000, downcase_header: true,  :row_sep => :auto, encoding: "UTF-8"}
 
-size = 0
-progress = 0
-
-Net::FTP.open('ftp.dpd.ie') do |ftp|
-  ftp.passive = true
-  ftp.login '3L4', '3l4123'
-  ftp.chdir('/users/3L4/WebAppImport') 
-
-  total = ftp.size(filename)
-
-  ftp.getbinaryfile(filename, nil, 8192) do |chunk|
-    temp_file << chunk
-    @rowSmartCSV = chunk
-    size += chunk.size
-    new_progress = (size * 100) / total
-    unless new_progress == progress
-      puts "\rDownloading %s (%3d%%) " % [filename, new_progress]
-      
-    end
-    progress = new_progress
-  end
-end
-
-SmarterCSV.process(
-temp_file, import_options) do |chunk|
-chunk.each do |row|
-puts row
-end
-end
  
                 
                 
@@ -197,8 +162,8 @@ tempfile = Tempfile.new(['OurFormatEmailVadimTest', '.csv'], options)
 ####################@tempfile.write(@bulletin3)
 ####################tempfile.write(@resume.attachment)
 ##@fileReadCSV = @fileReadCSV.gsub(/"/, '|')
-                     #################################            @tempfile.write(ftp.getbinaryfile(most_recent, "FromFTP.csv"))
-                     #################################            @@tempFTPPath = tempfile.path
+tempfile.write(ftp.getbinaryfile(most_recent, "FromFTP.csv"))
+@tempFTPPath = tempfile.path
 
 ##@temp =Tempfile.open('*', @tempFTPPath)
 
@@ -218,7 +183,7 @@ tempfile.close
         
         
         
-                      #################################            @               ftp.close
+ftp.close
                 
         
             # ##triger this onclick??   
