@@ -172,12 +172,12 @@ Net::FTP.open('ftp.dpd.ie') do |ftp|
   end
 end
 
-###########SmarterCSV.process(
- ###########   temp_file, import_options) do |chunk|
-###########  chunk.each do |row|
-  ###########  puts row
-###########  end
-###########end
+SmarterCSV.process(
+temp_file, import_options) do |chunk|
+chunk.each do |row|
+puts row
+end
+end
  
                 
                 
