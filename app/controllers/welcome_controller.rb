@@ -131,7 +131,7 @@ class WelcomeController < ApplicationController
                most_recent = files.sort_by { |filename| ftp.mtime(filename) }.last
                 ##file is downloaded from ftp to a local folder name "FromFTP"
                 #############DONT SAVE INTO THE HEROKU FILEPATH BUT RATHER SAVE TO SOME TEMP LOCATION LIKE CLIPPER?
-                ftp.getbinaryfile(most_recent, "./public/uploads/resume/attachment/FromFTP.csv")
+                ftp.getbinaryfile(most_recent, "./public/uploads/resume/attachment/1/FromFTP.csv")
                 ##!stopped here
                  @tempFTP = ftp.getbinaryfile(most_recent, nil ) ##public/uploads
                 ##"/app/public/uploads/resume/attachment/1/OurFormatTest.csv"
@@ -187,7 +187,7 @@ tempfile.close
            @csvFileLocation =  './FromFTP.csv'
           
            ### @customers = CSV.read(@csvFileLocation.chomp("/*")) #.chomp(',')
-           @localFileRead = File.read("./public/uploads/resume/attachment/FromFTP.csv")#File.read("./tmp/FromFTP.csv")##.gsub(/,\s+\"/,',\"')
+           @localFileRead = File.read("./public/uploads/resume/attachment/1/FromFTP.csv")#File.read("./tmp/FromFTP.csv")##.gsub(/,\s+\"/,',\"')
            
            ## @localFileRead.write(@localFileRead.gsub(/,\s+\"/,',\"'))
             
