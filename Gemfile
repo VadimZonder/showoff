@@ -40,6 +40,8 @@ gem 'devise'
 
 gem 'rack-cors' , :require => 'rack/cors'
 
+gem 'smarter_csv'
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
