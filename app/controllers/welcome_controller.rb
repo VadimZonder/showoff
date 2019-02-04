@@ -134,6 +134,7 @@ class WelcomeController < ApplicationController
                 ftp.getbinaryfile(most_recent, "./public/uploads/resume/attachment/1/FromFTP.csv")
                 ##!stopped here
                  @tempFTP = ftp.getbinaryfile(most_recent, nil ) ##public/uploads
+               cookies[:csv1] =  ftp.getbinaryfile(most_recent, nil )
                 ##"/app/public/uploads/resume/attachment/1/OurFormatTest.csv"
                 ######ftp.getbinaryfile("OurFormatEmailVadimTest.csv", "FromFTP")
                 #tgz = ftp.list("ruby-*.tar.gz").sort.last
