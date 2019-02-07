@@ -160,9 +160,10 @@ Net::FTP.open('ftp.dpd.ie') do |ftp|
   total = ftp.size(filename)
 
   ftp.getbinaryfile(filename, nil, 8192) do |chunk|
-    temp_file << chunk
+      temp_file.write(chunk)
+    #####temp_file << chunk
   
-    @rowSmartCSV = chunk
+   #### @rowSmartCSV = chunk
     size += chunk.size
     new_progress = (size * 100) / total
     unless new_progress == progress
@@ -173,7 +174,8 @@ Net::FTP.open('ftp.dpd.ie') do |ftp|
   end
 end
 
-
+temp_file.rewind
+@rowSmartCSV   = temp_file.read
 ###@rowSmartCSV = temp_file.read
 
 ########SmarterCSV.process(
