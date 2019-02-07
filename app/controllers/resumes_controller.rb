@@ -24,6 +24,9 @@ class ResumesController < ApplicationController
         
     end  
     
+    @email= current_user.email
+    @accountNumber = @email[0, 6]  
+    
     
      #checks if there are Resume entries in DB
       if  Resume.first.nil?
