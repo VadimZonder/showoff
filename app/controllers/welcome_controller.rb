@@ -147,7 +147,7 @@ class WelcomeController < ApplicationController
  filename = 'OurFormatTest.csv'
 temp_file = Tempfile.new("download-#{filename}")
 temp_file.binmode
-import_options = {chunk_size: 10000, downcase_header: true, required_headers: false, unique_headers: true,  :row_sep => :auto, encoding: "UTF-8"}
+import_options = {chunk_size: 10000, downcase_header: true,  :row_sep => :auto, encoding: "UTF-8"}
 
 size = 0
 progress = 0
@@ -158,7 +158,7 @@ Net::FTP.open('ftp.dpd.ie') do |ftp|
   ftp.chdir('/users/3L4/WebAppImport') 
 
   total = ftp.size(filename)
-
+  
   ftp.getbinaryfile(filename, nil, 8192) do |chunk|
       temp_file.write(chunk)
     #####temp_file << chunk
@@ -175,7 +175,11 @@ Net::FTP.open('ftp.dpd.ie') do |ftp|
 end
 
 temp_file.rewind
-@rowSmartCSV   = temp_file.read
+cookies[:temp] =  temp_file.read
+@rowSmartCSV   = cookies[:temp]
+puts @rowSmartCSV 
+
+
 ###@rowSmartCSV = temp_file.read
 
 ########SmarterCSV.process(
