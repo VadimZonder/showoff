@@ -34,6 +34,7 @@ class ResumesController < ApplicationController
         #false=delete the old one and make new one
         Resume.last.destroy
         @resume = Resume.new(resume_params)
+        
         # @resume = current_user.resumes.new(resume_params)
         
 
@@ -110,6 +111,27 @@ end
 =end
 end
 
+@readResume =  CSV.read("./public/uploads/resume/attachment/1/FromFTP.csv")
+##open('OurFormatTest.csv', 'wb') do |file|
+                ##   file << open('./public'+@resume.attachment.to_s).read
+                 ##  @readResume = file
+                ##   
+                ## end
+## updateing urls here will not trigger autoprint on refresh of the home page
+        #######rmakes sure that label wont be generated on the reload
+    if Url.find_by_account_number(@accountNumber).nil?
+        #if is URLs is nil then create a new entry for that account
+        @newURLs = Url.create :account_number => @accountNumber, :urls => './public'+@resume.attachment.to_s
+        @newURLs.save
+        
+    else
+        #if urls account already exist update with the latest urls
+        @newURLs = Url.find_by_account_number(@accountNumber)
+        @newURLs.update(urls: CSV.read('./public'+@resume.attachment.to_s))
+        ##@newURLs = Url.create :account_number => @accountNumber, :urls => @labelsArray2
+        ##@newURLs.save
+        
+    end 
 ####################@@bulletin3 = CSV.read(@file)
 ###################################################@fileReadCSV = CSV.read(@file)
 

@@ -7,8 +7,8 @@ require 'rubygems'
 %>
 
 <% if user_signed_in?  %>
-<P>@@locationCSV  = <%= @locationCSV%></P>
-<P>@printX  = <%= @printX%></P>
+<P>@@@readResume  = <%= @readResume%></P>
+<P>@url db   = <%= @resume.attachment.to_s %></P>
 <%########URLs from controller with all the labels %>
 <%=@hardcodedURLsC = @labelsArray2%>
 <P>urls from VAR - = <%=@hardcodedURLsC%></P>
