@@ -11,7 +11,7 @@ amazon:
   service: S3
   access_key_id: <%= ENV['AKIAI27VS67AMLLQSKAQ'] %>
   secret_access_key: <%= ENV['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'] %>
-  region: <%= ENV['opsworks-cm.us-east-2.amazonaws.com(Ohio)'] %>
+  region: <%= ENV['us-east-2'] %>
   bucket: <%= ENV['bucketvadim'] %>
 
 # Remember not to checkin your GCS keyfile to a repository
