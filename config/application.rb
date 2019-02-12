@@ -27,7 +27,7 @@ end
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 5.2
 
-    config.secret_key_base = "3898c78e9e745bf5225207e48f25d596064088fd0c1514c2a0a9ebc88463e1abbc69c24f5942e32e96975a5caa9b6f0fd7e29cb40c87d77e8a404051902a160d"
+    config.secret_key_base = "eb22e51051702de357687ba076442a7f87fa5ac0361a5380c290ae9744327cf0c4e2579a5f7c6ef2003b5710da1ac948d239eb64022d54f8c8d417f026c671ee"
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration can go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded after loading
