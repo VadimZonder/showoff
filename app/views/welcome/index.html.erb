@@ -1,0 +1,165 @@
+<!-- Your Vidgets ----------------------------------------------------------------- -->
+<%= link_to "My Widgets", new_widget_path, :class => " btn-white btn btn-primary"%>
+
+<br><br>
+<h3>All Widgets</h3>
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>Widget Name</th>
+      <th>Widget Description</th>
+      <th>Author Details Links</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @nameResulsArray.each_slice(4) do |widgetName, widgetDescription, fName, lName| %>
+    <%# @descriptionResulsArray.each do |widgetDescription| %>
+    <%# @fNameResulsArray.each do |fName| %>
+    <%# @lNameResulsArray.each do |lName| %>
+      <tr>
+        <td><%= widgetName %></td>
+        <td><%= widgetDescription %></td>
+        <!--Here is the link to the user who created the widget -->
+       <td><%=link_to 'Who made this?!', '#',:remote => true , :onclick => 'alert("The Creator of this widget is '+fName+ ' ' +lName+'!")'%></td>
+
+
+        <td><%#= link_to 'Show', widget %></td>
+      </tr>
+    <%# end %>
+    <%# end %>
+       <%# end %>
+    <% end %>
+  </tbody>
+</table>
+
+
+
+
+the access token rails = <%=@access_token%>
+
+  
+<!-- Trigger/Open The Modal BEGIN----------------------------------------------------------- -->
+<!-- Button to open the modal login form -->
+<button onclick="document.getElementById('id02').style.display='block'">Signin</button>
+
+<!-- The Modal -->
+<div id="id02" class="modal">
+  <span onclick="document.getElementById('id02').style.display='none'" 
+class="close" title="Close Modal">&times;</span>
+
+  <!-- Modal Content -->
+  <form class="modal-content animate" action="./">
+    <div class="imgcontainer">
+    </div>
+
+    <div class="container">
+      <label for="email"><b>Email</b></label>
+      <input type="text" placeholder="Enter Email" id="email4"  name="email" required>
+
+      <label for="psw"><b>Password</b></label>
+      <input type="password" placeholder="Enter Password" id="password4"  name="password" required>
+      
+
+
+      <button type="submit" onclick="signin();">Signin</button>
+       <!--<input  type="submit" onclick="changeUserPassword();" />-->
+      <label>
+        <input type="checkbox" checked="checked" name="remember"> Remember me
+      </label>
+    </div>
+
+    <div class="container" style="background-color:#f1f1f1">
+      <button type="button" onclick="document.getElementById('id02').style.display='none'" class="cancelbtn">Cancel</button>
+      <span class="psw">Forgot <a href="#">password?</a></span>
+    </div>
+  </form>
+</div>
+<script>
+// Get the modal
+var modal2 = document.getElementById('id02');
+
+
+// When the user clicks anywhere outside of the modal, close it
+
+window.onclick = function(event) {
+  if (event.target == modal2) {
+    modal2.style.display = "none";
+  }
+}
+</script>
+
+<script>
+//Sigin in BACKUP JS---------------------------------------------------------------------------------------------
+function sn() {
+  var password5 = document.getElementById("password5").value;
+  var email5 = document.getElementById("email5").value;
+
+  function call5(){
+   var sn = "https://showoff-rails-react-production.herokuapp.com/oauth/token"
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", sn, true);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.send(JSON.stringify({
+
+    	  grant_type: "password",
+    		client_id: "277ef29692f9a70d511415dc60592daf4cf2c6f6552d3e1b769924b2f2e2e6fe",
+    	client_secret: "d6106f26e8ff5b749a606a1fba557f44eb3dca8f48596847770beb9b643ea352",
+    		username: email5,
+    		password: password5
+  }));
+  
+  xhr.onreadystatechange = function () {
+          if (xhr.readyState === 4) {
+              var response = xhr.responseText;
+              var obj = JSON.stringify(response); //JSON.parse(response); 
+              console.log(obj); 
+              document.getElementById('output').innerHTML = obj;
+              
+              
+          }
+                       else{
+              var response = xhr.responseText;
+              var obj = JSON.stringify(response); //JSON.parse(response); 
+              console.log(obj); 
+              document.getElementById('output').innerHTML = obj;
+              
+          }
+          
+          if (obj != undefined){
+            var registerResponce =obj.slice(27, 34);
+            if(registerResponce == "Success") {
+              //save username and password to cookies
+              //document.cookie = "username=John Smith; 3 Aug 2020 20:47:11 UTC; path=/";
+              // Create cookie
+              //save accestoken and refresh tokens
+              var resultArray = obj.split('"');
+              var access_token = resultArray[14];
+              access_token = access_token.slice(0, access_token.length-1);
+              var refresh_token = resultArray[24];
+              refresh_token = refresh_token.slice(0, resultArray.length-1);
+              alert('the access_token is = '+access_token);
+          
+              document.cookie = "access_token="+access_token+";";
+              document.cookie = "refresh_token="+refresh_token+";";
+
+            }
+
+            
+
+                alert('here = '+registerResponce);  
+              }
+        
+      }
+  }
+  call5();
+}
+
+</script>
+
+
+
+           
+</div>
+
+
