@@ -17,6 +17,165 @@ var allWidgetsUrl = "https://showoff-rails-react-production.herokuapp.com/api/v1
 "client_id="+client_id+
 "&client_secret="+client_secret;
 
+
+ function getCookie(cname) {
+  var name = cname + "=";
+  var decodedCookie = decodeURIComponent(document.cookie);
+  var ca = decodedCookie.split(';');
+  for(var i = 0; i <ca.length; i++) {
+    var c = ca[i];
+    while (c.charAt(0) == ' ') {
+      c = c.substring(1);
+    }
+    if (c.indexOf(name) == 0) {
+      return c.substring(name.length, c.length);
+    }
+  }
+  return "";
+} 
+
+var cname = "access_token";
+var access_token = getCookie(cname);
+var authorization = "Bearer "+access_token;
+console.log("auth from cookies " + authorization);
+//________________________________________________________________________________
+
+//Registration
+//create user-------------------------------------------------------------------------------------------------------------------
+function sendUserPost() {
+  var fName = document.getElementById("fName").value;
+  var lName = document.getElementById("lName").value;
+  var password = document.getElementById("password").value;
+  var email = document.getElementById("email").value;
+
+  function call(){
+    var url = "https://showoff-rails-react-production.herokuapp.com/api/v1/users";
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", url, true);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.send(JSON.stringify({
+    	client_id: "277ef29692f9a70d511415dc60592daf4cf2c6f6552d3e1b769924b2f2e2e6fe",
+    	client_secret: "d6106f26e8ff5b749a606a1fba557f44eb3dca8f48596847770beb9b643ea352",
+    	user: {
+    		first_name: fName,
+    		last_name: lName,
+    		password: password,
+    		email: email,
+    		image_url: "https://static.thenounproject.com/png/961-200.png"
+    	}
+  }));
+  
+  xhr.onreadystatechange = function () {
+          if (xhr.readyState === 4) {
+              var response = xhr.responseText;
+              var obj = JSON.stringify(response); //JSON.parse(response); 
+              console.log(obj); 
+              document.getElementById('output').innerHTML = obj;
+              
+              
+          }
+          if (obj != undefined){
+            var registerResponce =obj.slice(27, 34);
+            if(registerResponce == "Success") {
+              //save username and password to cookies
+              //document.cookie = "username=John Smith; 3 Aug 2020 20:47:11 UTC; path=/";
+              // Create cookie
+             
+              document.cookie = "fName="+fName+";";
+              document.cookie = "lName="+lName+";";
+              document.cookie = "password="+password+";";
+              document.cookie = "email="+email+";";
+              
+             //redirect to home page - window.location is used for cross browser safety
+              //also by refreshing it will update ruby varaible with the access token
+              window.location.href = "/";
+              
+            }
+
+               
+              }
+               //alert(registerResponce);  
+        
+      }
+  }
+  call();
+}
+
+
+
+
+
+
+//var authorization = "Bearer efe971a2b4060376b82f3dc0c83cf88291a0d0b2219f819b996412493db0db4d";
+//Sign in user-------------------------------------------------------------------------------------------------------------------
+function signin() {
+var password4 = document.getElementById("password4").value;
+  var email4 = document.getElementById("email4").value;
+
+  function call4(){
+   var sn = "https://showoff-rails-react-production.herokuapp.com/oauth/token"
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", sn, true);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.send(JSON.stringify({
+
+    	  grant_type: "password",
+    		client_id: "277ef29692f9a70d511415dc60592daf4cf2c6f6552d3e1b769924b2f2e2e6fe",
+    	client_secret: "d6106f26e8ff5b749a606a1fba557f44eb3dca8f48596847770beb9b643ea352",
+    		username: email4,
+    		password: password4
+  }));
+  
+  xhr.onreadystatechange = function () {
+          if (xhr.readyState === 4) {
+              var response = xhr.responseText;
+              var obj = JSON.stringify(response); //JSON.parse(response); 
+              console.log(obj); 
+              document.getElementById('output').innerHTML = obj;
+              
+              
+          }
+                       else{
+              var response = xhr.responseText;
+              var obj = JSON.stringify(response); //JSON.parse(response); 
+              console.log(obj); 
+              document.getElementById('output').innerHTML = obj;
+              
+          }
+          
+          if (obj != undefined){
+            var registerResponce =obj.slice(27, 34);
+            if(registerResponce == "Success") {
+              //save username and password to cookies
+              //document.cookie = "username=John Smith; 3 Aug 2020 20:47:11 UTC; path=/";
+              // Create cookie
+              //save accestoken and refresh tokens
+              var resultArray = obj.split('"');
+              var access_token = resultArray[14];
+              access_token = access_token.slice(0, access_token.length-1);
+              var refresh_token = resultArray[24];
+              refresh_token = refresh_token.slice(0, resultArray.length-1);
+              alert('the access_token is = '+access_token);
+          
+              document.cookie = "access_token="+access_token+";";
+              document.cookie = "refresh_token="+refresh_token+";";
+              
+              //redirect to home page - window.location is used for cross browser safety
+              //also by refreshing it will update ruby varaible with the access token
+              window.location.href = "/";
+            }
+
+            
+
+                //alert('here = '+registerResponce);  
+              }
+        
+      }
+  }
+  call4();
+  
+}
+</script>
 </head>
 <body>
   
