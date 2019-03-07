@@ -158,6 +158,262 @@ function sn() {
 </script>
 
 
+<!--Create User------------------------------------------------------------->
+sign again
+<form id="form" onsubmit="return false;">
+  <input  type="text" id="email5" />
+    <br>
+    <input  type="text" id="password5" />
+    <br>
+  
+    <br><br>
+    <input  type="submit" onclick="sn();" />
+</form>
+<br>
+
+
+<!-- ALL Visible Widgets----------------------------------------------------------------- -->
+
+
+
+
+
+<!-- Trigger/Open The Modal END----------------------------------------------------------------- -->
+
+
+
+<div>
+<%= link_to 'Create', authenticationCreate_path, :class => " btn-white btn btn-primary" %>
+
+<%= link_to 'Revoke', authenticationRevoke_path, :class => " btn-white btn btn-primary" %>
+
+<%= link_to 'Refresh', authenticationRefresh_path, :class => " btn-white btn btn-primary" %>
+
+<%#= button_to 'Button', welcome_button_path, method: :post %>
+</div>
+<%#= link_to 'Button 3', button3_path, :class => "btn btn-primary" %>
+<%#= button_to 'Button 3', button3_path, method: :get %>
+
+<div>
+<%#= link_to 'Index Me', usrIndexMe_path, :class => " btn-white btn btn-primary" %>
+
+<%#= link_to 'Create User', new_usr_path, :class => " btn-white btn btn-primary" %>
+
+<%#= link_to 'Update User', edit_usr_path(current_user), :class => " btn-white btn btn-primary" %>
+
+
+
+<p>Update</p>
+<script>
+
+//update user---------------------------------------------------------------------------------------------
+function sendUserUpdate() {
+  var fName = document.getElementById("fName").value;
+  var lName = document.getElementById("lName").value;
+  var dob = document.getElementById("dob").value;
+
+  function call(){
+    var url = "https://showoff-rails-react-production.herokuapp.com/api/v1/users/me";
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", url, true);
+    xhr.setRequestHeader('Content-Type', 'application/json', "Authorization", authorization);
+    xhr.send(JSON.stringify({
+    	user: {
+    		first_name: fName,
+    		last_name: lName,
+    		date_of_birth: dob,
+    		image_url: "https://static.thenounproject.com/png/961-200.png"
+    	}
+  }));
+  
+  xhr.onreadystatechange = function () {
+          if (xhr.readyState === 4) {
+              var response = xhr.responseText;
+              var obj = JSON.stringify(response); //JSON.parse(response); 
+              console.log(obj); 
+              document.getElementById('ouput').innerHTML = obj;
+          }
+      }
+  }
+  call();
+}
+
+
+</script>
+
+
+<p>Change Password</p>
+<script>
+//Change Password user  JS---------------------------------------------------------------------------------------------
+function changeUserPassword() {
+  var current_password = document.getElementById("current_password").value;
+  var new_password = document.getElementById("new_password").value;
+
+
+  function call(){
+    var url = "https://showoff-rails-react-production.herokuapp.com/api/v1/users/me/password";
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", url, true);
+    xhr.setRequestHeader('Content-Type', 'application/json', "Authorization", authorization);
+    xhr.send(JSON.stringify({
+    	user: {
+    		current_password: current_password,
+    		new_password: new_password
+    	}
+  }));
+  
+  xhr.onreadystatechange = function () {
+          if (xhr.readyState === 4) {
+              var response = xhr.responseText;
+              var obj = JSON.stringify(response); //JSON.parse(response); 
+              console.log(obj); 
+              document.getElementById('ouput').innerHTML = obj;
+          }
+      }
+  }
+  call();
+}
+
+</script>
+
+
+<!--Create User------------------------------------------------------------->
+<form id="form" onsubmit="return false;">
+    <input  type="text" id="fName2" />
+    <br>
+    <input  type="text" id="lName2" />
+    <br>
+    <input  type="text" id="password2" />
+    <br>
+    <input  type="text" id="email2" />
+    <br><br>
+    <input  type="submit" onclick="sendUserPost()2;" />
+</form>
+<br>
+<p>Create User Responce</p>
+<br>
+<div class="panel panel-info">
+
+<p id="output"></p>
+</div>
+</div>
+<!--Update User---------------------------------------------------------->
+<form id="form" onsubmit="return false;">
+    <input  type="text" id="fName" />
+    <br>
+    <input  type="text" id="lName" />
+    <br>
+    <input  type="text" id="dob" />
+    <br><br>
+    <input  type="submit" onclick="sendUserUpdate();" />
+</form>
+<br>
+<p>Create User Responce</p>
+<br>
+<div class="panel panel-info">
+
+<p id="outputUpdate"></p>
+</div>
+</div>
+
+
+
+
+
+<!--Change Password User HTML---------------------------------------------------------->
+<form id="form" onsubmit="return false;">
+    <input  type="text" id="current_password" />
+    <br>
+    <input  type="text" id="new_password" />
+    <br><br>
+    <input  type="submit" onclick="changeUserPassword();" />
+</form>
+<br><br><br>
+</div>
+
+
+
+<!--Delete Your WidgetHTML---------------------------------------------------------->
+<form id="form" onsubmit="return false;">
+    <input  type="text" id="name" />
+    <br>
+    <input  type="text" id="description" />
+    <br><br>
+    <input  type="submit" onclick="deleteWidget();" />
+</form>
+<br><br><br>
+
+
+<p>Delete Widget</p>
+<script>
+//var authorization = "Bearer efe971a2b4060376b82f3dc0c83cf88291a0d0b2219f819b996412493db0db4d";
+//create Public Widgets JS---------------------------------------------------------------------------------------------
+function deleteWidget() {
+  var id = document.getElementById("id").value;
+
+
+  function call(){
+    //passing widget id to delete
+   // var url = "https://showoff-rails-react-production.herokuapp.com/api/v1/widgets/"+id;
+    var xhr = new XMLHttpRequest();
+    xhr.open("DELETE", url, true);
+    xhr.setRequestHeader('Content-Type', 'application/json', "Authorization", authorization);
+     xhr.send(JSON.stringify({
+    	widget: {
+    		id: id
+    	}
+  }));
+   
+  
+  xhr.onreadystatechange = function () {
+          if (xhr.readyState === 4) {
+              var response = xhr.responseText;
+              var obj = JSON.stringify(response); //JSON.parse(response); 
+              console.log(obj); 
+              document.getElementById('output').innerHTML = obj;
+          }
+      }
+  }
+  call();
+}
+</script>
+<!--Create Hidden WidgetHTML---------------------------------------------------------->
+<form id="form" onsubmit="return false;">
+    <input  type="text" id="id" />
+    <br><br>
+    <input  type="submit" onclick="deleteWidget();" />
+</form>
+<br><br><br>
+
+
+
+<div class="container">
+  <div class="row">
+
+        
+      
+  </div>
+</div>
+<hr />
+
+<div class="container">
+  <div class="row">
+    <div class="purple-box u-padding-Al">
+      <center>
+         <h3></h3>
+       
+      </center>
+    </div>
+    <hr />
+  </div>
+  
+
+
+
+<br>
+<br>
+<br>
+<br>
 
            
 </div>

@@ -227,7 +227,255 @@ client_id='+@client_id+'&client_secret='+@client_secret+'&term=visible'
     #__________________________________________________________________
        
 
+  #__________________________________________User Index Me____________________________________   
+   def usrIndexMe
+       #__________ActualL___
+=begin      
+@urlSerachMe ='https://showoff-rails-react-production.herokuapp.com/api/v1/users/1/widgets?client_id=
+'+@client_id+'&client_secret='+@client_secret+''
 
+
+
+    result = RestClient.get(@urlSerachMe,
+  {
+    content_type: 'application/json',
+    authorization: @authorization
+  }
+) 
+=end
+#delete
+@responceSample ='{
+  "code": 0,
+  "message": "Success",
+  "data": {
+    "widgets": [
+      {
+        "id": 3,
+        "name": "A Hidden Widget",
+        "description": "Widget 1",
+        "kind": "hidden",
+        "user": {
+          "id": 1,
+          "name": "A User",
+          "images": {
+            "small_url": "https://showoff-rails-react-api-production.s3.amazonaws.com/users/images/000/000/001/small/961-200.png?1549366177",
+            "medium_url": "https://showoff-rails-react-api-production.s3.amazonaws.com/users/images/000/000/001/medium/961-200.png?1549366177",
+            "large_url": "https://showoff-rails-react-api-production.s3.amazonaws.com/users/images/000/000/001/large/961-200.png?1549366177",
+            "original_url": "https://showoff-rails-react-api-production.s3.amazonaws.com/users/images/000/000/001/original/961-200.png?1549366177"
+          },
+          "first_name": "A",
+          "last_name": "User",
+          "date_of_birth": null,
+          "email": "michael@showoff.ie",
+          "active": true
+        },
+        "owner": true
+      },
+      {
+        "id": 4,
+        "name": "A Visible Widget",
+        "description": "Widget 1",
+        "kind": "visible",
+        "user": {
+          "id": 1,
+          "name": "A User",
+          "images": {
+            "small_url": "https://showoff-rails-react-api-production.s3.amazonaws.com/users/images/000/000/001/small/961-200.png?1549366177",
+            "medium_url": "https://showoff-rails-react-api-production.s3.amazonaws.com/users/images/000/000/001/medium/961-200.png?1549366177",
+            "large_url": "https://showoff-rails-react-api-production.s3.amazonaws.com/users/images/000/000/001/large/961-200.png?1549366177",
+            "original_url": "https://showoff-rails-react-api-production.s3.amazonaws.com/users/images/000/000/001/original/961-200.png?1549366177"
+          },
+          "first_name": "A",
+          "last_name": "User",
+          "date_of_birth": null,
+          "email": "michael@showoff.ie",
+          "active": true
+        },
+        "owner": true
+      }
+    ]
+  }
+}'
+
+#display auth message
+   ### @res = result
+   ### @jsonParse = JSON.parse @res
+    @jsonParseResponce  = JSON.parse (@responceSample) ##change to the actual json string
+    #@nameResulsArray = @jsonParseResponce["data"]["widgets"][0]["name"]
+   
+   end
+#__________________________________________User Index Me END____________________________________  
+
+#__________________________________________User Index Me + Term Begin____________________________________   
+   def usrIndexMeTerm
+       #__________ActualL___
+=begin       
+@urlSerachTermVisible ='https://showoff-rails-react-production.herokuapp.com/api/v1/users/1/widgets?client_id='+@client_id+'&client_secret='+@client_secret+'&term=visible'
+
+
+    result = RestClient.get(@urlSerachTermVisible,
+  {
+    content_type: 'application/json',
+    authorization: @authorization
+  }
+) 
+=end
+
+
+#display auth message
+    @res = result
+    @jsonParse = JSON.parse @res
+    #@nameResulsArray = @jsonParseResponce["data"]["widgets"][0]["name"]
+   
+   end
+#__________________________________________User Index Me Term END____________________________________  
+
+#__________________________________________User Create Begin____________________________________   
+
+   def usrCreate
+       
+ require 'csv' 
+    require 'net/ftp'
+    require 'tempfile'
+    require "open-uri"
+    require 'rest-client'
+    require 'smarter_csv'
+    require 'json'
+    
+    
+    @client_id = "277ef29692f9a70d511415dc60592daf4cf2c6f6552d3e1b769924b2f2e2e6fe"
+    @client_secret = "d6106f26e8ff5b749a606a1fba557f44eb3dca8f48596847770beb9b643ea352"
+    @authorization = "Bearer b530f9ad13a061b36aa342b255608e18960db09cfd977cab8c1de9a0f8226024"
+    
+@url ='https://showoff-rails-react-production.herokuapp.com/api/v1/users'
+
+
+
+@fName = "Vadim"
+@lName = "Mal"
+@pass = "password"
+@email = "michael+52@showoff.ie"
+
+=begin
+  xmlPayloadAuthoriseControl = 
+                '{"User":'+@user+', 
+                "Password":'+@pass+', 
+                "Type":"CUST"}'
+=end
+
+ body =
+ '{
+
+	"client_id": "277ef29692f9a70d511415dc60592daf4cf2c6f6552d3e1b769924b2f2e2e6fe",
+	"client_secret": "d6106f26e8ff5b749a606a1fba557f44eb3dca8f48596847770beb9b643ea352",
+	"user": {
+		"first_name": "'+@fName+'",
+		"last_name": "'+@lName+'",
+		"password": "'+@pass+'",
+			"email": "'+@email+'",
+		"image_url": "https://static.thenounproject.com/png/961-200.png"
+	}
+}'
+ 
+                
+  #  result = RestClient.post(@url, body,:content_type => 'application/json') 
+  #xmlPayloadAuthorise,:content_type => 'application/xml') 
+
+
+
+
+    result = RestClient.post(@url, body, 
+  {
+  content_type: 'application/json'
+  }
+)
+
+
+
+#display auth message
+    @result = result
+    @jsonParse = JSON.parse @result
+    #@nameResulsArray = @jsonParseResponce["data"]["widgets"][0]["name"]
+
+   end
+ 
+#__________________________________________User Create END____________________________________  
+
+    
+    
+
+##_______________________________________________________________________________________________________IF SIGNED IN    
+   
+  end
+
+#__________________________________________Revoke____________________________________   
+   def authenticationRevoke
+#__________________________________________Revoke____________________________________   
+=begin
+    
+    @url = 'https://showoff-rails-react-production.herokuapp.com/oauth/revoke'
+    @bearer 'b530f9ad13a061b36aa342b255608e18960db09cfd977cab8c1de9a0f8226024'
+    
+
+ payload =  
+ '{
+ 
+"token":'+@bearer+'
+     
+ }'
+    result = RestClient.post(@url,
+    payload, 
+  {
+    content_type: 'application/json'
+    authorization: @bearer
+   # accept: 'application/json'
+
+  }
+) 
+=end
+#__________ACTUAL CONTROL___ END 
+        
+    
+    #display revoke message  
+    @res = result  
+       
+       
+   end 
+   
+#__________________________________________Refresh____________________________________   
+   def authenticationRefresh
+#__________________________________________Refresh____________________________________    
+=begin
+    
+    @client_id = "277ef29692f9a70d511415dc60592daf4cf2c6f6552d3e1b769924b2f2e2e6fe"
+    @client_secret = "d6106f26e8ff5b749a606a1fba557f44eb3dca8f48596847770beb9b643ea352"
+    @url = 'https://showoff-rails-react-production.herokuapp.com/oauth/token'
+    
+
+ payload =  
+ '{
+ 
+    "grant_type": "refresh_token",
+    "refresh_token":'+@refresh_token+'',
+     "client_id":'+@client_id +',
+     "client_secret":'+@client_secret +',
+     
+ }'
+    result = RestClient.post(@url,
+    payload, 
+  {
+    content_type: 'application/json'
+    authorization: @bearer
+   # accept: 'application/json'
+
+  }
+) 
+=end
+#__________ACTUAL CONTROL___ END 
+        
+    
+    #display revoke message  
+    @res = result  
        
        
    end    
