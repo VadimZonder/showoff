@@ -1,13 +1,13 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  email: MyString
   fName: MyString
-  lname: MyString
-  dob: MyString
+  lName: MyString
+  pass: MyString
+  email: MyString
 
 two:
-  email: MyString
   fName: MyString
-  lname: MyString
-  dob: MyString
+  lName: MyString
+  pass: MyString
+  email: MyString

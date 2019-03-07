@@ -8,8 +8,18 @@
   <%= javascript_include_tag  '//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js' %>
   <%= csrf_meta_tags %>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  
+  <!-- ALL Visible Widgets----------------------------------------------------------------- -->
+<script>
+var client_id ="277ef29692f9a70d511415dc60592daf4cf2c6f6552d3e1b769924b2f2e2e6fe";
+var client_secret ="d6106f26e8ff5b749a606a1fba557f44eb3dca8f48596847770beb9b643ea352";
+var allWidgetsUrl = "https://showoff-rails-react-production.herokuapp.com/api/v1/users/1/widgets?"+
+"client_id="+client_id+
+"&client_secret="+client_secret;
+
 </head>
 <body>
+  
   <% if notice %>
   <p class="alert alert-success"><%= notice %></p>
 <% end %>
@@ -28,9 +38,11 @@
        
       </li>
       <li>
-        <% if user_signed_in? %>
-          <%= link_to "  Mapping", new_mapping_path, :class => 'navbar-link glyphicon glyphicon-transfer'  %>
-        <%end%>
+
+
+        <%# if user_signed_in? %>
+          <%#= link_to "  Widgets", new_widget_path, :class => 'navbar-link glyphicon glyphicon-transfer'  %>
+        <%#end%>
       </li>
      
 
@@ -38,9 +50,42 @@
  
     <ul class="nav navbar-nav navbar-right myFont">
       <li class="navbar-right">
-        <% if user_signed_in? %>
-        <%= link_to "   Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link glyphicon glyphicon-off'  %>
-<% end %>
+               <!-- Trigger/Open The Modal BEGIN----------------------------------------------------------- -->
+<!-- Button to open the modal login form -->
+<button onclick="document.getElementById('id02').style.display='block'">Signin</button>
+
+<!-- The Modal -->
+<div id="id02" class="modal">
+  <span onclick="document.getElementById('id02').style.display='none'" 
+class="close" title="Close Modal">&times;</span>
+
+  <!-- Modal Content -->
+  <form class="modal-content animate" action="./">
+    <div class="imgcontainer">
+    </div>
+
+    <div class="container">
+      <label for="email"><b>Email</b></label>
+      <input type="text" placeholder="Enter Email" id="email4"  name="email" required>
+
+      <label for="psw"><b>Password</b></label>
+      <input type="password" placeholder="Enter Password" id="password4"  name="password" required>
+      
+
+
+      <button type="submit" onclick="signin();">Signin</button>
+       <!--<input  type="submit" onclick="changeUserPassword();" />-->
+      <label>
+        <input type="checkbox" checked="checked" name="remember"> Remember me
+      </label>
+    </div>
+
+    <div class="container" style="background-color:#f1f1f1">
+      <button type="button" onclick="document.getElementById('id02').style.display='none'" class="cancelbtn">Cancel</button>
+      <span class="psw">Forgot <a href="#">password?</a></span>
+    </div>
+  </form>
+</div>
       </li>
     </ul>
     
@@ -54,9 +99,60 @@
      
     <ul class="nav navbar-nav navbar-right myFont">
       <li class="navbar-right">
-          <% if user_signed_in? %>
-         <%=  link_to ' '+@accountNumber+' ', edit_user_registration_path, :class => 'navbar-link glyphicon glyphicon-user'  %>
-  <%end%>
+          <!-- Trigger/Open The Modal BEGIN----------------------------------------------------------- -->
+<!-- Button to open the modal login form -->
+<button onclick="document.getElementById('id01').style.display='block'">Register</button>
+
+<!-- The Modal -->
+<div id="id01" class="modal">
+  <span onclick="document.getElementById('id01').style.display='none'" 
+class="close" title="Close Modal">&times;</span>
+
+  <!-- Modal Content -->
+  <form class="modal-content animate" action="./">
+    <div class="imgcontainer">
+      <img src="img_avatar2.png" alt="Avatar" class="avatar">
+    </div>
+
+    <div class="container">
+      <label for="uname"><b>Username</b></label>
+      <input type="text" placeholder="Enter Username"  id="fName"  name="fName" required>
+      
+      <label for="lName"><b>Username</b></label>
+      <input type="text" placeholder="Enter Username" id="lName"  name="lName" required>
+
+      <label for="psw"><b>Password</b></label>
+      <input type="password" placeholder="Enter Password" id="password"  name="password" required>
+      
+      <label for="email"><b>Username</b></label>
+      <input type="text" placeholder="Enter Email" id="email"  name="email" required>
+
+      <button type="submit" onclick="sendUserPost();">Register</button>
+       <!--<input  type="submit" onclick="changeUserPassword();" />-->
+      <label>
+        <input type="checkbox" checked="checked" name="remember"> Remember me
+      </label>
+    </div>
+
+    <div class="container" style="background-color:#f1f1f1">
+      <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
+      <span class="psw">Forgot <a href="#">password?</a></span>
+    </div>
+  </form>
+</div>
+<script>
+// Get the modal
+var modal = document.getElementById('id01');
+
+
+// When the user clicks anywhere outside of the modal, close it
+
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+</script>
              </ul>
       </li>
     </ul>
@@ -69,10 +165,10 @@
 <div class="jumbotron text-center">
   <div class="container">
     <a href="/" class="lang-logo">
-      <img src="<%= asset_path('Dpdlog') %>">
+      <img src="<%= asset_path('showoff-logo') %>">
     </a>
-    <h1>DPD Label Generator App</h1>
-    <p>From APIs to a Label</p>
+    <h1>Showoff</h1>
+    <p>Widgets Client</p>
   </div>
 </div>
 

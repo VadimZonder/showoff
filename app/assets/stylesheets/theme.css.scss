@@ -5,8 +5,8 @@ $brand-print: #DC0032;
 .jumbotron {
   background: $brand-primary;
   color: white;
-  padding-bottom: 80px;
-  background-color: #DC0032;
+  padding-bottom: 10px;
+  background-color: #FC3100;
 
   .btn-primary {
     background: lighten($brand-primary, 20%);

@@ -32,15 +32,11 @@ gem 'mini_magick', '~> 4.8'
 
 gem 'rest-client'
 
-
-
 gem 'carrierwave' , '~> 0.9'
 
-gem 'devise'
 
 gem 'rack-cors' , :require => 'rack/cors'
 
-gem 'smarter_csv'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
@@ -72,5 +68,4 @@ end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
-gem 'aws-sdk-s3', require: false
-gem "google-cloud-storage", "~> 1.8", require: false
+

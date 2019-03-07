@@ -1,63 +1,48 @@
 require 'test_helper'
 
-class WidgetsControllerTest < ActionController::TestCase
+class WidgetsControllerTest < ActionDispatch::IntegrationTest
   setup do
     @widget = widgets(:one)
   end
 
   test "should get index" do
-    get :index
+    get widgets_url
     assert_response :success
   end
 
   test "should get new" do
-    get :new
+    get new_widget_url
     assert_response :success
   end
 
   test "should create widget" do
     assert_difference('Widget.count') do
-      post :create,
-        params: {
-          widget: {
-            description: @widget.description,
-            name: @widget.name,
-            stock: @widget.stock
-          }
-        }
+      post widgets_url, params: { widget: { dob: @widget.dob, email: @widget.email, fName: @widget.fName, lname: @widget.lname } }
     end
 
-    assert_redirected_to widget_path(@widget.id + 1)
+    assert_redirected_to widget_url(Widget.last)
   end
 
   test "should show widget" do
-    get :show, params: { id: @widget }
+    get widget_url(@widget)
     assert_response :success
   end
 
   test "should get edit" do
-    get :edit, params: { id: @widget }
+    get edit_widget_url(@widget)
     assert_response :success
   end
 
   test "should update widget" do
-    patch :update,
-      params: {
-        id: @widget,
-        widget: {
-          description: @widget.description,
-          name: @widget.name,
-          stock: @widget.stock
-        }
-      }
-    assert_redirected_to widget_path(@widget)
+    patch widget_url(@widget), params: { widget: { dob: @widget.dob, email: @widget.email, fName: @widget.fName, lname: @widget.lname } }
+    assert_redirected_to widget_url(@widget)
   end
 
   test "should destroy widget" do
     assert_difference('Widget.count', -1) do
-      delete :destroy, params: { id: @widget }
+      delete widget_url(@widget)
     end
 
-    assert_redirected_to widgets_path
+    assert_redirected_to widgets_url
   end
 end

@@ -1,8 +1,8 @@
 {
-  "name": "Active Storage Example App",
-  "description": "A barebones Rails app that uses Active Storage",
+  "name": "Showoff Example App",
+  "description": "A simple app that serves as UI for Widget APIs",
   "image": "heroku/ruby",
-  "repository": "https://github.com/heroku/active_storage_with_previews_example",
+  "repository": "https://github.com/VadimZonder/showoff",
   "keywords": ["ruby", "rails" ],
   "addons": [
     "heroku-postgresql",
@@ -10,7 +10,7 @@
   ],
   "buildpacks": [
     {
-      "url": "https://github.com/heroku/heroku-buildpack-activestorage-preview"
+      "url": "https://github.com/VadimZonder/showoffw"
     },
     {
       "url": "heroku/ruby"

@@ -185,4 +185,96 @@ function createPublicWidget() {
 
 
 
+<!-- Trigger/Open The Modal END----------------------------------------------------------------- -->
+<p>Sign In</p>
+<script>
+var authCreateURL = "https://showoff-rails-react-production.herokuapp.com/oauth/token"
+var authorization = "Bearer b530f9ad13a061b36aa342b255608e18960db09cfd977cab8c1de9a0f8226024";
+//Sign in user-------------------------------------------------------------------------------------------------------------------
+function signin2() {
+
+  var password = document.getElementById("password").value;
+  var email = document.getElementById("email").value;
+
+  function call2(){
+    var url = "https://showoff-rails-react-production.herokuapp.com/api/v1/widgets";
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", url, true);
+    xhr.setRequestHeader("Authorization", "Bearer 1477634114484bdf7d527208fd9c2bc0e2b7c02fac4fdeab4141257bcc87ed7e", "Content-Type", "application/json");
+    xhr.send('{"widget": {"name": "A Visible Widget3","description": "Widgett 2","kind": "hidden"}');
+  
+  xhr.onreadystatechange = function () {
+          if (xhr.readyState === 4) {
+              var response = xhr.responseText;
+              var obj = JSON.stringify(response); //JSON.parse(response); 
+              console.log(obj); 
+              document.getElementById('output').innerHTML = obj;
+              alert(obj);
+          }
+          else{
+              var response = xhr.responseText;
+              var obj = JSON.stringify(response); //JSON.parse(response); 
+              console.log(obj); 
+              document.getElementById('output').innerHTML = obj;
+              alert(obj);
+          }
+      }
+  }
+  call2();
+}
+</script>
+
+
+<!-- Trigger/Open The Modal BEGIN----------------------------------------------------------- -->
+<!-- Button to open the modal login form -->
+<button onclick="document.getElementById('id02').style.display='block'">Signin</button>
+
+<!-- The Modal -->
+<div id="id02" class="modal">
+  <span onclick="document.getElementById('id02').style.display='none'" 
+class="close" title="Close Modal">&times;</span>
+
+  <!-- Modal Content -->
+  <form class="modal-content animate" action="./">
+    <div class="imgcontainer">
+    </div>
+
+    <div class="container">
+      <label for="email"><b>Email</b></label>
+      <input type="text" placeholder="Enter Email" id="email"  name="email" required>
+
+      <label for="psw"><b>Password</b></label>
+      <input type="password" placeholder="Enter Password" id="password"  name="password" required>
+      
+
+
+      <button type="submit" onclick="signin2();">Signin</button>
+       <!--<input  type="submit" onclick="changeUserPassword();" />-->
+      <label>
+        <input type="checkbox" checked="checked" name="remember"> Remember me
+      </label>
+    </div>
+
+    <div class="container" style="background-color:#f1f1f1">
+      <button type="button" onclick="document.getElementById('id02').style.display='none'" class="cancelbtn">Cancel</button>
+      <span class="psw">Forgot <a href="#">password?</a></span>
+    </div>
+  </form>
+</div>
+<script>
+// Get the modal
+var modal = document.getElementById('id02');
+
+
+// When the user clicks anywhere outside of the modal, close it
+
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+</script>
+
+
+
 <%= link_to 'Back', widgets_path %>
