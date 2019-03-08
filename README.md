@@ -40,7 +40,9 @@ Make sure to register first and then login in.
 Only then other functionalities can be accessed.
 
 # Links to view the app
+# Cloud 9 
 https://showoff-vadimmalakhovski.c9users.io/
+# Heroku
 https://showoff-your-app.herokuapp.com/
 
 # For best results run on Google Chrome
