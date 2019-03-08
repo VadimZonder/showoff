@@ -1,40 +1,48 @@
-# Active Storage Example App
+# ShowOff App Client Exercise
 
-An app that uses Active Storage file uploads and Previews. For more information view the [devcenter documentation on Active Storage](https://devcenter.heroku.com/articles/active-storage-on-heroku).
+This is a client application that interacts with Widget, Authentication and User Management APIs.
+This application is makes calls to these APIs and uses its responses to enable users interaction with them. 
 
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
+# Development
+Application is built using Ruby on Rails 5.2.0 and Ruby version 2.5.1
+Some of the essential gems used: rest-client, bootsnap, puma.
 
-> Note: This app uses a paid add-on for S3 storage.
+# Deploying Locally
+Clone the repo locally and run:
 
-## Running Locally
-
-Make sure you have Ruby installed.  Also, install the [Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli) (formerly known as the Heroku Toolbelt).
-
-```sh
-$ git clone https://github.com/heroku/active_storage_with_previews_example
-$ cd active_storage_with_previews_example
+# install gems
 $ bundle install
-$ bin/rails db:create db:migrate
-$ heroku local
-```
 
-Your app should now be running on [localhost:5000](http://localhost:5000/).
+# setup the database
+$ bundle exec rake db:setup
+
+# run the server
+$ rails s
+
+# run the rails console
+$ rails c
+
+# In order to run the application: may need to run this command to enable the postgresql before running the server.
+$ sudo service postgresql start
+
 
 ## Deploying to Heroku
 
-```sh
+sh
 $ heroku create
 $ git push heroku master
-$ heroku run rake db:migrate
+$ rake assets:precompile RAILS_ENV=production
 $ heroku open
-```
+ 
 
-or
+## Navigation
+Make sure to register first and then login in.
+Only then other functionalities can be accessed.
 
-[![Deploy to Heroku](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
+# Links to view the app
+https://showoff-vadimmalakhovski.c9users.io/
+https://showoff-your-app.herokuapp.com/
 
-## Documentation
+# For best results run on Google Chrome
 
-For more information about using Ruby on Heroku, see these Dev Center articles:
 
-- [Ruby on Heroku](https://devcenter.heroku.com/categories/ruby)
