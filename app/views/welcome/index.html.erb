@@ -11,7 +11,6 @@
       <th>Author Details Links</th>
     </tr>
   </thead>
-
   <tbody>
     <% @nameResulsArray.each_slice(4) do |widgetName, widgetDescription, fName, lName| %>
     <%# @descriptionResulsArray.each do |widgetDescription| %>
@@ -26,19 +25,11 @@
 
         <td><%#= link_to 'Show', widget %></td>
       </tr>
-    <%# end %>
-    <%# end %>
-       <%# end %>
     <% end %>
   </tbody>
 </table>
 
 
-
-
-the access token rails = <%=@access_token%>
-
-  
 <!-- Trigger/Open The Modal BEGIN----------------------------------------------------------- -->
 <!-- Button to open the modal login form -->
 <button onclick="document.getElementById('id02').style.display='block'">Signin</button>

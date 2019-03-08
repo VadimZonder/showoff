@@ -1,336 +1,326 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Active Storage Example App</title>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <%= stylesheet_link_tag  '//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css' %>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag  '//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js' %>
-  <%= csrf_meta_tags %>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-  
+  <head>
+    <title>Showoff</title>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    <%= stylesheet_link_tag  '//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css' %>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+    <%= javascript_include_tag  '//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js' %>
+    <%= csrf_meta_tags %>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    
   <!-- ALL Visible Widgets----------------------------------------------------------------- -->
-<script>
-var client_id ="277ef29692f9a70d511415dc60592daf4cf2c6f6552d3e1b769924b2f2e2e6fe";
-var client_secret ="d6106f26e8ff5b749a606a1fba557f44eb3dca8f48596847770beb9b643ea352";
-var allWidgetsUrl = "https://showoff-rails-react-production.herokuapp.com/api/v1/users/1/widgets?"+
-"client_id="+client_id+
-"&client_secret="+client_secret;
-
-
- function getCookie(cname) {
-  var name = cname + "=";
-  var decodedCookie = decodeURIComponent(document.cookie);
-  var ca = decodedCookie.split(';');
-  for(var i = 0; i <ca.length; i++) {
-    var c = ca[i];
-    while (c.charAt(0) == ' ') {
-      c = c.substring(1);
-    }
-    if (c.indexOf(name) == 0) {
-      return c.substring(name.length, c.length);
-    }
-  }
-  return "";
-} 
-
-var cname = "access_token";
-var access_token = getCookie(cname);
-var authorization = "Bearer "+access_token;
-console.log("auth from cookies " + authorization);
-//________________________________________________________________________________
-
-//Registration
-//create user-------------------------------------------------------------------------------------------------------------------
-function sendUserPost() {
-  var fName = document.getElementById("fName").value;
-  var lName = document.getElementById("lName").value;
-  var password = document.getElementById("password").value;
-  var email = document.getElementById("email").value;
-
-  function call(){
-    var url = "https://showoff-rails-react-production.herokuapp.com/api/v1/users";
-    var xhr = new XMLHttpRequest();
-    xhr.open("POST", url, true);
-    xhr.setRequestHeader('Content-Type', 'application/json');
-    xhr.send(JSON.stringify({
-    	client_id: "277ef29692f9a70d511415dc60592daf4cf2c6f6552d3e1b769924b2f2e2e6fe",
-    	client_secret: "d6106f26e8ff5b749a606a1fba557f44eb3dca8f48596847770beb9b643ea352",
-    	user: {
-    		first_name: fName,
-    		last_name: lName,
-    		password: password,
-    		email: email,
-    		image_url: "https://static.thenounproject.com/png/961-200.png"
-    	}
-  }));
+    <script>
+      var client_id ="277ef29692f9a70d511415dc60592daf4cf2c6f6552d3e1b769924b2f2e2e6fe";
+      var client_secret ="d6106f26e8ff5b749a606a1fba557f44eb3dca8f48596847770beb9b643ea352";
+      var allWidgetsUrl = "https://showoff-rails-react-production.herokuapp.com/api/v1/users/1/widgets?"+
+      "client_id="+client_id+
+      "&client_secret="+client_secret;
   
-  xhr.onreadystatechange = function () {
-          if (xhr.readyState === 4) {
-              var response = xhr.responseText;
-              var obj = JSON.stringify(response); //JSON.parse(response); 
-              console.log(obj); 
-              document.getElementById('output').innerHTML = obj;
-              
-              
+      //getting the cookie JS way
+      function getCookie(cname) {
+        var name = cname + "=";
+        var decodedCookie = decodeURIComponent(document.cookie);
+        var ca = decodedCookie.split(';');
+        for(var i = 0; i <ca.length; i++) {
+          var c = ca[i];
+          while (c.charAt(0) == ' ') {
+            c = c.substring(1);
           }
-          if (obj != undefined){
-            var registerResponce =obj.slice(27, 34);
-            if(registerResponce == "Success") {
-              //save username and password to cookies
-              //document.cookie = "username=John Smith; 3 Aug 2020 20:47:11 UTC; path=/";
-              // Create cookie
-             
-              document.cookie = "fName="+fName+";";
-              document.cookie = "lName="+lName+";";
-              document.cookie = "password="+password+";";
-              document.cookie = "email="+email+";";
-              
-             //redirect to home page - window.location is used for cross browser safety
-              //also by refreshing it will update ruby varaible with the access token
-              window.location.href = "/";
-              
-            }
-
-               
+          if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+          }
+        }
+        return "";
+      } 
+  
+      //assigning cookies
+      var cname = "access_token";
+      var access_token = getCookie(cname);
+      var authorization = "Bearer "+access_token;
+      console.log("auth from cookies " + authorization);
+  //________________________________________________________________________________
+  
+  //Registration
+  //create user-------------------------------------------------------------------------------------------------------------------
+    function sendUserPost() {
+      var fName = document.getElementById("fName").value;
+      var lName = document.getElementById("lName").value;
+      var password = document.getElementById("password").value;
+      var email = document.getElementById("email").value;
+    
+      function call(){
+        var url = "https://showoff-rails-react-production.herokuapp.com/api/v1/users";
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", url, true);
+        xhr.setRequestHeader('Content-Type', 'application/json');
+        xhr.send(JSON.stringify({
+        	client_id: "277ef29692f9a70d511415dc60592daf4cf2c6f6552d3e1b769924b2f2e2e6fe",
+        	client_secret: "d6106f26e8ff5b749a606a1fba557f44eb3dca8f48596847770beb9b643ea352",
+        	user: {
+        		first_name: fName,
+        		last_name: lName,
+        		password: password,
+        		email: email,
+        		image_url: "https://static.thenounproject.com/png/961-200.png"
+        	}
+      }));
+      
+      xhr.onreadystatechange = function () {
+              if (xhr.readyState === 4) {
+                  var response = xhr.responseText;
+                  var obj = JSON.stringify(response); //JSON.parse(response); 
+                  console.log(obj); 
+                  document.getElementById('output').innerHTML = obj;
+                  
+                  
               }
-               //alert(registerResponce);  
-        
-      }
-  }
-  call();
-}
-
-
-
-
-
-
-//var authorization = "Bearer efe971a2b4060376b82f3dc0c83cf88291a0d0b2219f819b996412493db0db4d";
-//Sign in user-------------------------------------------------------------------------------------------------------------------
-function signin() {
-var password4 = document.getElementById("password4").value;
-  var email4 = document.getElementById("email4").value;
-
-  function call4(){
-   var sn = "https://showoff-rails-react-production.herokuapp.com/oauth/token"
-    var xhr = new XMLHttpRequest();
-    xhr.open("POST", sn, true);
-    xhr.setRequestHeader('Content-Type', 'application/json');
-    xhr.send(JSON.stringify({
-
-    	  grant_type: "password",
-    		client_id: "277ef29692f9a70d511415dc60592daf4cf2c6f6552d3e1b769924b2f2e2e6fe",
-    	client_secret: "d6106f26e8ff5b749a606a1fba557f44eb3dca8f48596847770beb9b643ea352",
-    		username: email4,
-    		password: password4
-  }));
-  
-  xhr.onreadystatechange = function () {
-          if (xhr.readyState === 4) {
-              var response = xhr.responseText;
-              var obj = JSON.stringify(response); //JSON.parse(response); 
-              console.log(obj); 
-              document.getElementById('output').innerHTML = obj;
-              
-              
-          }
-                       else{
-              var response = xhr.responseText;
-              var obj = JSON.stringify(response); //JSON.parse(response); 
-              console.log(obj); 
-              document.getElementById('output').innerHTML = obj;
-              
-          }
-          
-          if (obj != undefined){
-            var registerResponce =obj.slice(27, 34);
-            if(registerResponce == "Success") {
-              //save username and password to cookies
-              //document.cookie = "username=John Smith; 3 Aug 2020 20:47:11 UTC; path=/";
-              // Create cookie
-              //save accestoken and refresh tokens
-              var resultArray = obj.split('"');
-              var access_token = resultArray[14];
-              access_token = access_token.slice(0, access_token.length-1);
-              var refresh_token = resultArray[24];
-              refresh_token = refresh_token.slice(0, resultArray.length-1);
-              alert('the access_token is = '+access_token);
-          
-              document.cookie = "access_token="+access_token+";";
-              document.cookie = "refresh_token="+refresh_token+";";
-              
-              //redirect to home page - window.location is used for cross browser safety
-              //also by refreshing it will update ruby varaible with the access token
-              window.location.href = "/";
-            }
-
+              if (obj != undefined){
+                var registerResponce =obj.slice(27, 34);
+                if(registerResponce == "Success") {
+                  //save username and password to cookies
+                  //document.cookie = "username=John Smith; 3 Aug 2020 20:47:11 UTC; path=/";
+                  // Create cookie
+                 
+                  document.cookie = "fName="+fName+";";
+                  document.cookie = "lName="+lName+";";
+                  document.cookie = "password="+password+";";
+                  document.cookie = "email="+email+";";
+                  
+                 //redirect to home page - window.location is used for cross browser safety
+                  //also by refreshing it will update ruby varaible with the access token
+                  window.location.href = "/";
+                  
+                }
+    
+                   
+                  }
+                   //alert(registerResponce);  
             
-
-                //alert('here = '+registerResponce);  
-              }
-        
+          }
       }
-  }
-  call4();
+      call();
+    }
+    
+    
+    
   
-}
-</script>
-</head>
-<body>
   
-  <% if notice %>
-  <p class="alert alert-success"><%= notice %></p>
-<% end %>
-<% if alert %>
-  <p class="alert alert-danger"><%= alert %></p>
-<% end %>
-
-
-
-
-<nav class="navbar navbar-default navbar-static-top navbar-inverse">
-  <div class="container ">
-    <ul class="nav navbar-nav myFont">
-      <li class="active">
-        <%= link_to " Home ", root_path,  :class => 'navbar-link glyphicon glyphicon-home '%>
-       
-      </li>
-      <li>
-
-
-        <%# if user_signed_in? %>
-          <%#= link_to "  Widgets", new_widget_path, :class => 'navbar-link glyphicon glyphicon-transfer'  %>
-        <%#end%>
-      </li>
-     
-
-    </ul>
- 
-    <ul class="nav navbar-nav navbar-right myFont">
-      <li class="navbar-right">
-               <!-- Trigger/Open The Modal BEGIN----------------------------------------------------------- -->
-<!-- Button to open the modal login form -->
-<button onclick="document.getElementById('id02').style.display='block'">Signin</button>
-
-<!-- The Modal -->
-<div id="id02" class="modal">
-  <span onclick="document.getElementById('id02').style.display='none'" 
-class="close" title="Close Modal">&times;</span>
-
-  <!-- Modal Content -->
-  <form class="modal-content animate" action="./">
-    <div class="imgcontainer">
-    </div>
-
-    <div class="container">
-      <label for="email"><b>Email</b></label>
-      <input type="text" placeholder="Enter Email" id="email4"  name="email" required>
-
-      <label for="psw"><b>Password</b></label>
-      <input type="password" placeholder="Enter Password" id="password4"  name="password" required>
+  
+    //var authorization = "Bearer efe971a2b4060376b82f3dc0c83cf88291a0d0b2219f819b996412493db0db4d";
+    //Sign in user-------------------------------------------------------------------------------------------------------------------
+    function signin() {
+    var password4 = document.getElementById("password4").value;
+      var email4 = document.getElementById("email4").value;
+    
+      function call4(){
+       var sn = "https://showoff-rails-react-production.herokuapp.com/oauth/token"
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", sn, true);
+        xhr.setRequestHeader('Content-Type', 'application/json');
+        xhr.send(JSON.stringify({
+    
+        	  grant_type: "password",
+        		client_id: "277ef29692f9a70d511415dc60592daf4cf2c6f6552d3e1b769924b2f2e2e6fe",
+        	client_secret: "d6106f26e8ff5b749a606a1fba557f44eb3dca8f48596847770beb9b643ea352",
+        		username: email4,
+        		password: password4
+      }));
       
-
-
-      <button type="submit" onclick="signin();">Signin</button>
-       <!--<input  type="submit" onclick="changeUserPassword();" />-->
-      <label>
-        <input type="checkbox" checked="checked" name="remember"> Remember me
-      </label>
-    </div>
-
-    <div class="container" style="background-color:#f1f1f1">
-      <button type="button" onclick="document.getElementById('id02').style.display='none'" class="cancelbtn">Cancel</button>
-      <span class="psw">Forgot <a href="#">password?</a></span>
-    </div>
-  </form>
-</div>
-      </li>
-    </ul>
+      xhr.onreadystatechange = function () {
+              if (xhr.readyState === 4) {
+                  var response = xhr.responseText;
+                  var obj = JSON.stringify(response); //JSON.parse(response); 
+                  console.log(obj); 
+                  document.getElementById('output').innerHTML = obj;
+                  
+                  
+              }
+                           else{
+                  var response = xhr.responseText;
+                  var obj = JSON.stringify(response); //JSON.parse(response); 
+                  console.log(obj); 
+                  document.getElementById('output').innerHTML = obj;
+                  
+              }
+              
+              if (obj != undefined){
+                var registerResponce =obj.slice(27, 34);
+                if(registerResponce == "Success") {
+                  //save username and password to cookies
+                  //document.cookie = "username=John Smith; 3 Aug 2020 20:47:11 UTC; path=/";
+                  // Create cookie
+                  //save accestoken and refresh tokens
+                  var resultArray = obj.split('"');
+                  var access_token = resultArray[14];
+                  access_token = access_token.slice(0, access_token.length-1);
+                  var refresh_token = resultArray[24];
+                  refresh_token = refresh_token.slice(0, resultArray.length-1);
+                  alert('the access_token is = '+access_token);
+              
+                  document.cookie = "access_token="+access_token+";";
+                  document.cookie = "refresh_token="+refresh_token+";";
+                  
+                  //redirect to home page - window.location is used for cross browser safety
+                  //also by refreshing it will update ruby varaible with the access token
+                  window.location.href = "/";
+                }
+    
+                
+    
+                    //alert('here = '+registerResponce);  
+                  }
+            
+          }
+      }
+      call4();
+      
+    }
+   </script>
+  </head>
+    <body>
+    
+    <% if notice %>
+      <p class="alert alert-success"><%= notice %></p>
+    <% end %>
+    <% if alert %>
+      <p class="alert alert-danger"><%= alert %></p>
+    <% end %>
+  
+  
+  
+  
+  <nav class="navbar navbar-default navbar-static-top navbar-inverse">
+    <div class="container ">
+      <ul class="nav navbar-nav myFont">
+        <li class="active">
+          <%= link_to " Home ", root_path,  :class => 'navbar-link glyphicon glyphicon-home '%>
+        </li>
+         <li>
+        </li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right myFont">
+        <li class="navbar-right">
+  <!-- Trigger/Open The Modal BEGIN----------------------------------------------------------- -->
+  <!-- Button to open the modal login form -->
+    <button onclick="document.getElementById('id02').style.display='block'">Signin</button>
+    
+    <!-- The Modal -->
+    <div id="id02" class="modal">
+      <span onclick="document.getElementById('id02').style.display='none'" 
+    class="close" title="Close Modal">&times;</span>
+    
+      <!-- Modal Content -->
+      <form class="modal-content animate" action="./">
+        <div class="imgcontainer">
+        </div>
+    
+        <div class="container">
+          <label for="email"><b>Email</b></label>
+          <input type="text" placeholder="Enter Email" id="email4"  name="email" required>
+    
+          <label for="psw"><b>Password</b></label>
+          <input type="password" placeholder="Enter Password" id="password4"  name="password" required>
+          
     
     
-    <ul class="nav navbar-nav navbar-right">
-      <li class="navbar-right">
-        <p></p>
-      </li>
-    </ul>
-       
-     
-    <ul class="nav navbar-nav navbar-right myFont">
-      <li class="navbar-right">
-          <!-- Trigger/Open The Modal BEGIN----------------------------------------------------------- -->
-<!-- Button to open the modal login form -->
-<button onclick="document.getElementById('id01').style.display='block'">Register</button>
-
-<!-- The Modal -->
-<div id="id01" class="modal">
-  <span onclick="document.getElementById('id01').style.display='none'" 
-class="close" title="Close Modal">&times;</span>
-
-  <!-- Modal Content -->
-  <form class="modal-content animate" action="./">
-    <div class="imgcontainer">
-      <img src="img_avatar2.png" alt="Avatar" class="avatar">
-    </div>
-
-    <div class="container">
-      <label for="uname"><b>Username</b></label>
-      <input type="text" placeholder="Enter Username"  id="fName"  name="fName" required>
-      
-      <label for="lName"><b>Username</b></label>
-      <input type="text" placeholder="Enter Username" id="lName"  name="lName" required>
-
-      <label for="psw"><b>Password</b></label>
-      <input type="password" placeholder="Enter Password" id="password"  name="password" required>
-      
-      <label for="email"><b>Username</b></label>
-      <input type="text" placeholder="Enter Email" id="email"  name="email" required>
-
-      <button type="submit" onclick="sendUserPost();">Register</button>
-       <!--<input  type="submit" onclick="changeUserPassword();" />-->
-      <label>
-        <input type="checkbox" checked="checked" name="remember"> Remember me
-      </label>
-    </div>
-
-    <div class="container" style="background-color:#f1f1f1">
-      <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
-      <span class="psw">Forgot <a href="#">password?</a></span>
-    </div>
-  </form>
-</div>
-<script>
-// Get the modal
-var modal = document.getElementById('id01');
-
-
-// When the user clicks anywhere outside of the modal, close it
-
-window.onclick = function(event) {
-  if (event.target == modal) {
-    modal.style.display = "none";
-  }
-}
-</script>
-             </ul>
-      </li>
-    </ul>
+          <button type="submit" onclick="signin();">Signin</button>
+           <!--<input  type="submit" onclick="changeUserPassword();" />-->
+          <label>
+            <input type="checkbox" checked="checked" name="remember"> Remember me
+          </label>
+        </div>
     
-  </div>
-</nav>
-
-<br>
-<br>
-<div class="jumbotron text-center">
-  <div class="container">
-    <a href="/" class="lang-logo">
-      <img src="<%= asset_path('showoff-logo') %>">
-    </a>
-    <h1>Showoff</h1>
-    <p>Widgets Client</p>
-  </div>
-</div>
-
-<%= yield %>
-</body>
+        <div class="container" style="background-color:#f1f1f1">
+          <button type="button" onclick="document.getElementById('id02').style.display='none'" class="cancelbtn">Cancel</button>
+          <span class="psw">Forgot <a href="#">password?</a></span>
+        </div>
+      </form>
+    </div>
+          </li>
+        </ul>
+        
+        
+        <ul class="nav navbar-nav navbar-right">
+          <li class="navbar-right">
+            <p></p>
+          </li>
+        </ul>
+           
+         
+        <ul class="nav navbar-nav navbar-right myFont">
+          <li class="navbar-right">
+              <!-- Trigger/Open The Modal BEGIN----------------------------------------------------------- -->
+    <!-- Button to open the modal login form -->
+    <button onclick="document.getElementById('id01').style.display='block'">Register</button>
+    
+    <!-- The Modal -->
+    <div id="id01" class="modal">
+      <span onclick="document.getElementById('id01').style.display='none'" 
+    class="close" title="Close Modal">&times;</span>
+    
+      <!-- Modal Content -->
+      <form class="modal-content animate" action="./">
+        <div class="imgcontainer">
+          <img src="img_avatar2.png" alt="Avatar" class="avatar">
+        </div>
+    
+        <div class="container">
+          <label for="uname"><b>Username</b></label>
+          <input type="text" placeholder="Enter Username"  id="fName"  name="fName" required>
+          
+          <label for="lName"><b>Username</b></label>
+          <input type="text" placeholder="Enter Username" id="lName"  name="lName" required>
+    
+          <label for="psw"><b>Password</b></label>
+          <input type="password" placeholder="Enter Password" id="password"  name="password" required>
+          
+          <label for="email"><b>Username</b></label>
+          <input type="text" placeholder="Enter Email" id="email"  name="email" required>
+    
+          <button type="submit" onclick="sendUserPost();">Register</button>
+           <!--<input  type="submit" onclick="changeUserPassword();" />-->
+          <label>
+            <input type="checkbox" checked="checked" name="remember"> Remember me
+          </label>
+        </div>
+    
+        <div class="container" style="background-color:#f1f1f1">
+          <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
+          <span class="psw">Forgot <a href="#">password?</a></span>
+        </div>
+      </form>
+    </div>
+    <script>
+    // Get the modal
+    var modal = document.getElementById('id01');
+    
+    
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+      if (event.target == modal) {
+        modal.style.display = "none";
+      }
+    }
+    </script>
+    
+         </ul>
+       </li>
+     </ul>
+    </div>
+    </nav>
+    <br>
+    <br>
+    <div class="jumbotron text-center">
+      <div class="container">
+        <a href="/" class="lang-logo">
+          <img src="<%= asset_path('showoff-logo') %>">
+        </a>
+        <h1>Showoff</h1>
+        <p>Widgets Client</p>
+      </div>
+    </div>
+    
+    <%= yield %>
+  </body>
 </html>
