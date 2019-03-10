@@ -40,7 +40,7 @@
 <script>
 
 //create Widgets JS---------------------------------------------------------------------------------------------
-function createPrivateWidget() {
+function createWidget() {
   //initial values
   var name = document.getElementById("name").value;
   var description = document.getElementById("description").value;
@@ -113,7 +113,7 @@ function createPrivateWidget() {
     <input type="checkbox" class="form-check-input" id="privateWidget">
     <label class="form-check-label" for="exampleCheck1">Make it Private?</label>
   </div>
-  <button type="submit" onclick="createPrivateWidget();" class="btn btn-primary">Create</button>
+  <button type="submit" onclick="createWidget();" class="btn btn-primary">Create</button>
 </form>
 
 
@@ -161,7 +161,7 @@ function createOrDeleteWidget() {
      console.log("Something went wrong with the widget's delete/update checkbox. It's value is = "+id);
    }
 
-   
+                                
    var deleteOrEditWidgetUrl = "https://showoff-rails-react-production.herokuapp.com/api/v1/widgets/"+id;
 
   //AJAX call

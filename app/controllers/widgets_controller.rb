@@ -27,7 +27,7 @@ class WidgetsController < ApplicationController
     end
 
 
-
+  # https://showoff-rails-react-production.herokuapp.com/api/v1/users/me/widgets?
    @myWidgetsUrl = 'https://showoff-rails-react-production.herokuapp.com/api/v1/widgets/visible?
 client_id='+@client_id+'&client_secret='+@client_secret
    

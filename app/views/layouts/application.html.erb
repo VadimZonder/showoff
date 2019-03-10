@@ -186,7 +186,7 @@
                 console.log("Error");
                 console.log(err.responseJSON.message);
                 document.cookie = "loggedin=error";
-                alert("logout error message ="+err.responseJSON.message);
+                //alert("logout error message ="+err.responseJSON.message);
                 window.location.href = "/";
             }
             
@@ -224,13 +224,16 @@
               alert(data.message);
                   //alert("lggedin? ="+data.data.message);
                   console.log(data);
+                  document.cookie = "loggedin=error";
                   window.location.href = "/";
         
             },
             error: function(err) {
                 console.log("Error");
                 console.log(err.responseJSON.message);
-                alert("password reset error message ="+err.responseJSON.message);
+                //alert("password reset error message ="+err.responseJSON.message);
+                document.cookie = "loggedin=error";
+                window.location.href = "/";
             }
             
          
