@@ -1,412 +1,135 @@
+
+
 <!-- Your Vidgets ----------------------------------------------------------------- -->
-<%= link_to "My Widgets", new_widget_path, :class => " btn-white btn btn-primary"%>
+<%= link_to "My Widgets", widgets_path, :class => " btn-white btn btn-primary"%>
 
 <br><br>
 <h3>All Widgets</h3>
 <table class="table table-hover">
   <thead>
     <tr>
+      <th>ID</th>
       <th>Widget Name</th>
       <th>Widget Description</th>
-      <th>Author Details Links</th>
+      <th>Privacy</th>
+       <th>Name</th>
+      <th>Avatar</th>
+      <th>Link</th>
     </tr>
   </thead>
   <tbody>
-    <% @nameResulsArray.each_slice(4) do |widgetName, widgetDescription, fName, lName| %>
+    <% @nameResulsArray.each_slice(7) do |id ,widgetId, widgetName, widgetDescription,  kind,  name, image| %>
     <%# @descriptionResulsArray.each do |widgetDescription| %>
     <%# @fNameResulsArray.each do |fName| %>
     <%# @lNameResulsArray.each do |lName| %>
       <tr>
+         <% id %>
+          <td><%= widgetId %></td>
         <td><%= widgetName %></td>
         <td><%= widgetDescription %></td>
-        <!--Here is the link to the user who created the widget -->
-       <td><%=link_to 'Who made this?!', '#',:remote => true , :onclick => 'alert("The Creator of this widget is '+fName+ ' ' +lName+'!")'%></td>
-
-
-        <td><%#= link_to 'Show', widget %></td>
+        <td><%= kind %></td>
+        <td><%= name %></td>
+        <td><%= image_tag image, :size => "25x25"%></td>
+        <td><%=link_to 'Who made this?!', '#',:remote => true , :onclick => " viewUser("+id.to_s+")"%></td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
 
-<!-- Trigger/Open The Modal BEGIN----------------------------------------------------------- -->
-<!-- Button to open the modal login form -->
-<button onclick="document.getElementById('id02').style.display='block'">Signin</button>
 
-<!-- The Modal -->
-<div id="id02" class="modal">
-  <span onclick="document.getElementById('id02').style.display='none'" 
-class="close" title="Close Modal">&times;</span>
-
-  <!-- Modal Content -->
-  <form class="modal-content animate" action="./">
-    <div class="imgcontainer">
-    </div>
-
-    <div class="container">
-      <label for="email"><b>Email</b></label>
-      <input type="text" placeholder="Enter Email" id="email4"  name="email" required>
-
-      <label for="psw"><b>Password</b></label>
-      <input type="password" placeholder="Enter Password" id="password4"  name="password" required>
-      
-
-
-      <button type="submit" onclick="signin();">Signin</button>
-       <!--<input  type="submit" onclick="changeUserPassword();" />-->
-      <label>
-        <input type="checkbox" checked="checked" name="remember"> Remember me
-      </label>
-    </div>
-
-    <div class="container" style="background-color:#f1f1f1">
-      <button type="button" onclick="document.getElementById('id02').style.display='none'" class="cancelbtn">Cancel</button>
-      <span class="psw">Forgot <a href="#">password?</a></span>
-    </div>
-  </form>
-</div>
-<script>
-// Get the modal
-var modal2 = document.getElementById('id02');
-
-
-// When the user clicks anywhere outside of the modal, close it
-
-window.onclick = function(event) {
-  if (event.target == modal2) {
-    modal2.style.display = "none";
-  }
-}
-</script>
 
 <script>
-//Sigin in BACKUP JS---------------------------------------------------------------------------------------------
-function sn() {
-  var password5 = document.getElementById("password5").value;
-  var email5 = document.getElementById("email5").value;
-
-  function call5(){
-   var sn = "https://showoff-rails-react-production.herokuapp.com/oauth/token"
-    var xhr = new XMLHttpRequest();
-    xhr.open("POST", sn, true);
-    xhr.setRequestHeader('Content-Type', 'application/json');
-    xhr.send(JSON.stringify({
-
-    	  grant_type: "password",
-    		client_id: "277ef29692f9a70d511415dc60592daf4cf2c6f6552d3e1b769924b2f2e2e6fe",
-    	client_secret: "d6106f26e8ff5b749a606a1fba557f44eb3dca8f48596847770beb9b643ea352",
-    		username: email5,
-    		password: password5
-  }));
-  
-  xhr.onreadystatechange = function () {
-          if (xhr.readyState === 4) {
-              var response = xhr.responseText;
-              var obj = JSON.stringify(response); //JSON.parse(response); 
-              console.log(obj); 
-              document.getElementById('output').innerHTML = obj;
-              
-              
-          }
-                       else{
-              var response = xhr.responseText;
-              var obj = JSON.stringify(response); //JSON.parse(response); 
-              console.log(obj); 
-              document.getElementById('output').innerHTML = obj;
-              
-          }
+var widgetNameArray = [];
+var widgetDescriptionArray = [];
+var widgetsArrayLengthCounter;
+var displayWidgetsLength;
+  function viewUser(id){
           
-          if (obj != undefined){
-            var registerResponce =obj.slice(27, 34);
-            if(registerResponce == "Success") {
-              //save username and password to cookies
-              //document.cookie = "username=John Smith; 3 Aug 2020 20:47:11 UTC; path=/";
-              // Create cookie
-              //save accestoken and refresh tokens
-              var resultArray = obj.split('"');
-              var access_token = resultArray[14];
-              access_token = access_token.slice(0, access_token.length-1);
-              var refresh_token = resultArray[24];
-              refresh_token = refresh_token.slice(0, resultArray.length-1);
-              alert('the access_token is = '+access_token);
-          
-              document.cookie = "access_token="+access_token+";";
-              document.cookie = "refresh_token="+refresh_token+";";
-
-            }
-
+         //initial values
+         var client_id ="277ef29692f9a70d511415dc60592daf4cf2c6f6552d3e1b769924b2f2e2e6fe";
+         var client_secret ="d6106f26e8ff5b749a606a1fba557f44eb3dca8f48596847770beb9b643ea352";
+         var userUrl = "https://showoff-rails-react-production.herokuapp.com/api/v1/users/"+
+         id+"/widgets?"+
+      "client_id="+client_id+
+      "&client_secret="+client_secret;
+        //AJAX call
+        $.ajax({
+            type: "GET",
+            dataType: "json",
+            url: userUrl ,
+            data: {},
+            beforeSend: function(xhr) {
+                xhr.setRequestHeader("Authorization", authorization, "Content-Type","application/json")
+            }, success: function(data){
+              console.log(data.message);
+              widgetsArrayLengthCounter = data.data.widgets.length;
+              displayWidgetsLength = widgetsArrayLengthCounter;
             
+              console.log("The user has "+widgetsArrayLengthCounter+" widgets");
+              while (widgetsArrayLengthCounter != 0){
+                widgetsArrayLengthCounter = widgetsArrayLengthCounter -1;
+                console.log('Widget no '+(widgetsArrayLengthCounter+1));
+                console.log(data.data.widgets[widgetsArrayLengthCounter].name);
+              console.log(data.data.widgets[widgetsArrayLengthCounter].description);
+              widgetNameArray.push(' '+(widgetsArrayLengthCounter+1)+'. ' + data.data.widgets[widgetsArrayLengthCounter].name);
+              widgetDescriptionArray.push(' '+(widgetsArrayLengthCounter+1)+'. ' +data.data.widgets[widgetsArrayLengthCounter].description);
+              
+              
+                    var outputModal =  document.getElementById('outputModal').innerHTML = '';
+         outputModal = document.getElementById('outputModal').innerHTML = "<span font-size:28px; padding: 25px 25px 25px 25px;'>This user has "+
+    displayWidgetsLength+" widgets. "+"</span><br><span font-size:28px; padding: 25px 25px 25px 25px;'>Widget Name: "+
+    (widgetNameArray.toString())+" widgets. "+"</span><br><span font-size:28px; padding: 25px 25px 25px 25px;'>Widget Description: "+
+    (widgetDescriptionArray.toString())+" ."+"</span>";
+    document.getElementById('id08').style.display='block';
+    
 
-                alert('here = '+registerResponce);  
+              
               }
-        
-      }
-  }
-  call5();
-}
+
+            },
+            error: function(err) {
+                console.log("Error");
+                console.log(err.responseJSON.message);
+                alert("search error message ="+err.responseJSON.message);
+            }
+        });
+
+      //reseting the arrays
+     widgetNameArray = [];
+     widgetDescriptionArray = [];  
+
+    }
 
 </script>
-
-
-<!--Create User------------------------------------------------------------->
-sign again
-<form id="form" onsubmit="return false;">
-  <input  type="text" id="email5" />
-    <br>
-    <input  type="text" id="password5" />
-    <br>
-  
-    <br><br>
-    <input  type="submit" onclick="sn();" />
-</form>
-<br>
-
-
-<!-- ALL Visible Widgets----------------------------------------------------------------- -->
-
-
-
-
-
-<!-- Trigger/Open The Modal END----------------------------------------------------------------- -->
-
-
-
-<div>
-<%= link_to 'Create', authenticationCreate_path, :class => " btn-white btn btn-primary" %>
-
-<%= link_to 'Revoke', authenticationRevoke_path, :class => " btn-white btn btn-primary" %>
-
-<%= link_to 'Refresh', authenticationRefresh_path, :class => " btn-white btn btn-primary" %>
-
-<%#= button_to 'Button', welcome_button_path, method: :post %>
-</div>
-<%#= link_to 'Button 3', button3_path, :class => "btn btn-primary" %>
-<%#= button_to 'Button 3', button3_path, method: :get %>
-
-<div>
-<%#= link_to 'Index Me', usrIndexMe_path, :class => " btn-white btn btn-primary" %>
-
-<%#= link_to 'Create User', new_usr_path, :class => " btn-white btn btn-primary" %>
-
-<%#= link_to 'Update User', edit_usr_path(current_user), :class => " btn-white btn btn-primary" %>
-
-
-
-<p>Update</p>
-<script>
-
-//update user---------------------------------------------------------------------------------------------
-function sendUserUpdate() {
-  var fName = document.getElementById("fName").value;
-  var lName = document.getElementById("lName").value;
-  var dob = document.getElementById("dob").value;
-
-  function call(){
-    var url = "https://showoff-rails-react-production.herokuapp.com/api/v1/users/me";
-    var xhr = new XMLHttpRequest();
-    xhr.open("POST", url, true);
-    xhr.setRequestHeader('Content-Type', 'application/json', "Authorization", authorization);
-    xhr.send(JSON.stringify({
-    	user: {
-    		first_name: fName,
-    		last_name: lName,
-    		date_of_birth: dob,
-    		image_url: "https://static.thenounproject.com/png/961-200.png"
-    	}
-  }));
-  
-  xhr.onreadystatechange = function () {
-          if (xhr.readyState === 4) {
-              var response = xhr.responseText;
-              var obj = JSON.stringify(response); //JSON.parse(response); 
-              console.log(obj); 
-              document.getElementById('ouput').innerHTML = obj;
-          }
-      }
-  }
-  call();
-}
-
-
-</script>
-
-
-<p>Change Password</p>
-<script>
-//Change Password user  JS---------------------------------------------------------------------------------------------
-function changeUserPassword() {
-  var current_password = document.getElementById("current_password").value;
-  var new_password = document.getElementById("new_password").value;
-
-
-  function call(){
-    var url = "https://showoff-rails-react-production.herokuapp.com/api/v1/users/me/password";
-    var xhr = new XMLHttpRequest();
-    xhr.open("POST", url, true);
-    xhr.setRequestHeader('Content-Type', 'application/json', "Authorization", authorization);
-    xhr.send(JSON.stringify({
-    	user: {
-    		current_password: current_password,
-    		new_password: new_password
-    	}
-  }));
-  
-  xhr.onreadystatechange = function () {
-          if (xhr.readyState === 4) {
-              var response = xhr.responseText;
-              var obj = JSON.stringify(response); //JSON.parse(response); 
-              console.log(obj); 
-              document.getElementById('ouput').innerHTML = obj;
-          }
-      }
-  }
-  call();
-}
-
-</script>
-
-
-<!--Create User------------------------------------------------------------->
-<form id="form" onsubmit="return false;">
-    <input  type="text" id="fName2" />
-    <br>
-    <input  type="text" id="lName2" />
-    <br>
-    <input  type="text" id="password2" />
-    <br>
-    <input  type="text" id="email2" />
-    <br><br>
-    <input  type="submit" onclick="sendUserPost()2;" />
-</form>
-<br>
-<p>Create User Responce</p>
-<br>
-<div class="panel panel-info">
-
-<p id="output"></p>
-</div>
-</div>
-<!--Update User---------------------------------------------------------->
-<form id="form" onsubmit="return false;">
-    <input  type="text" id="fName" />
-    <br>
-    <input  type="text" id="lName" />
-    <br>
-    <input  type="text" id="dob" />
-    <br><br>
-    <input  type="submit" onclick="sendUserUpdate();" />
-</form>
-<br>
-<p>Create User Responce</p>
-<br>
-<div class="panel panel-info">
-
-<p id="outputUpdate"></p>
-</div>
-</div>
-
-
-
-
-
-<!--Change Password User HTML---------------------------------------------------------->
-<form id="form" onsubmit="return false;">
-    <input  type="text" id="current_password" />
-    <br>
-    <input  type="text" id="new_password" />
-    <br><br>
-    <input  type="submit" onclick="changeUserPassword();" />
-</form>
-<br><br><br>
-</div>
-
-
-
-<!--Delete Your WidgetHTML---------------------------------------------------------->
-<form id="form" onsubmit="return false;">
-    <input  type="text" id="name" />
-    <br>
-    <input  type="text" id="description" />
-    <br><br>
-    <input  type="submit" onclick="deleteWidget();" />
-</form>
-<br><br><br>
-
-
-<p>Delete Widget</p>
-<script>
-//var authorization = "Bearer efe971a2b4060376b82f3dc0c83cf88291a0d0b2219f819b996412493db0db4d";
-//create Public Widgets JS---------------------------------------------------------------------------------------------
-function deleteWidget() {
-  var id = document.getElementById("id").value;
-
-
-  function call(){
-    //passing widget id to delete
-   // var url = "https://showoff-rails-react-production.herokuapp.com/api/v1/widgets/"+id;
-    var xhr = new XMLHttpRequest();
-    xhr.open("DELETE", url, true);
-    xhr.setRequestHeader('Content-Type', 'application/json', "Authorization", authorization);
-     xhr.send(JSON.stringify({
-    	widget: {
-    		id: id
-    	}
-  }));
-   
-  
-  xhr.onreadystatechange = function () {
-          if (xhr.readyState === 4) {
-              var response = xhr.responseText;
-              var obj = JSON.stringify(response); //JSON.parse(response); 
-              console.log(obj); 
-              document.getElementById('output').innerHTML = obj;
-          }
-      }
-  }
-  call();
-}
-</script>
-<!--Create Hidden WidgetHTML---------------------------------------------------------->
-<form id="form" onsubmit="return false;">
-    <input  type="text" id="id" />
-    <br><br>
-    <input  type="submit" onclick="deleteWidget();" />
-</form>
-<br><br><br>
-
-
-
-<div class="container">
-  <div class="row">
-
-        
-      
-  </div>
-</div>
-<hr />
-
-<div class="container">
-  <div class="row">
-    <div class="purple-box u-padding-Al">
-      <center>
-         <h3></h3>
-       
-      </center>
+ <!-- Trigger/Open The Modal BEGIN----------------------------------------------------------- -->
+  <!-- Button to open the modal login form -->
+  <script>//var id = <%#=id.to_s%></script> 
+    <!-- The Modal -->
+    <div id='id08' class="modal">
+      <span onclick="document.getElementById('id08').style.display='none'" 
+    class="close" title="Close Modal">&times;</span>
+    
+      <!-- Modal Content -->
+      <form class="modal-content animate" action="./">
+        <div class="imgcontainer">
+        </div>
+    
+        <div class="container">
+         <div class = "panel panel-primary">
+   <div class = "panel-heading">
+      <h3 class = "panel-title">Responce Message</h3>
+         </div>
+           <div id="outputModal"></div>
+         </div>
+        </div>
+    
+        <div class="container" style="background-color:#f1f1f1">
+          <button type="button" onclick="document.getElementById('id08').style.display='none'" class="cancelbtn">Cancel</button>
+        </div>
+      </form>
     </div>
-    <hr />
-  </div>
-  
 
-
-
-<br>
-<br>
-<br>
-<br>
-
-           
-</div>
+<!-- ALL Visible Widgets END----------------------------------------------------------------- -->
 
 
