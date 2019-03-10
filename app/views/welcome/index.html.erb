@@ -1,0 +1,135 @@
+
+
+<!-- Your Vidgets ----------------------------------------------------------------- -->
+<%= link_to "My Widgets", widgets_path, :class => " btn-white btn btn-primary"%>
+
+<br><br>
+<h3>All Widgets</h3>
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Widget Name</th>
+      <th>Widget Description</th>
+      <th>Privacy</th>
+       <th>Name</th>
+      <th>Avatar</th>
+      <th>Link</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @nameResulsArray.each_slice(7) do |id ,widgetId, widgetName, widgetDescription,  kind,  name, image| %>
+    <%# @descriptionResulsArray.each do |widgetDescription| %>
+    <%# @fNameResulsArray.each do |fName| %>
+    <%# @lNameResulsArray.each do |lName| %>
+      <tr>
+         <% id %>
+          <td><%= widgetId %></td>
+        <td><%= widgetName %></td>
+        <td><%= widgetDescription %></td>
+        <td><%= kind %></td>
+        <td><%= name %></td>
+        <td><%= image_tag image, :size => "25x25"%></td>
+        <td><%=link_to 'Who made this?!', '#',:remote => true , :onclick => " viewUser("+id.to_s+")"%></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+
+
+
+<script>
+var widgetNameArray = [];
+var widgetDescriptionArray = [];
+var widgetsArrayLengthCounter;
+var displayWidgetsLength;
+  function viewUser(id){
+          
+         //initial values
+         var client_id ="277ef29692f9a70d511415dc60592daf4cf2c6f6552d3e1b769924b2f2e2e6fe";
+         var client_secret ="d6106f26e8ff5b749a606a1fba557f44eb3dca8f48596847770beb9b643ea352";
+         var userUrl = "https://showoff-rails-react-production.herokuapp.com/api/v1/users/"+
+         id+"/widgets?"+
+      "client_id="+client_id+
+      "&client_secret="+client_secret;
+        //AJAX call
+        $.ajax({
+            type: "GET",
+            dataType: "json",
+            url: userUrl ,
+            data: {},
+            beforeSend: function(xhr) {
+                xhr.setRequestHeader("Authorization", authorization, "Content-Type","application/json")
+            }, success: function(data){
+              console.log(data.message);
+              widgetsArrayLengthCounter = data.data.widgets.length;
+              displayWidgetsLength = widgetsArrayLengthCounter;
+            
+              console.log("The user has "+widgetsArrayLengthCounter+" widgets");
+              while (widgetsArrayLengthCounter != 0){
+                widgetsArrayLengthCounter = widgetsArrayLengthCounter -1;
+                console.log('Widget no '+(widgetsArrayLengthCounter+1));
+                console.log(data.data.widgets[widgetsArrayLengthCounter].name);
+              console.log(data.data.widgets[widgetsArrayLengthCounter].description);
+              widgetNameArray.push(' '+(widgetsArrayLengthCounter+1)+'. ' + data.data.widgets[widgetsArrayLengthCounter].name);
+              widgetDescriptionArray.push(' '+(widgetsArrayLengthCounter+1)+'. ' +data.data.widgets[widgetsArrayLengthCounter].description);
+              
+              
+                    var outputModal =  document.getElementById('outputModal').innerHTML = '';
+         outputModal = document.getElementById('outputModal').innerHTML = "<span font-size:28px; padding: 25px 25px 25px 25px;'>This user has "+
+    displayWidgetsLength+" widgets. "+"</span><br><span font-size:28px; padding: 25px 25px 25px 25px;'>Widget Name: "+
+    (widgetNameArray.toString())+" widgets. "+"</span><br><span font-size:28px; padding: 25px 25px 25px 25px;'>Widget Description: "+
+    (widgetDescriptionArray.toString())+" ."+"</span>";
+    document.getElementById('id08').style.display='block';
+    
+
+              
+              }
+
+            },
+            error: function(err) {
+                console.log("Error");
+                console.log(err.responseJSON.message);
+                alert("search error message ="+err.responseJSON.message);
+            }
+        });
+
+      //reseting the arrays
+     widgetNameArray = [];
+     widgetDescriptionArray = [];  
+
+    }
+
+</script>
+ <!-- Trigger/Open The Modal BEGIN----------------------------------------------------------- -->
+  <!-- Button to open the modal login form -->
+  <script>//var id = <%#=id.to_s%></script> 
+    <!-- The Modal -->
+    <div id='id08' class="modal">
+      <span onclick="document.getElementById('id08').style.display='none'" 
+    class="close" title="Close Modal">&times;</span>
+    
+      <!-- Modal Content -->
+      <form class="modal-content animate" action="./">
+        <div class="imgcontainer">
+        </div>
+    
+        <div class="container">
+         <div class = "panel panel-primary">
+   <div class = "panel-heading">
+      <h3 class = "panel-title">Responce Message</h3>
+         </div>
+           <div id="outputModal"></div>
+         </div>
+        </div>
+    
+        <div class="container" style="background-color:#f1f1f1">
+          <button type="button" onclick="document.getElementById('id08').style.display='none'" class="cancelbtn">Cancel</button>
+        </div>
+      </form>
+    </div>
+
+<!-- ALL Visible Widgets END----------------------------------------------------------------- -->
+
+
