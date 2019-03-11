@@ -37,20 +37,20 @@
 
 
 
-<script>
-var widgetNameArray = [];
-var widgetDescriptionArray = [];
-var widgetsArrayLengthCounter;
-var displayWidgetsLength;
-  function viewUser(id){
-          
+    <script>
+    var widgetNameArray = [];
+    var widgetDescriptionArray = [];
+    var widgetsArrayLengthCounter;
+    var displayWidgetsLength;
+    
+      function viewUser(id){
          //initial values
          var client_id ="277ef29692f9a70d511415dc60592daf4cf2c6f6552d3e1b769924b2f2e2e6fe";
          var client_secret ="d6106f26e8ff5b749a606a1fba557f44eb3dca8f48596847770beb9b643ea352";
          var userUrl = "https://showoff-rails-react-production.herokuapp.com/api/v1/users/"+
-         id+"/widgets?"+
-      "client_id="+client_id+
-      "&client_secret="+client_secret;
+           id+"/widgets?"+
+          "client_id="+client_id+
+          "&client_secret="+client_secret;
         //AJAX call
         $.ajax({
             type: "GET",
@@ -66,22 +66,20 @@ var displayWidgetsLength;
             
               console.log("The user has "+widgetsArrayLengthCounter+" widgets");
               while (widgetsArrayLengthCounter != 0){
-                widgetsArrayLengthCounter = widgetsArrayLengthCounter -1;
-                console.log('Widget no '+(widgetsArrayLengthCounter+1));
-                console.log(data.data.widgets[widgetsArrayLengthCounter].name);
+              widgetsArrayLengthCounter = widgetsArrayLengthCounter -1;
+              console.log('Widget no '+(widgetsArrayLengthCounter+1));
+              console.log(data.data.widgets[widgetsArrayLengthCounter].name);
               console.log(data.data.widgets[widgetsArrayLengthCounter].description);
               widgetNameArray.push(' '+(widgetsArrayLengthCounter+1)+'. ' + data.data.widgets[widgetsArrayLengthCounter].name);
               widgetDescriptionArray.push(' '+(widgetsArrayLengthCounter+1)+'. ' +data.data.widgets[widgetsArrayLengthCounter].description);
               
               
-                    var outputModal =  document.getElementById('outputModal').innerHTML = '';
-         outputModal = document.getElementById('outputModal').innerHTML = "<span font-size:28px; padding: 25px 25px 25px 25px;'>This user has "+
-    displayWidgetsLength+" widgets. "+"</span><br><span font-size:28px; padding: 25px 25px 25px 25px;'>Widget Name: "+
-    (widgetNameArray.toString())+" widgets. "+"</span><br><span font-size:28px; padding: 25px 25px 25px 25px;'>Widget Description: "+
-    (widgetDescriptionArray.toString())+" ."+"</span>";
-    document.getElementById('id08').style.display='block';
-    
-
+                var outputModal =  document.getElementById('outputModal').innerHTML = '';
+                outputModal = document.getElementById('outputModal').innerHTML = "<span font-size:28px; padding: 25px 25px 25px 25px;'>This user has "+
+                displayWidgetsLength+" widgets. "+"</span><br><span font-size:28px; padding: 25px 25px 25px 25px;'>Widget Name: "+
+                (widgetNameArray.toString())+" widgets. "+"</span><br><span font-size:28px; padding: 25px 25px 25px 25px;'>Widget Description: "+
+                (widgetDescriptionArray.toString())+" ."+"</span>";
+                document.getElementById('id08').style.display='block';
               
               }
 
@@ -96,13 +94,12 @@ var displayWidgetsLength;
       //reseting the arrays
      widgetNameArray = [];
      widgetDescriptionArray = [];  
-
-    }
-
-</script>
+    
+        }
+    
+    </script>
  <!-- Trigger/Open The Modal BEGIN----------------------------------------------------------- -->
-  <!-- Button to open the modal login form -->
-  <script>//var id = <%#=id.to_s%></script> 
+  <!-- Button to open the modal LOGIN form -->
     <!-- The Modal -->
     <div id='id08' class="modal">
       <span onclick="document.getElementById('id08').style.display='none'" 

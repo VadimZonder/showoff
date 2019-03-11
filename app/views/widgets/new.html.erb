@@ -1,4 +1,3 @@
-
 <script>
 function quickTest(){
     
@@ -7,13 +6,11 @@ function quickTest(){
     xmlhttp.open("POST", theUrl);
     xmlhttp.setRequestHeader("Authorization", "Bearer f6b89a6cd29c3cf7c9bc78d7d8a6bb73ccef2b0f75273b3075cc58d03e3eadb0", "Content-Type", "application/json" );
     xmlhttp.send(JSON.stringify({ "widget": {
-		"name": "A Visib",
-		"description": "Wid",
-		"kind": "visible"
-	}
-        
-        }));
-        
+  		"name": "A Visib",
+  		"description": "Wid",
+  		"kind": "visible"
+  	   }
+    }));
         
          xmlhttp.onreadystatechange = function () {
           if (xmlhttp.readyState === 4) {
@@ -37,10 +34,8 @@ function quickTest(){
 
 
 </script>
-<input  type="submit" onclick="quickTest();" />
 
-<h1>New Widget</h1>
-<!--WIDGETS ----------------------------------------------------------------------------------------------------------------->
+
 <script>
 
  function getCookie(cname) {
@@ -65,8 +60,12 @@ var authorization = "Bearer "+access_token;
 console.log("auth from cookies " + authorization);
     
 </script>
+<h1>New Widget</h1>
+<!--WIDGETS ----------------------------------------------------------------------------------------------------------------->
 <p>Create Private Widget</p>
 <script>
+
+
 
 //create Widgets JS---------------------------------------------------------------------------------------------
 function createPrivateWidget() {
