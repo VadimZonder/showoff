@@ -5,6 +5,7 @@ This application is makes calls to these APIs and uses its responses to enable u
 
 # Development
 Application is built using Ruby on Rails 5.2.0 and Ruby version 2.5.1
+=> may need to run '$rvm install 2.5.1' to update the ruby version
 Some of the essential gems used: rest-client, bootsnap, puma.
 
 # Deploying Locally
@@ -25,6 +26,10 @@ $ rails c
 # In order to run the application: may need to run this command to enable the postgresql before running the server.
 $ sudo service postgresql start
 
+#if getting a DB error then try running
+4rake db:create:all
+and
+$rake db:migrate
 
 ## Deploying to Heroku
 
